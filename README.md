@@ -3,7 +3,7 @@ shared tools for track data
 
 There is a huge fragmentation of tools and approaches in R for tracking, see the Spatio-Temporal Task View section for examples. 
 
-collect needed functions in this package
+collect needed functions in this package and approach package authors 
 
 - path distance
 - distance to source/target, absolute or cumulative
