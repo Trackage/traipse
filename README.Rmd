@@ -1,0 +1,103 @@
+---
+output: github_document
+editor_options: 
+  chunk_output_type: console
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+# triplib
+
+NOT YET USEABLE
+
+
+<!-- badges: start -->
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![Travis build status](https://travis-ci.org/Trackage/triplib.svg?branch=master)](https://travis-ci.org/Trackage/triplib)
+[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/Trackage/triplib?branch=master&svg=true)](https://ci.appveyor.com/project/Trackage/triplib)
+[![Codecov test coverage](https://codecov.io/gh/Trackage/triplib/branch/master/graph/badge.svg)](https://codecov.io/gh/Trackage/triplib?branch=master)
+<!-- badges: end -->
+
+The goal of triplib is to provide shared tools for tracking data. 
+
+There is a huge fragmentation of tools and approaches in R for tracking, see the Spatio-Temporal 
+Task View section for examples. 
+
+Collect needed functions in this package that are as fast as possible, and
+very lightweight, no classes or complications or external libraries.
+
+
+- path distance
+- distance to source/target, absolute or cumulative
+- turning angle (direction change) 
+- track angle (internal angle of turn)
+- Argos quality codes as ordered factor
+- validation of basic data, and trip sense
+- interpolation based on time step, distance
+- cut for tracks
+- examples and docs!
+
+
+
+## Installation
+
+Not available on CRAN yet. 
+
+
+You can install the  development version from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("Trackage/triplib")
+```
+## Example
+
+This is a basic example which shows you how to calculate ellipsoidal distance and turning angle for a data set of tracks: 
+
+```{r example}
+library(triplib)
+
+library(tidyverse)
+## there's no grouping here - we haven't gotten our data organized yet
+trips0 %>% mutate(distance = track_distance(x, y), angle = track_angle(x, y))
+
+## now we group by id (also need arrange by date to be sure ...)
+metric <- trips0 %>% group_by(id) %>% mutate(distance = track_distance(x, y), 
+                                             angle = track_angle(x, y),
+                                             turn = track_turn(x, y), 
+                                             bearing = track_bearing(x, y)) 
+metric 
+
+metric %>% 
+  ggplot(aes(x, y, cex= 1/angle)) + 
+  geom_point() + 
+  geom_path(col = rgb(0.2, 0.2, 0.2, 0.2))
+
+```
+
+Using the bearing and distance now reproduce the track as *destination point* segments. 
+
+```{r dest-point}
+plot(metric[1:10, c("x", "y")], type = "b", lwd = 10, col = "grey")
+dest <- geosphere::destPoint(metric[1:10, c("x", "y")], 
+                             b = metric$bearing[1:10], 
+                            d = metric$distance[2:11])
+segments(metric$x[1:10], metric$y[1:10], dest[1:10,1], dest[1:10,2], col = "firebrick", lwd = 2)
+```
+
+
+
+---
+
+Please note that the 'triplib' project is released with a
+[Contributor Code of Conduct](CODE_OF_CONDUCT.md).
+By contributing to this project, you agree to abide by its terms.
+

@@ -1,0 +1,26 @@
+Package: triplib
+Title: Shared Tools for Tracking Data
+Version: 0.0.0.9000
+Authors@R: 
+    c(
+    person(given = "Michael", 
+           family = "Sumner", 
+           email = "mdsumner@gmail.com", 
+           role = c("aut", "cre"), 
+           comment = c(ORCID = "0000-0002-2471-7511"))
+           )
+Description: A collection of commonly used tools for animal movement and other tracking data. 
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 6.1.1
+Depends: R (>= 2.10)
+Imports: 
+    magrittr,
+    geodist,
+    geosphere
+URL: https://github.com/Trackage/triplib
+BugReports: https://github.com/Trackage/triplib/issues
+Suggests: 
+    covr
