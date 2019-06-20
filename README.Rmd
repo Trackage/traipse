@@ -13,6 +13,7 @@ knitr::opts_chunk$set(
   fig.path = "man/figures/README-",
   out.width = "100%"
 )
+library(tidyverse)
 ```
 # triplib
 
@@ -30,6 +31,10 @@ The goal of triplib is to provide shared tools for tracking data.
 
 There is a huge fragmentation of tools and approaches in R for tracking, see the Spatio-Temporal 
 Task View section for examples. 
+
+We would like to have a simple core package to provide the most commonly used metrics. We assume `geodist` and `geosphere` as good examples of core packages for the underlying tool. 
+
+E.g. `amt` is among the best of the best tracking packages, but imports many monolithic packages as well. 
 
 Collect needed functions in this package that are as fast as possible, and
 very lightweight, no classes or complications or external libraries.
@@ -60,7 +65,9 @@ devtools::install_github("Trackage/triplib")
 ```
 ## Example
 
-This is a basic example which shows you how to calculate ellipsoidal distance and turning angle for a data set of tracks: 
+This is a basic example which shows you how to calculate ellipsoidal distance and turning angle for a data set of tracks. 
+
+First, calculate without any groupings - we definitely don't want this as there are three separate tracks within our data set identified by `id`. (No ordering is a applied other than the order the rows occur).
 
 ```{r example}
 library(triplib)
@@ -69,6 +76,13 @@ library(tidyverse)
 ## there's no grouping here - we haven't gotten our data organized yet
 trips0 %>% mutate(distance = track_distance(x, y), angle = track_angle(x, y))
 
+```
+Now run the same metrics but do it with respect to the grouping variable `id`. 
+
+
+TODO: show clearly the nonsense values we get if grouping is not respected. 
+
+```{r example-group_by}
 ## now we group by id (also need arrange by date to be sure ...)
 metric <- trips0 %>% group_by(id) %>% mutate(distance = track_distance(x, y), 
                                              angle = track_angle(x, y),
@@ -90,7 +104,7 @@ plot(metric[1:10, c("x", "y")], type = "b", lwd = 10, col = "grey")
 dest <- geosphere::destPoint(metric[1:10, c("x", "y")], 
                              b = metric$bearing[1:10], 
                             d = metric$distance[2:11])
-segments(metric$x[1:10], metric$y[1:10], dest[1:10,1], dest[1:10,2], col = "firebrick", lwd = 2)
+arrows(metric$x[1:10], metric$y[1:10], dest[1:10,1], dest[1:10,2], col = "firebrick", lwd = 2)
 ```
 
 

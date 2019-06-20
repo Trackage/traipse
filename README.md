@@ -22,6 +22,13 @@ The goal of triplib is to provide shared tools for tracking data.
 There is a huge fragmentation of tools and approaches in R for tracking,
 see the Spatio-Temporal Task View section for examples.
 
+We would like to have a simple core package to provide the most commonly
+used metrics. We assume `geodist` and `geosphere` as good examples of
+core packages for the underlying tool.
+
+E.g. `amt` is among the best of the best tracking packages, but imports
+many monolithic packages as well.
+
 Collect needed functions in this package that are as fast as possible,
 and very lightweight, no classes or complications or external libraries.
 
@@ -50,20 +57,16 @@ devtools::install_github("Trackage/triplib")
 ## Example
 
 This is a basic example which shows you how to calculate ellipsoidal
-distance and turning angle for a data set of tracks:
+distance and turning angle for a data set of tracks.
+
+First, calculate without any groupings - we definitely don’t want this
+as there are three separate tracks within our data set identified by
+`id`. (No ordering is a applied other than the order the rows occur).
 
 ``` r
 library(triplib)
 
 library(tidyverse)
-#> -- Attaching packages ------------------------------------------------------------------------- tidyverse 1.2.1 --
-#> v ggplot2 3.2.0          v purrr   0.3.2     
-#> v tibble  2.1.3          v dplyr   0.8.1.9000
-#> v tidyr   0.8.3          v stringr 1.4.0     
-#> v readr   1.3.1          v forcats 0.4.0
-#> -- Conflicts ---------------------------------------------------------------------------- tidyverse_conflicts() --
-#> x dplyr::filter() masks stats::filter()
-#> x dplyr::lag()    masks stats::lag()
 ## there's no grouping here - we haven't gotten our data organized yet
 trips0 %>% mutate(distance = track_distance(x, y), angle = track_angle(x, y))
 #> # A tibble: 1,500 x 6
@@ -80,7 +83,15 @@ trips0 %>% mutate(distance = track_distance(x, y), angle = track_angle(x, y))
 #>  9  118. -39.7 2001-01-02 13:49:59 1      130588.  23.8 
 #> 10  118. -40.5 2001-01-02 16:24:46 1       86066.  64.3 
 #> # ... with 1,490 more rows
+```
 
+Now run the same metrics but do it with respect to the grouping variable
+`id`.
+
+TODO: show clearly the nonsense values we get if grouping is not
+respected.
+
+``` r
 ## now we group by id (also need arrange by date to be sure ...)
 metric <- trips0 %>% group_by(id) %>% mutate(distance = track_distance(x, y), 
                                              angle = track_angle(x, y),
@@ -111,7 +122,7 @@ metric %>%
 #> Warning: Removed 2 rows containing missing values (geom_path).
 ```
 
-<img src="man/figures/README-example-1.png" width="100%" />
+<img src="man/figures/README-example-group_by-1.png" width="100%" />
 
 Using the bearing and distance now reproduce the track as *destination
 point* segments.
@@ -121,7 +132,7 @@ plot(metric[1:10, c("x", "y")], type = "b", lwd = 10, col = "grey")
 dest <- geosphere::destPoint(metric[1:10, c("x", "y")], 
                              b = metric$bearing[1:10], 
                             d = metric$distance[2:11])
-segments(metric$x[1:10], metric$y[1:10], dest[1:10,1], dest[1:10,2], col = "firebrick", lwd = 2)
+arrows(metric$x[1:10], metric$y[1:10], dest[1:10,1], dest[1:10,2], col = "firebrick", lwd = 2)
 ```
 
 <img src="man/figures/README-dest-point-1.png" width="100%" />
