@@ -15,9 +15,9 @@ knitr::opts_chunk$set(
 )
 library(tidyverse)
 ```
-# triplib
+# traipse
 
-CAUTION, triplib is very much in-development and has not been extensively checked. 
+CAUTION, traipse is very much in-development and has not been extensively checked. 
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
@@ -26,7 +26,7 @@ CAUTION, triplib is very much in-development and has not been extensively checke
 [![Codecov test coverage](https://codecov.io/gh/Trackage/triplib/branch/master/graph/badge.svg)](https://codecov.io/gh/Trackage/triplib?branch=master)
 <!-- badges: end -->
 
-The goal of triplib is to provide shared tools for tracking data. 
+The goal of traipse is to provide shared tools for tracking data. 
 
 There is a huge fragmentation of tools and approaches in R for tracking, see the Spatio-Temporal 
 Task View section for examples. 
@@ -58,7 +58,7 @@ You can install the  development version from [GitHub](https://github.com/) with
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("Trackage/triplib")
+devtools::install_github("Trackage/traipse")
 ```
 ## Example
 
@@ -67,7 +67,7 @@ This is a basic example which shows you how to calculate ellipsoidal distance an
 First, calculate without any groupings - we definitely don't want this as there are three separate tracks within our data set identified by `id`. (No ordering is a applied other than the order the rows occur).
 
 ```{r example}
-library(triplib)
+library(traipse)
 
 library(tidyverse)
 ## there's no grouping here - we haven't gotten our data organized yet
@@ -123,7 +123,7 @@ arrows(metric$x[1:10], metric$y[1:10], dest[1:10,1], dest[1:10,2], col = "firebr
 
 ---
 
-Please note that the 'triplib' project is released with a
+Please note that the 'traipse' project is released with a
 [Contributor Code of Conduct](CODE_OF_CONDUCT.md).
 By contributing to this project, you agree to abide by its terms.
 

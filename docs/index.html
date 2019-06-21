@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shared Tools for Tracking Data • triplib</title>
+<title>Shared Tools for Tracking Data • traipse</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
@@ -29,7 +29,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="index.html">triplib</a>
+        <a class="navbar-link" href="index.html">traipse</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
@@ -51,7 +51,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/Trackage/triplib">
+  <a href="https://github.com/Trackage/traipse">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -72,13 +72,13 @@
     
     
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-<div id="triplib" class="section level1">
+<div id="traipse" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#triplib" class="anchor"></a>triplib</h1></div>
-<p>CAUTION, triplib is very much in-development and has not been extensively checked.</p>
+<a href="#traipse" class="anchor"></a>traipse</h1></div>
+<p>CAUTION, traipse is very much in-development and has not been extensively checked.</p>
 <!-- badges: start -->
 <p><a href="https://www.tidyverse.org/lifecycle/#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a> <a href="https://travis-ci.org/Trackage/triplib"><img src="https://travis-ci.org/Trackage/triplib.svg?branch=master" alt="Travis build status"></a> <a href="https://ci.appveyor.com/project/Trackage/triplib"><img src="https://ci.appveyor.com/api/projects/status/github/Trackage/triplib?branch=master&amp;svg=true" alt="AppVeyor build status"></a> <a href="https://codecov.io/gh/Trackage/triplib?branch=master"><img src="https://codecov.io/gh/Trackage/triplib/branch/master/graph/badge.svg" alt="Codecov test coverage"></a> <!-- badges: end --></p>
-<p>The goal of triplib is to provide shared tools for tracking data.</p>
+<p>The goal of traipse is to provide shared tools for tracking data.</p>
 <p>There is a huge fragmentation of tools and approaches in R for tracking, see the Spatio-Temporal Task View section for examples.</p>
 <p>We would like to have a simple core package to provide the most commonly used metrics. We assume <code>geodist</code> and <code>geosphere</code> as good examples of core packages for the underlying tool.</p>
 <ul>
@@ -108,14 +108,14 @@
 <p>Not available on CRAN yet.</p>
 <p>You can install the development version from <a href="https://github.com/">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># install.packages("devtools")</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"Trackage/triplib"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb1-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"Trackage/traipse"</span>)</a></code></pre></div>
 </div>
 <div id="example" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example" class="anchor"></a>Example</h2>
 <p>This is a basic example which shows you how to calculate ellipsoidal distance and turning angle for a data set of tracks.</p>
 <p>First, calculate without any groupings - we definitely don’t want this as there are three separate tracks within our data set identified by <code>id</code>. (No ordering is a applied other than the order the rows occur).</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(triplib)</a>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(traipse)</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(tidyverse)</a>
 <a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co">## there's no grouping here - we haven't gotten our data organized yet</span></a>
@@ -190,7 +190,7 @@
 <a class="sourceLine" id="cb6-5" data-line-number="5"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/arrows">arrows</a></span>(metric<span class="op">$</span>x[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>], metric<span class="op">$</span>y[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>], dest[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,<span class="dv">1</span>], dest[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,<span class="dv">2</span>], <span class="dt">col =</span> <span class="st">"firebrick"</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a></code></pre></div>
 <p><img src="reference/figures/README-dest-point-1.png" width="100%"></p>
 <hr>
-<p>Please note that the ‘triplib’ project is released with a <a href="CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
+<p>Please note that the ‘traipse’ project is released with a <a href="CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
 </div>
   </div>
@@ -199,9 +199,9 @@
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
-<li>Browse source code at <br><a href="https://github.com/Trackage/triplib">https://​github.com/​Trackage/​triplib</a>
+<li>Browse source code at <br><a href="https://github.com/Trackage/traipse">https://​github.com/​Trackage/​traipse</a>
 </li>
-<li>Report a bug at <br><a href="https://github.com/Trackage/triplib/issues">https://​github.com/​Trackage/​triplib/​issues</a>
+<li>Report a bug at <br><a href="https://github.com/Trackage/traipse/issues">https://​github.com/​Trackage/​traipse/​issues</a>
 </li>
 </ul>
 </div>

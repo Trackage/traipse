@@ -1,4 +1,4 @@
-# triplib 0.0.1
+# traipse 0.0.1
 
 * New functions `track_time`, `track_speed`,`track_distance_to()` and `track_bearing_to()`. 
 

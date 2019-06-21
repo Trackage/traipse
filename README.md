@@ -1,9 +1,9 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# triplib
+# traipse
 
-CAUTION, triplib is very much in-development and has not been
+CAUTION, traipse is very much in-development and has not been
 extensively checked.
 
 <!-- badges: start -->
@@ -18,7 +18,7 @@ status](https://ci.appveyor.com/api/projects/status/github/Trackage/triplib?bran
 coverage](https://codecov.io/gh/Trackage/triplib/branch/master/graph/badge.svg)](https://codecov.io/gh/Trackage/triplib?branch=master)
 <!-- badges: end -->
 
-The goal of triplib is to provide shared tools for tracking data.
+The goal of traipse is to provide shared tools for tracking data.
 
 There is a huge fragmentation of tools and approaches in R for tracking,
 see the Spatio-Temporal Task View section for examples.
@@ -53,7 +53,7 @@ You can install the development version from
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("Trackage/triplib")
+devtools::install_github("Trackage/traipse")
 ```
 
 ## Example
@@ -66,7 +66,7 @@ as there are three separate tracks within our data set identified by
 `id`. (No ordering is a applied other than the order the rows occur).
 
 ``` r
-library(triplib)
+library(traipse)
 
 library(tidyverse)
 ## there's no grouping here - we haven't gotten our data organized yet
@@ -166,6 +166,6 @@ arrows(metric$x[1:10], metric$y[1:10], dest[1:10,1], dest[1:10,2], col = "firebr
 
 -----
 
-Please note that the ‘triplib’ project is released with a [Contributor
+Please note that the ‘traipse’ project is released with a [Contributor
 Code of Conduct](CODE_OF_CONDUCT.md). By contributing to this project,
 you agree to abide by its terms.

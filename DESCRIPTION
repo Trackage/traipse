@@ -1,4 +1,4 @@
-Package: triplib
+Package: traipse
 Title: Shared Tools for Tracking Data
 Version: 0.0.1
 Authors@R: 
@@ -20,7 +20,7 @@ Imports:
     magrittr,
     geodist,
     geosphere
-URL: https://github.com/Trackage/triplib
-BugReports: https://github.com/Trackage/triplib/issues
+URL: https://github.com/Trackage/traipse
+BugReports: https://github.com/Trackage/traipse/issues
 Suggests: 
     covr
