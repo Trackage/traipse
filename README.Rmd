@@ -17,8 +17,7 @@ library(tidyverse)
 ```
 # triplib
 
-NOT YET USEABLE
-
+CAUTION, triplib is very much in-development and has not been extensively checked. 
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
@@ -34,28 +33,26 @@ Task View section for examples.
 
 We would like to have a simple core package to provide the most commonly used metrics. We assume `geodist` and `geosphere` as good examples of core packages for the underlying tool. 
 
-E.g. `amt` is among the best of the best tracking packages, but imports many monolithic packages as well. 
 
-Collect needed functions in this package that are as fast as possible, and
-very lightweight, no classes or complications or external libraries.
+* `track_distance()` for distance in metres
+* `track_angle()` for internal angle in degrees
+* `track_turn()` for relative turn angle
+* `track_bearing()` for absolute bearing
+* `track_time()` for duration in seconds
+* `track_speed()` for speed in metres per second
+* `track_distance_to()` for distance to location
+* `track_bearing_to()` for bearing to location
 
+Distances are always returned in metres. 
 
-- path distance
-- distance to source/target, absolute or cumulative
-- turning angle (direction change) 
-- track angle (internal angle of turn)
-- Argos quality codes as ordered factor
-- validation of basic data, and trip sense
-- interpolation based on time step, distance
-- cut for tracks
-- examples and docs!
+Angles are always returned in degrees, and absolute bearing is relative to North (0), and proceeds clockwise positive and anti-clockwise negative `N = 0, E = 90, S = +/-180, W = -90`. 
 
+Time is always returned in seconds. 
 
 
 ## Installation
 
 Not available on CRAN yet. 
-
 
 You can install the  development version from [GitHub](https://github.com/) with:
 
@@ -87,13 +84,28 @@ TODO: show clearly the nonsense values we get if grouping is not respected.
 metric <- trips0 %>% group_by(id) %>% mutate(distance = track_distance(x, y), 
                                              angle = track_angle(x, y),
                                              turn = track_turn(x, y), 
-                                             bearing = track_bearing(x, y)) 
+                                             bearing = track_bearing(x, y), 
+                                             duration = track_time(date),
+                                             speed = track_speed(x, y, date), 
+                                             distance_to = track_distance_to(x, y, 147, -42), 
+                                             bearing_to = track_bearing_to(x, y, 100, -42)) 
 metric 
 
 metric %>% 
   ggplot(aes(x, y, cex= 1/angle)) + 
   geom_point() + 
   geom_path(col = rgb(0.2, 0.2, 0.2, 0.2))
+
+metric %>% 
+  ggplot(aes(x, y, colour = distance_to)) + 
+  geom_point() + geom_label(data = data.frame(x = 147, y = -42, distance_to = 0), 
+                            label = "home")
+
+metric %>% 
+  ggplot(aes(x, y, colour = bearing_to)) + 
+  geom_point() + geom_label(data = data.frame(x = 100, y = -42, bearing_to = 0), 
+                            label = "home")
+
 
 ```
 

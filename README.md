@@ -3,7 +3,8 @@
 
 # triplib
 
-NOT YET USEABLE
+CAUTION, triplib is very much in-development and has not been
+extensively checked.
 
 <!-- badges: start -->
 
@@ -26,21 +27,22 @@ We would like to have a simple core package to provide the most commonly
 used metrics. We assume `geodist` and `geosphere` as good examples of
 core packages for the underlying tool.
 
-E.g. `amt` is among the best of the best tracking packages, but imports
-many monolithic packages as well.
+  - `track_distance()` for distance in metres
+  - `track_angle()` for internal angle in degrees
+  - `track_turn()` for relative turn angle
+  - `track_bearing()` for absolute bearing
+  - `track_time()` for duration in seconds
+  - `track_speed()` for speed in metres per second
+  - `track_distance_to()` for distance to location
+  - `track_bearing_to()` for bearing to location
 
-Collect needed functions in this package that are as fast as possible,
-and very lightweight, no classes or complications or external libraries.
+Distances are always returned in metres.
 
-  - path distance
-  - distance to source/target, absolute or cumulative
-  - turning angle (direction change)
-  - track angle (internal angle of turn)
-  - Argos quality codes as ordered factor
-  - validation of basic data, and trip sense
-  - interpolation based on time step, distance
-  - cut for tracks
-  - examples and docs\!
+Angles are always returned in degrees, and absolute bearing is relative
+to North (0), and proceeds clockwise positive and anti-clockwise
+negative `N = 0, E = 90, S = +/-180, W = -90`.
+
+Time is always returned in seconds.
 
 ## Installation
 
@@ -82,7 +84,7 @@ trips0 %>% mutate(distance = track_distance(x, y), angle = track_angle(x, y))
 #>  8  118. -40.9 2001-01-02 10:01:26 1      108811. 159.  
 #>  9  118. -39.7 2001-01-02 13:49:59 1      130588.  23.8 
 #> 10  118. -40.5 2001-01-02 16:24:46 1       86066.  64.3 
-#> # ... with 1,490 more rows
+#> # … with 1,490 more rows
 ```
 
 Now run the same metrics but do it with respect to the grouping variable
@@ -96,9 +98,13 @@ respected.
 metric <- trips0 %>% group_by(id) %>% mutate(distance = track_distance(x, y), 
                                              angle = track_angle(x, y),
                                              turn = track_turn(x, y), 
-                                             bearing = track_bearing(x, y)) 
+                                             bearing = track_bearing(x, y), 
+                                             duration = track_time(date),
+                                             speed = track_speed(x, y, date), 
+                                             distance_to = track_distance_to(x, y, 147, -42), 
+                                             bearing_to = track_bearing_to(x, y, 100, -42)) 
 metric 
-#> # A tibble: 1,500 x 8
+#> # A tibble: 1,500 x 12
 #> # Groups:   id [3]
 #>        x     y date                id    distance  angle   turn bearing
 #>    <dbl> <dbl> <dttm>              <chr>    <dbl>  <dbl>  <dbl>   <dbl>
@@ -112,7 +118,8 @@ metric
 #>  8  118. -40.9 2001-01-02 10:01:26 1      108811. 159.    -21.2   12.9 
 #>  9  118. -39.7 2001-01-02 13:49:59 1      130588.  23.8   156.   169.  
 #> 10  118. -40.5 2001-01-02 16:24:46 1       86066.  64.3  -116.    53.1 
-#> # ... with 1,490 more rows
+#> # … with 1,490 more rows, and 4 more variables: duration <dbl>,
+#> #   speed <dbl>, distance_to <dbl>, bearing_to <dbl>
 
 metric %>% 
   ggplot(aes(x, y, cex= 1/angle)) + 
@@ -123,6 +130,26 @@ metric %>%
 ```
 
 <img src="man/figures/README-example-group_by-1.png" width="100%" />
+
+``` r
+
+metric %>% 
+  ggplot(aes(x, y, colour = distance_to)) + 
+  geom_point() + geom_label(data = data.frame(x = 147, y = -42, distance_to = 0), 
+                            label = "home")
+```
+
+<img src="man/figures/README-example-group_by-2.png" width="100%" />
+
+``` r
+
+metric %>% 
+  ggplot(aes(x, y, colour = bearing_to)) + 
+  geom_point() + geom_label(data = data.frame(x = 100, y = -42, bearing_to = 0), 
+                            label = "home")
+```
+
+<img src="man/figures/README-example-group_by-3.png" width="100%" />
 
 Using the bearing and distance now reproduce the track as *destination
 point* segments.
