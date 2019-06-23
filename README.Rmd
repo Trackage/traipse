@@ -21,9 +21,9 @@ CAUTION, traipse is very much in-development and has not been extensively checke
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
-[![Travis build status](https://travis-ci.org/Trackage/triplib.svg?branch=master)](https://travis-ci.org/Trackage/triplib)
-[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/Trackage/triplib?branch=master&svg=true)](https://ci.appveyor.com/project/Trackage/triplib)
-[![Codecov test coverage](https://codecov.io/gh/Trackage/triplib/branch/master/graph/badge.svg)](https://codecov.io/gh/Trackage/triplib?branch=master)
+[![Travis build status](https://travis-ci.org/Trackage/traipse.svg?branch=master)](https://travis-ci.org/Trackage/traipse)
+[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/7v59mpmj4lqw2b0q/branch/master?svg=true)](https://ci.appveyor.com/project/mdsumner/traipse)
+[![Codecov test coverage](https://codecov.io/gh/Trackage/traipse/branch/master/graph/badge.svg)](https://codecov.io/gh/Trackage/traipse?branch=master)
 <!-- badges: end -->
 
 The goal of traipse is to provide shared tools for tracking data. 

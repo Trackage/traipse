@@ -19,7 +19,8 @@ track_time<- function(date) {
   if (!inherits(date, "POSIXct")) {
     date <- try(as.POSIXct(date), silent = TRUE)
     if (inherits(date, "try-error")) {
-      stop(sprintf("Cannot convert 'date' of class '%s' to POSIXct"), paste(cls, collapse = ","))
+
+      stop(sprintf("Cannot convert 'date' of class '%s' to POSIXct", paste(cls, collapse = ",")))
     }
   }
   c(NA_real_, diff(unclass(date)))

@@ -1,6 +1,6 @@
 Package: traipse
 Title: Shared Tools for Tracking Data
-Version: 0.0.1
+Version: 0.1.0
 Authors@R: 
     c(
     person(given = "Michael", 
@@ -23,4 +23,5 @@ Imports:
 URL: https://github.com/Trackage/traipse
 BugReports: https://github.com/Trackage/traipse/issues
 Suggests: 
-    covr
+    covr,
+    testthat (>= 2.1.0)
