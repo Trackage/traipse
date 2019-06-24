@@ -10,7 +10,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Shared Tools for Tracking Data">
-<meta property="og:description" content="A collection of commonly used tools for animal movement and other tracking data. ">
+<meta property="og:description" content="A collection of commonly used tools for animal movement and other tracking 
+ data. Variously distance, angle, bearing, distance-to, bearing-to and speed are 
+ provided for geographic data that can be used directly or within 'tidyverse' 
+ syntax. Distances and bearings are calculated using modern geodesic methods as 
+ provided by Charles F. F. Karney (2013) &lt;doi:10.1007/s00190-012-0578-z&gt; 
+ via the 'geodist' and 'geosphere' packages. ">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -75,12 +80,9 @@
 <div id="traipse" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#traipse" class="anchor"></a>traipse</h1></div>
-<p>CAUTION, traipse is very much in-development and has not been extensively checked.</p>
 <!-- badges: start -->
-<p><a href="https://www.tidyverse.org/lifecycle/#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a> <a href="https://travis-ci.org/Trackage/traipse"><img src="https://travis-ci.org/Trackage/traipse.svg?branch=master" alt="Travis build status"></a> <a href="https://ci.appveyor.com/project/mdsumner/traipse"><img src="https://ci.appveyor.com/api/projects/status/7v59mpmj4lqw2b0q/branch/master?svg=true" alt="AppVeyor build status"></a> <a href="https://codecov.io/gh/Trackage/traipse?branch=master"><img src="https://codecov.io/gh/Trackage/traipse/branch/master/graph/badge.svg" alt="Codecov test coverage"></a> <!-- badges: end --></p>
-<p>The goal of traipse is to provide shared tools for tracking data.</p>
-<p>There is a huge fragmentation of tools and approaches in R for tracking, see the Spatio-Temporal Task View section for examples.</p>
-<p>We would like to have a simple core package to provide the most commonly used metrics. We assume <code>geodist</code> and <code>geosphere</code> as good examples of core packages for the underlying tool.</p>
+
+<p>The goal of traipse is to provide shared tools for tracking data, for common metrics of distance, direction, and speed. The package includes the following functions which are always assumed to operate on input locations in longitude latitude, and input date-times in R’s <code>POSIXt</code> class.</p>
 <ul>
 <li>
 <code><a href="reference/track_distance.html">track_distance()</a></code> for distance in metres</li>
@@ -99,9 +101,10 @@
 <li>
 <code><a href="reference/track_bearing_to.html">track_bearing_to()</a></code> for bearing to location</li>
 </ul>
-<p>Distances are always returned in metres.</p>
-<p>Angles are always returned in degrees, and absolute bearing is relative to North (0), and proceeds clockwise positive and anti-clockwise negative <code>N = 0, E = 90, S = +/-180, W = -90</code>.</p>
-<p>Time is always returned in seconds.</p>
+<p>Distances are always returned in metres, directions and angles are always returned in degrees. Absolute bearing is relative to North (0), and proceeds clockwise positive and anti-clockwise negative <code>N = 0, E = 90, S = +/-180, W = -90</code>.</p>
+<p>Time is always returned in seconds, and speed in metres per second.</p>
+<p>There is a huge fragmentation of tools and approaches in R for tracking, see the <a href="https://cran.r-project.org/web/views/SpatioTemporal.html">moving objects, trajectories</a> section of the Handling and Analyzing Spatio-Temporal DataTask View for examples.</p>
+<p>We would like to have a simple core package to provide the most commonly used metrics. We assume <code>geodist</code> and <code>geosphere</code> as good examples of core packages for the underlying tool. These both apply the modern</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
@@ -135,7 +138,6 @@
 <a class="sourceLine" id="cb2-18" data-line-number="18"><span class="co">#&gt; 10  118. -40.5 2001-01-02 16:24:46 1       86066.  64.3 </span></a>
 <a class="sourceLine" id="cb2-19" data-line-number="19"><span class="co">#&gt; # … with 1,490 more rows</span></a></code></pre></div>
 <p>Now run the same metrics but do it with respect to the grouping variable <code>id</code>.</p>
-<p>TODO: show clearly the nonsense values we get if grouping is not respected.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co">## now we group by id (also need arrange by date to be sure ...)</span></a>
 <a class="sourceLine" id="cb3-2" data-line-number="2">metric &lt;-<span class="st"> </span>trips0 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(id) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">distance =</span> <span class="kw"><a href="reference/track_distance.html">track_distance</a></span>(x, y), </a>
 <a class="sourceLine" id="cb3-3" data-line-number="3">                                             <span class="dt">angle =</span> <span class="kw"><a href="reference/track_angle.html">track_angle</a></span>(x, y),</a>
@@ -189,8 +191,14 @@
 <a class="sourceLine" id="cb6-4" data-line-number="4">                            <span class="dt">d =</span> metric<span class="op">$</span>distance[<span class="dv">2</span><span class="op">:</span><span class="dv">11</span>])</a>
 <a class="sourceLine" id="cb6-5" data-line-number="5"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/arrows">arrows</a></span>(metric<span class="op">$</span>x[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>], metric<span class="op">$</span>y[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>], dest[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,<span class="dv">1</span>], dest[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,<span class="dv">2</span>], <span class="dt">col =</span> <span class="st">"firebrick"</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a></code></pre></div>
 <p><img src="reference/figures/README-dest-point-1.png" width="100%"></p>
+</div>
+<div id="data-are-assumed-to-be-sensibly-organized" class="section level2">
+<h2 class="hasAnchor">
+<a href="#data-are-assumed-to-be-sensibly-organized" class="anchor"></a>Data are assumed to be sensibly organized</h2>
+<p>Note above that we provided a <em>grouping ID</em> for when we have separate trips within the same data set. There’s nothing to stop from calculating distances when the arrangement of records does not make sense, but this is your responsibility. If missing values are present, or times are out of order, or include zero-length time durations, or movement backward in time there are aren’t any checks.</p>
+<p>The idea is for developers to be able to use these tools however they like but with an assumed consistent workflow.</p>
 <hr>
-<p>Please note that the ‘traipse’ project is released with a <a href="CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
+<p>Please note that this project is released with a <a href="CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
 </div>
   </div>
@@ -218,7 +226,18 @@
 </ul>
 </div>
 
-      </div>
+      <div class="dev-status">
+<h2>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://www.tidyverse.org/lifecycle/#maturing"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="Lifecycle: experimental"></a></li>
+<li><a href="https://travis-ci.org/Trackage/traipse"><img src="https://travis-ci.org/Trackage/traipse.svg?branch=master" alt="Travis build status"></a></li>
+<li><a href="https://ci.appveyor.com/project/mdsumner/traipse"><img src="https://ci.appveyor.com/api/projects/status/7v59mpmj4lqw2b0q/branch/master?svg=true" alt="AppVeyor build status"></a></li>
+<li><a href="https://codecov.io/gh/Trackage/traipse?branch=master"><img src="https://codecov.io/gh/Trackage/traipse/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://cran.r-project.org/package=traipse"><img src="https://www.r-pkg.org/badges/version/traipse" alt="CRAN status"></a></li>
+<li><a href="https://cran.r-project.org/package=traipse"><img src="http://cranlogs.r-pkg.org/badges/traipse" alt="CRAN_Download_Badge"></a></li>
+</ul>
+</div>
+</div>
 
 </div>
 

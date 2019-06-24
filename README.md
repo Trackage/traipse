@@ -13,6 +13,9 @@ status](https://travis-ci.org/Trackage/traipse.svg?branch=master)](https://travi
 status](https://ci.appveyor.com/api/projects/status/7v59mpmj4lqw2b0q/branch/master?svg=true)](https://ci.appveyor.com/project/mdsumner/traipse)
 [![Codecov test
 coverage](https://codecov.io/gh/Trackage/traipse/branch/master/graph/badge.svg)](https://codecov.io/gh/Trackage/traipse?branch=master)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/traipse)](https://cran.r-project.org/package=traipse)
+[![CRAN\_Download\_Badge](http://cranlogs.r-pkg.org/badges/traipse)](https://cran.r-project.org/package=traipse)
 <!-- badges: end -->
 
 The goal of traipse is to provide shared tools for tracking data, for
@@ -38,7 +41,10 @@ and proceeds clockwise positive and anti-clockwise negative `N = 0, E
 Time is always returned in seconds, and speed in metres per second.
 
 There is a huge fragmentation of tools and approaches in R for tracking,
-see the Spatio-Temporal Task View section for examples.
+see the [moving objects,
+trajectories](https://cran.r-project.org/web/views/SpatioTemporal.html)
+section of the Handling and Analyzing Spatio-Temporal DataTask View for
+examples.
 
 We would like to have a simple core package to provide the most commonly
 used metrics. We assume `geodist` and `geosphere` as good examples of
@@ -171,10 +177,10 @@ of order, or include zero-length time durations, or movement backward in
 time there are aren’t any checks.
 
 The idea is for developers to be able to use these tools however they
-like.
+like but with an assumed consistent workflow.
 
 -----
 
-Please note that the ‘traipse’ project is released with a [Contributor
-Code of Conduct](CODE_OF_CONDUCT.md). By contributing to this project,
-you agree to abide by its terms.
+Please note that this project is released with a [Contributor Code of
+Conduct](CODE_OF_CONDUCT.md). By contributing to this project, you agree
+to abide by its terms.

@@ -134,11 +134,15 @@
 applies to the relative turn from the current location.</p>
 <p>To use this on multiple track ids, use a grouped data frame with tidyverse code like
 <code>data %&gt;% group_by(id) %&gt;% mutate(turn = track_turn(lon, lat))</code>.</p>
+<p>The maximum possible value is 180 degrees and the minimum is 0.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>track_turn</span>(<span class='no'>trips0</span>$<span class='no'>x</span>, <span class='no'>trips0</span>$<span class='no'>y</span>)[<span class='fl'>1</span>:<span class='fl'>10</span>]</div><div class='output co'>#&gt;  [1]         NA  -60.99577 -175.45007 -167.27394  107.65275 -155.18283
-#&gt;  [7]   90.85982  -21.24632  156.01156 -115.82731</div></pre>
+#&gt;  [7]   90.85982  -21.24632  156.01156 -115.82731</div><div class='input'>
+<span class='co'>## maximum turn angle</span>
+<span class='fu'>track_turn</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>), <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>0</span>))</div><div class='output co'>#&gt; [1]  NA 180  NA</div><div class='input'><span class='co'>## minimum turn angle</span>
+<span class='fu'>track_turn</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>), <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>2</span>))</div><div class='output co'>#&gt; [1] NA  0 NA</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

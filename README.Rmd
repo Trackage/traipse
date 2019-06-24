@@ -23,6 +23,8 @@ library(tidyverse)
 [![Travis build status](https://travis-ci.org/Trackage/traipse.svg?branch=master)](https://travis-ci.org/Trackage/traipse)
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/7v59mpmj4lqw2b0q/branch/master?svg=true)](https://ci.appveyor.com/project/mdsumner/traipse)
 [![Codecov test coverage](https://codecov.io/gh/Trackage/traipse/branch/master/graph/badge.svg)](https://codecov.io/gh/Trackage/traipse?branch=master)
+[![CRAN status](https://www.r-pkg.org/badges/version/traipse)](https://cran.r-project.org/package=traipse)
+[![CRAN_Download_Badge](http://cranlogs.r-pkg.org/badges/traipse)](https://cran.r-project.org/package=traipse)
 <!-- badges: end -->
 
 The goal of traipse is to provide shared tools for tracking data, for common metrics of distance, direction, and speed. The package includes the following functions which are always assumed to operate on input locations in longitude latitude, and input date-times in R's `POSIXt` class. 
@@ -40,8 +42,7 @@ Distances are always returned in metres, directions and angles are always return
 
 Time is always returned in seconds, and speed in metres per second. 
 
-There is a huge fragmentation of tools and approaches in R for tracking, see the Spatio-Temporal 
-Task View section for examples. 
+There is a huge fragmentation of tools and approaches in R for tracking, see the [moving objects, trajectories](https://cran.r-project.org/web/views/SpatioTemporal.html) section of the Handling and Analyzing Spatio-Temporal DataTask View for examples. 
 
 We would like to have a simple core package to provide the most commonly used metrics. We assume `geodist` and `geosphere` as good examples of core packages for the underlying tool. These both apply the modern 
 
@@ -118,11 +119,11 @@ arrows(metric$x[1:10], metric$y[1:10], dest[1:10,1], dest[1:10,2], col = "firebr
 
 Note above that we provided a *grouping ID* for when we have separate trips within the same data set. There's nothing to stop from calculating distances when the arrangement of records does not make sense, but this is your responsibility. If missing values are present, or times are out of order, or include zero-length time durations, or movement backward in time there are aren't any checks. 
 
-The idea is for developers to be able to use these tools however they like. 
+The idea is for developers to be able to use these tools however they like but with an assumed consistent workflow. 
 
 ---
 
-Please note that the 'traipse' project is released with a
+Please note that this project is released with a
 [Contributor Code of Conduct](CODE_OF_CONDUCT.md).
 By contributing to this project, you agree to abide by its terms.
 
