@@ -70,11 +70,10 @@ library(tidyverse)
 trips0 %>% mutate(distance = track_distance(x, y), angle = track_angle(x, y))
 
 ```
-Now run the same metrics but do it with respect to the grouping variable `id`. 
+Now run a the complete set of available metrics, but do it with respect to the grouping variable `id`. 
 
 
 ```{r example-group_by}
-## now we group by id (also need arrange by date to be sure ...)
 metric <- trips0 %>% group_by(id) %>% mutate(distance = track_distance(x, y), 
                                              angle = track_angle(x, y),
                                              turn = track_turn(x, y), 
@@ -117,7 +116,7 @@ arrows(metric$x[1:10], metric$y[1:10], dest[1:10,1], dest[1:10,2], col = "firebr
 
 ## Data are assumed to be sensibly organized
 
-Note above that we provided a *grouping ID* for when we have separate trips within the same data set. There's nothing to stop from calculating distances when the arrangement of records does not make sense, but this is your responsibility. If missing values are present, or times are out of order, or include zero-length time durations, or movement backward in time there are aren't any checks. 
+Note above that we provided a *grouping ID* for when we have separate trips within the same data set. There's nothing to stop from calculating distances when the arrangement of records does not make sense, but this is your responsibility. If missing values are present, or times are out of order, or include zero-length time durations, or movement backward in time there aren't any checks for that made in the traipse package. 
 
 The idea is for developers to be able to use these tools however they like but with an assumed consistent workflow. 
 

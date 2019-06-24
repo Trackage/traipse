@@ -95,11 +95,11 @@ trips0 %>% mutate(distance = track_distance(x, y), angle = track_angle(x, y))
 #> # … with 1,490 more rows
 ```
 
-Now run the same metrics but do it with respect to the grouping variable
+Now run a the complete set of available metrics, but do it with respect
+to the grouping variable
 `id`.
 
 ``` r
-## now we group by id (also need arrange by date to be sure ...)
 metric <- trips0 %>% group_by(id) %>% mutate(distance = track_distance(x, y), 
                                              angle = track_angle(x, y),
                                              turn = track_turn(x, y), 
@@ -176,7 +176,7 @@ trips within the same data set. There’s nothing to stop from calculating
 distances when the arrangement of records does not make sense, but this
 is your responsibility. If missing values are present, or times are out
 of order, or include zero-length time durations, or movement backward in
-time there are aren’t any checks.
+time there aren’t any checks for that made in the traipse package.
 
 The idea is for developers to be able to use these tools however they
 like but with an assumed consistent workflow.

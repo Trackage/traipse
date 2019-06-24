@@ -165,40 +165,39 @@
 <a class="sourceLine" id="cb2-17" data-line-number="17"><span class="co">#&gt;  9  118. -39.7 2001-01-02 13:49:59 1      130588.  23.8 </span></a>
 <a class="sourceLine" id="cb2-18" data-line-number="18"><span class="co">#&gt; 10  118. -40.5 2001-01-02 16:24:46 1       86066.  64.3 </span></a>
 <a class="sourceLine" id="cb2-19" data-line-number="19"><span class="co">#&gt; # … with 1,490 more rows</span></a></code></pre></div>
-<p>Now run the same metrics but do it with respect to the grouping variable <code>id</code>.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co">## now we group by id (also need arrange by date to be sure ...)</span></a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">metric &lt;-<span class="st"> </span>trips0 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(id) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">distance =</span> <span class="kw"><a href="reference/track_distance.html">track_distance</a></span>(x, y), </a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">                                             <span class="dt">angle =</span> <span class="kw"><a href="reference/track_angle.html">track_angle</a></span>(x, y),</a>
-<a class="sourceLine" id="cb3-4" data-line-number="4">                                             <span class="dt">turn =</span> <span class="kw"><a href="reference/track_turn.html">track_turn</a></span>(x, y), </a>
-<a class="sourceLine" id="cb3-5" data-line-number="5">                                             <span class="dt">bearing =</span> <span class="kw"><a href="reference/track_bearing.html">track_bearing</a></span>(x, y), </a>
-<a class="sourceLine" id="cb3-6" data-line-number="6">                                             <span class="dt">duration =</span> <span class="kw"><a href="reference/track_time.html">track_time</a></span>(date),</a>
-<a class="sourceLine" id="cb3-7" data-line-number="7">                                             <span class="dt">speed =</span> <span class="kw"><a href="reference/track_speed.html">track_speed</a></span>(x, y, date), </a>
-<a class="sourceLine" id="cb3-8" data-line-number="8">                                             <span class="dt">distance_to =</span> <span class="kw"><a href="reference/track_distance_to.html">track_distance_to</a></span>(x, y, <span class="dv">147</span>, <span class="dv">-42</span>), </a>
-<a class="sourceLine" id="cb3-9" data-line-number="9">                                             <span class="dt">bearing_to =</span> <span class="kw"><a href="reference/track_bearing_to.html">track_bearing_to</a></span>(x, y, <span class="dv">100</span>, <span class="dv">-42</span>)) </a>
-<a class="sourceLine" id="cb3-10" data-line-number="10">metric </a>
-<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="co">#&gt; # A tibble: 1,500 x 12</span></a>
-<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="co">#&gt; # Groups:   id [3]</span></a>
-<a class="sourceLine" id="cb3-13" data-line-number="13"><span class="co">#&gt;        x     y date                id    distance  angle   turn bearing</span></a>
-<a class="sourceLine" id="cb3-14" data-line-number="14"><span class="co">#&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dttm&gt;              &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb3-15" data-line-number="15"><span class="co">#&gt;  1  115. -42.4 2001-01-01 15:39:50 1          NA   NA      NA     34.5 </span></a>
-<a class="sourceLine" id="cb3-16" data-line-number="16"><span class="co">#&gt;  2  116. -41.4 2001-01-01 18:16:52 1      129435. 120.    -61.0  -26.5 </span></a>
-<a class="sourceLine" id="cb3-17" data-line-number="17"><span class="co">#&gt;  3  116. -41.1 2001-01-01 21:03:38 1       34632.   4.43 -175.   158.  </span></a>
-<a class="sourceLine" id="cb3-18" data-line-number="18"><span class="co">#&gt;  4  117. -42.1 2001-01-01 22:09:41 1      120575.  13.1  -167.    -9.20</span></a>
-<a class="sourceLine" id="cb3-19" data-line-number="19"><span class="co">#&gt;  5  116. -41.9 2001-01-01 23:33:54 1       30560.  72.4   108.    98.5 </span></a>
-<a class="sourceLine" id="cb3-20" data-line-number="20"><span class="co">#&gt;  6  118. -42.0 2001-01-02 01:25:12 1       97593.  25.6  -155.   -56.7 </span></a>
-<a class="sourceLine" id="cb3-21" data-line-number="21"><span class="co">#&gt;  7  117. -41.7 2001-01-02 06:45:40 1       57005.  89.5    90.9   34.1 </span></a>
-<a class="sourceLine" id="cb3-22" data-line-number="22"><span class="co">#&gt;  8  118. -40.9 2001-01-02 10:01:26 1      108811. 159.    -21.2   12.9 </span></a>
-<a class="sourceLine" id="cb3-23" data-line-number="23"><span class="co">#&gt;  9  118. -39.7 2001-01-02 13:49:59 1      130588.  23.8   156.   169.  </span></a>
-<a class="sourceLine" id="cb3-24" data-line-number="24"><span class="co">#&gt; 10  118. -40.5 2001-01-02 16:24:46 1       86066.  64.3  -116.    53.1 </span></a>
-<a class="sourceLine" id="cb3-25" data-line-number="25"><span class="co">#&gt; # … with 1,490 more rows, and 4 more variables: duration &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb3-26" data-line-number="26"><span class="co">#&gt; #   speed &lt;dbl&gt;, distance_to &lt;dbl&gt;, bearing_to &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb3-27" data-line-number="27"></a>
-<a class="sourceLine" id="cb3-28" data-line-number="28">metric <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb3-29" data-line-number="29"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(x, y, <span class="dt">cex=</span> <span class="dv">1</span><span class="op">/</span>angle)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb3-30" data-line-number="30"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb3-31" data-line-number="31"><span class="st">  </span><span class="kw">geom_path</span>(<span class="dt">col =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/grDevices/topics/rgb">rgb</a></span>(<span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>))</a>
-<a class="sourceLine" id="cb3-32" data-line-number="32"><span class="co">#&gt; Warning: Removed 6 rows containing missing values (geom_point).</span></a>
-<a class="sourceLine" id="cb3-33" data-line-number="33"><span class="co">#&gt; Warning: Removed 2 rows containing missing values (geom_path).</span></a></code></pre></div>
+<p>Now run a the complete set of available metrics, but do it with respect to the grouping variable <code>id</code>.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">metric &lt;-<span class="st"> </span>trips0 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(id) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">distance =</span> <span class="kw"><a href="reference/track_distance.html">track_distance</a></span>(x, y), </a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">                                             <span class="dt">angle =</span> <span class="kw"><a href="reference/track_angle.html">track_angle</a></span>(x, y),</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">                                             <span class="dt">turn =</span> <span class="kw"><a href="reference/track_turn.html">track_turn</a></span>(x, y), </a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">                                             <span class="dt">bearing =</span> <span class="kw"><a href="reference/track_bearing.html">track_bearing</a></span>(x, y), </a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">                                             <span class="dt">duration =</span> <span class="kw"><a href="reference/track_time.html">track_time</a></span>(date),</a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">                                             <span class="dt">speed =</span> <span class="kw"><a href="reference/track_speed.html">track_speed</a></span>(x, y, date), </a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">                                             <span class="dt">distance_to =</span> <span class="kw"><a href="reference/track_distance_to.html">track_distance_to</a></span>(x, y, <span class="dv">147</span>, <span class="dv">-42</span>), </a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">                                             <span class="dt">bearing_to =</span> <span class="kw"><a href="reference/track_bearing_to.html">track_bearing_to</a></span>(x, y, <span class="dv">100</span>, <span class="dv">-42</span>)) </a>
+<a class="sourceLine" id="cb3-9" data-line-number="9">metric </a>
+<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="co">#&gt; # A tibble: 1,500 x 12</span></a>
+<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="co">#&gt; # Groups:   id [3]</span></a>
+<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="co">#&gt;        x     y date                id    distance  angle   turn bearing</span></a>
+<a class="sourceLine" id="cb3-13" data-line-number="13"><span class="co">#&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dttm&gt;              &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb3-14" data-line-number="14"><span class="co">#&gt;  1  115. -42.4 2001-01-01 15:39:50 1          NA   NA      NA     34.5 </span></a>
+<a class="sourceLine" id="cb3-15" data-line-number="15"><span class="co">#&gt;  2  116. -41.4 2001-01-01 18:16:52 1      129435. 120.    -61.0  -26.5 </span></a>
+<a class="sourceLine" id="cb3-16" data-line-number="16"><span class="co">#&gt;  3  116. -41.1 2001-01-01 21:03:38 1       34632.   4.43 -175.   158.  </span></a>
+<a class="sourceLine" id="cb3-17" data-line-number="17"><span class="co">#&gt;  4  117. -42.1 2001-01-01 22:09:41 1      120575.  13.1  -167.    -9.20</span></a>
+<a class="sourceLine" id="cb3-18" data-line-number="18"><span class="co">#&gt;  5  116. -41.9 2001-01-01 23:33:54 1       30560.  72.4   108.    98.5 </span></a>
+<a class="sourceLine" id="cb3-19" data-line-number="19"><span class="co">#&gt;  6  118. -42.0 2001-01-02 01:25:12 1       97593.  25.6  -155.   -56.7 </span></a>
+<a class="sourceLine" id="cb3-20" data-line-number="20"><span class="co">#&gt;  7  117. -41.7 2001-01-02 06:45:40 1       57005.  89.5    90.9   34.1 </span></a>
+<a class="sourceLine" id="cb3-21" data-line-number="21"><span class="co">#&gt;  8  118. -40.9 2001-01-02 10:01:26 1      108811. 159.    -21.2   12.9 </span></a>
+<a class="sourceLine" id="cb3-22" data-line-number="22"><span class="co">#&gt;  9  118. -39.7 2001-01-02 13:49:59 1      130588.  23.8   156.   169.  </span></a>
+<a class="sourceLine" id="cb3-23" data-line-number="23"><span class="co">#&gt; 10  118. -40.5 2001-01-02 16:24:46 1       86066.  64.3  -116.    53.1 </span></a>
+<a class="sourceLine" id="cb3-24" data-line-number="24"><span class="co">#&gt; # … with 1,490 more rows, and 4 more variables: duration &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb3-25" data-line-number="25"><span class="co">#&gt; #   speed &lt;dbl&gt;, distance_to &lt;dbl&gt;, bearing_to &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb3-26" data-line-number="26"></a>
+<a class="sourceLine" id="cb3-27" data-line-number="27">metric <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb3-28" data-line-number="28"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(x, y, <span class="dt">cex=</span> <span class="dv">1</span><span class="op">/</span>angle)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb3-29" data-line-number="29"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb3-30" data-line-number="30"><span class="st">  </span><span class="kw">geom_path</span>(<span class="dt">col =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/grDevices/topics/rgb">rgb</a></span>(<span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>))</a>
+<a class="sourceLine" id="cb3-31" data-line-number="31"><span class="co">#&gt; Warning: Removed 6 rows containing missing values (geom_point).</span></a>
+<a class="sourceLine" id="cb3-32" data-line-number="32"><span class="co">#&gt; Warning: Removed 2 rows containing missing values (geom_path).</span></a></code></pre></div>
 <p><img src="man/figures/README-example-group_by-1.png" width="100%"></p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"></a>
 <a class="sourceLine" id="cb4-2" data-line-number="2">metric <span class="op">%&gt;%</span><span class="st"> </span></a>
@@ -223,7 +222,7 @@
 <div id="data-are-assumed-to-be-sensibly-organized" class="section level2">
 <h2 class="hasAnchor">
 <a href="#data-are-assumed-to-be-sensibly-organized" class="anchor"></a>Data are assumed to be sensibly organized</h2>
-<p>Note above that we provided a <em>grouping ID</em> for when we have separate trips within the same data set. There’s nothing to stop from calculating distances when the arrangement of records does not make sense, but this is your responsibility. If missing values are present, or times are out of order, or include zero-length time durations, or movement backward in time there are aren’t any checks.</p>
+<p>Note above that we provided a <em>grouping ID</em> for when we have separate trips within the same data set. There’s nothing to stop from calculating distances when the arrangement of records does not make sense, but this is your responsibility. If missing values are present, or times are out of order, or include zero-length time durations, or movement backward in time there aren’t any checks for that made in the traipse package.</p>
 <p>The idea is for developers to be able to use these tools however they like but with an assumed consistent workflow.</p>
 <hr>
 <p>Please note that this project is released with a <a href="CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
