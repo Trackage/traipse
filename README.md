@@ -49,6 +49,8 @@ examples.
 We would like to have a simple core package to provide the most commonly
 used metrics. We assume `geodist` and `geosphere` as good examples of
 core packages for the underlying tool. These both apply the modern
+geodesic methods of C. F. F. Karney (2013) [Algorithms for
+geodesics](https://doi.org/10.1007/s00190-012-0578-z)
 
 ## Installation
 
