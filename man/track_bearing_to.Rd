@@ -25,10 +25,20 @@ No missing values are required as padding, but input data with \code{NA}s will i
 \code{NA} in the output.
 
 To use this on multiple track ids, use a grouped data frame with tidyverse code like
-\code{data \%>\% group_by(id) \%>\% mutate(bearing_to = track_bearing_to(lon, lat, to_lon, to_lat))}
+\code{data \%>\% group_by(id) \%>\% mutate(bearing_to = track_bearing_to(lon, lat, to_lon, to_lat))}.
+
+Absolute bearing is relative to North (0), and proceeds clockwise positive and anti-clockwise
+negative \code{N = 0, E = 90, S = +/-180, W = -90}.
 }
 \examples{
 track_bearing_to(trips0$x, trips0$y, to_x = 147, to_y = -42)[1:10]
 # N E S W
 track_bearing_to(0,0, c(0, 10, 0, -10), c(5, 0, -5, 0))
+
+# maximum and minimum value are the same direction (due south)
+track_bearing(c(0, -0.00001), c(0, -1))
+track_bearing(c(0,  0.00001), c(0, -1))
+
+# the absolute minimum is north
+track_bearing(c(0, 0), c(0, 1))
 }

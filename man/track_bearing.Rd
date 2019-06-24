@@ -20,6 +20,9 @@ applies to the segment extending from the current location.
 
 To use this on multiple track ids, use a grouped data frame with tidyverse code like
 \code{data \%>\% group_by(id) \%>\% mutate(turn = track_bearing(lon, lat))}.
+
+Absolute bearing is relative to North (0), and proceeds clockwise positive and anti-clockwise
+negative \code{N = 0, E = 90, S = +/-180, W = -90}.
 }
 \examples{
 track_bearing(trips0$x, trips0$y)[1:10]

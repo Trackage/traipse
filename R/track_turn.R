@@ -7,12 +7,19 @@
 #'
 #' To use this on multiple track ids, use a grouped data frame with tidyverse code like
 #' `data %>% group_by(id) %>% mutate(turn = track_turn(lon, lat))`.
+#'
+#' The maximum possible value is 180 degrees and the minimum is 0.
 #' @param x longitude
 #' @param y latitude
 #'
 #' @export
 #' @examples
 #' track_turn(trips0$x, trips0$y)[1:10]
+#'
+#' ## maximum turn angle
+#' track_turn(c(0, 0, 0), c(0, 1, 0))
+#' ## minimum turn angle
+#' track_turn(c(0, 0, 0), c(0, 1, 2))
 track_turn <- function(x, y) {
   xy <- cbind(x, y)
   n <- nrow(xy)

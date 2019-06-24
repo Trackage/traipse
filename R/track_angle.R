@@ -8,6 +8,8 @@
 #' To use this on multiple track ids, use a grouped data frame with tidyverse code like
 #' `data %>% group_by(id) %>% mutate(angle = track_angle(lon, lat))`.
 #'
+#' The maximum possible value is 180 and the minimum is 0.
+#'
 #' @param x longitude
 #' @param y latitude
 #'
@@ -15,6 +17,11 @@
 #' @export
 #' @examples
 #' track_angle(trips0$x, trips0$y)[1:10]
+#'
+#' ## maximum value
+#' track_angle(c(0, 0, 0), c(0, 1, 2))
+#' ## minimum value
+#' track_angle(c(0, 0, 0), c(0, 1, 0))
 track_angle <- function(x, y) {
   xy <- cbind(x, y)
   n <- nrow(xy)
