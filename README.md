@@ -71,7 +71,7 @@ distance and turning angle for a data set of tracks.
 
 First, calculate without any groupings - we definitely don’t want this
 as there are three separate tracks within our data set identified by
-`id`. (No ordering is a applied other than the order the rows occur).
+`id`. (No ordering is applied other than the order the rows occur).
 
 ``` r
 library(traipse)

@@ -60,7 +60,7 @@ devtools::install_github("Trackage/traipse")
 
 This is a basic example which shows you how to calculate ellipsoidal distance and turning angle for a data set of tracks. 
 
-First, calculate without any groupings - we definitely don't want this as there are three separate tracks within our data set identified by `id`. (No ordering is a applied other than the order the rows occur).
+First, calculate without any groupings - we definitely don't want this for real work as there are three separate tracks within our data set identified by `id`. (No ordering is applied other than the order the rows occur).
 
 ```{r example}
 library(traipse)
