@@ -3,13 +3,10 @@
 
 # traipse
 
-CAUTION, traipse is very much in-development and has not been
-extensively checked.
-
 <!-- badges: start -->
 
 [![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+experimental](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![Travis build
 status](https://travis-ci.org/Trackage/traipse.svg?branch=master)](https://travis-ci.org/Trackage/traipse)
 [![AppVeyor build
@@ -18,14 +15,11 @@ status](https://ci.appveyor.com/api/projects/status/7v59mpmj4lqw2b0q/branch/mast
 coverage](https://codecov.io/gh/Trackage/traipse/branch/master/graph/badge.svg)](https://codecov.io/gh/Trackage/traipse?branch=master)
 <!-- badges: end -->
 
-The goal of traipse is to provide shared tools for tracking data.
-
-There is a huge fragmentation of tools and approaches in R for tracking,
-see the Spatio-Temporal Task View section for examples.
-
-We would like to have a simple core package to provide the most commonly
-used metrics. We assume `geodist` and `geosphere` as good examples of
-core packages for the underlying tool.
+The goal of traipse is to provide shared tools for tracking data, for
+common metrics of distance, direction, and speed. The package includes
+the following functions which are always assumed to operate on input
+locations in longitude latitude, and input date-times in R’s `POSIXt`
+class.
 
   - `track_distance()` for distance in metres
   - `track_angle()` for internal angle in degrees
@@ -36,13 +30,19 @@ core packages for the underlying tool.
   - `track_distance_to()` for distance to location
   - `track_bearing_to()` for bearing to location
 
-Distances are always returned in metres.
+Distances are always returned in metres, directions and angles are
+always returned in degrees. Absolute bearing is relative to North (0),
+and proceeds clockwise positive and anti-clockwise negative `N = 0, E
+= 90, S = +/-180, W = -90`.
 
-Angles are always returned in degrees, and absolute bearing is relative
-to North (0), and proceeds clockwise positive and anti-clockwise
-negative `N = 0, E = 90, S = +/-180, W = -90`.
+Time is always returned in seconds, and speed in metres per second.
 
-Time is always returned in seconds.
+There is a huge fragmentation of tools and approaches in R for tracking,
+see the Spatio-Temporal Task View section for examples.
+
+We would like to have a simple core package to provide the most commonly
+used metrics. We assume `geodist` and `geosphere` as good examples of
+core packages for the underlying tool. These both apply the modern
 
 ## Installation
 
@@ -89,9 +89,6 @@ trips0 %>% mutate(distance = track_distance(x, y), angle = track_angle(x, y))
 
 Now run the same metrics but do it with respect to the grouping variable
 `id`.
-
-TODO: show clearly the nonsense values we get if grouping is not
-respected.
 
 ``` r
 ## now we group by id (also need arrange by date to be sure ...)
@@ -163,6 +160,18 @@ arrows(metric$x[1:10], metric$y[1:10], dest[1:10,1], dest[1:10,2], col = "firebr
 ```
 
 <img src="man/figures/README-dest-point-1.png" width="100%" />
+
+## Data are assumed to be sensibly organized
+
+Note above that we provided a *grouping ID* for when we have separate
+trips within the same data set. There’s nothing to stop from calculating
+distances when the arrangement of records does not make sense, but this
+is your responsibility. If missing values are present, or times are out
+of order, or include zero-length time durations, or movement backward in
+time there are aren’t any checks.
+
+The idea is for developers to be able to use these tools however they
+like.
 
 -----
 

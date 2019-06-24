@@ -13,7 +13,7 @@ Description: A collection of commonly used tools for animal movement and other t
  data. Variously distance, angle, bearing, distance-to, bearing-to and speed are 
  provided for geographic data that can be used directly or within 'tidyverse' 
  syntax. Distances and bearings are calculated using modern geodesic methods as 
- provided by Charles F. F. Karney (2013) <https://doi.org/10.1007/s00190-012-0578-z> 
+ provided by Charles F. F. Karney (2013) <doi:10.1007/s00190-012-0578-z> 
  via the 'geodist' and 'geosphere' packages. 
 License: GPL-3
 Encoding: UTF-8
@@ -31,4 +31,6 @@ Suggests:
     covr,
     testthat (>= 2.1.0),
     dplyr,
-    tibble
+    tibble,
+    spelling
+Language: en-US
