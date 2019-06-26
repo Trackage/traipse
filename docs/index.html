@@ -103,7 +103,7 @@
 </ul>
 <p>Distances are always returned in metres, directions and angles are always returned in degrees. Absolute bearing is relative to North (0), and proceeds clockwise positive and anti-clockwise negative <code>N = 0, E = 90, S = +/-180, W = -90</code>.</p>
 <p>Time is always returned in seconds, and speed in metres per second.</p>
-<p>There is a huge fragmentation of tools and approaches in R for tracking, see the <a href="https://cran.r-project.org/web/views/SpatioTemporal.html">moving objects, trajectories</a> section of the Handling and Analyzing Spatio-Temporal DataTask View for examples.</p>
+<p>There is a huge fragmentation of tools and approaches in R for tracking, see the <a href="https://CRAN.R-project.org/view=SpatioTemporal">moving objects, trajectories</a> section of the Handling and Analyzing Spatio-Temporal Data Task View for examples.</p>
 <p>We would like to have a simple core package to provide the most commonly used metrics. We assume <code>geodist</code> and <code>geosphere</code> as good examples of core packages for the underlying tool. These both apply the modern geodesic methods of C. F. F. Karney (2013) <a href="https://doi.org/10.1007/s00190-012-0578-z">Algorithms for geodesics</a></p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
@@ -197,7 +197,7 @@
 <p>Note above that we provided a <em>grouping ID</em> for when we have separate trips within the same data set. There’s nothing to stop from calculating distances when the arrangement of records does not make sense, but this is your responsibility. If missing values are present, or times are out of order, or include zero-length time durations, or movement backward in time there aren’t any checks for that made in the traipse package.</p>
 <p>The idea is for developers to be able to use these tools however they like but with an assumed consistent workflow.</p>
 <hr>
-<p>Please note that this project is released with a <a href="CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
+<p>Please note that this project is released with a <a href="https://github.com/Trackage/traipse/blob/master/CODE_OF_CONDUCT.md">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
 </div>
   </div>

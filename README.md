@@ -42,9 +42,8 @@ Time is always returned in seconds, and speed in metres per second.
 
 There is a huge fragmentation of tools and approaches in R for tracking,
 see the [moving objects,
-trajectories](https://cran.r-project.org/web/views/SpatioTemporal.html)
-section of the Handling and Analyzing Spatio-Temporal DataTask View for
-examples.
+trajectories](https://CRAN.R-project.org/view=SpatioTemporal) section of
+the Handling and Analyzing Spatio-Temporal DataTask View for examples.
 
 We would like to have a simple core package to provide the most commonly
 used metrics. We assume `geodist` and `geosphere` as good examples of
@@ -70,8 +69,9 @@ This is a basic example which shows you how to calculate ellipsoidal
 distance and turning angle for a data set of tracks.
 
 First, calculate without any groupings - we definitely don’t want this
-as there are three separate tracks within our data set identified by
-`id`. (No ordering is applied other than the order the rows occur).
+for real work as there are three separate tracks within our data set
+identified by `id`. (No ordering is applied other than the order the
+rows occur).
 
 ``` r
 library(traipse)
@@ -184,5 +184,5 @@ like but with an assumed consistent workflow.
 -----
 
 Please note that this project is released with a [Contributor Code of
-Conduct](CODE_OF_CONDUCT.md). By contributing to this project, you agree
-to abide by its terms.
+Conduct](https://github.com/Trackage/traipse/blob/master/CODE_OF_CONDUCT.md).
+By contributing to this project, you agree to abide by its terms.

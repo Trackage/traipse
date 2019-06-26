@@ -42,7 +42,7 @@ Distances are always returned in metres, directions and angles are always return
 
 Time is always returned in seconds, and speed in metres per second. 
 
-There is a huge fragmentation of tools and approaches in R for tracking, see the [moving objects, trajectories](https://cran.r-project.org/web/views/SpatioTemporal.html) section of the Handling and Analyzing Spatio-Temporal DataTask View for examples. 
+There is a huge fragmentation of tools and approaches in R for tracking, see the [moving objects, trajectories](  https://CRAN.R-project.org/view=SpatioTemporal) section of the Handling and Analyzing Spatio-Temporal Data Task View for examples. 
 
 We would like to have a simple core package to provide the most commonly used metrics. We assume `geodist` and `geosphere` as good examples of core packages for the underlying tool. These both apply the modern geodesic methods of C. F. F. Karney (2013) [Algorithms for geodesics](https://doi.org/10.1007/s00190-012-0578-z)
 
@@ -123,6 +123,6 @@ The idea is for developers to be able to use these tools however they like but w
 ---
 
 Please note that this project is released with a
-[Contributor Code of Conduct](CODE_OF_CONDUCT.md).
+[Contributor Code of Conduct](https://github.com/Trackage/traipse/blob/master/CODE_OF_CONDUCT.md).
 By contributing to this project, you agree to abide by its terms.
 
