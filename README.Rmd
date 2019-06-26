@@ -38,13 +38,16 @@ The goal of traipse is to provide shared tools for tracking data, for common met
 * `track_distance_to()` for distance to location
 * `track_bearing_to()` for bearing to location
 
+There is no capacity for providing nested data structures because this is trivially done by using tidyverse code like
+
+```R
+data %>% group_by(id) %>% mutate(distance = track_distance(lon, lat)) %>% ungroup()
+```
+or by arranging use of the functions in various ways. Track metric values are inherently [window-like](https://dplyr.tidyverse.org/articles/window-functions.html) and in traipse padding value/s of `NA` are used to return an element for every input location.  
+
 Distances are always returned in metres, directions and angles are always returned in degrees. Absolute bearing is relative to North (0), and proceeds clockwise positive and anti-clockwise negative `N = 0, E = 90, S = +/-180, W = -90`. 
 
 Time is always returned in seconds, and speed in metres per second. 
-
-There is a huge fragmentation of tools and approaches in R for tracking, see the [moving objects, trajectories](  https://CRAN.R-project.org/view=SpatioTemporal) section of the Handling and Analyzing Spatio-Temporal Data Task View for examples. 
-
-We would like to have a simple core package to provide the most commonly used metrics. We assume `geodist` and `geosphere` as good examples of core packages for the underlying tool. These both apply the modern geodesic methods of C. F. F. Karney (2013) [Algorithms for geodesics](https://doi.org/10.1007/s00190-012-0578-z)
 
 ## Installation
 
@@ -119,6 +122,10 @@ arrows(metric$x[1:10], metric$y[1:10], dest[1:10,1], dest[1:10,2], col = "firebr
 Note above that we provided a *grouping ID* for when we have separate trips within the same data set. There's nothing to stop from calculating distances when the arrangement of records does not make sense, but this is your responsibility. If missing values are present, or times are out of order, or include zero-length time durations, or movement backward in time there aren't any checks for that made in the traipse package. 
 
 The idea is for developers to be able to use these tools however they like but with an assumed consistent workflow. 
+
+We would like to have a simple core package to provide the most commonly used metrics. We assume `geodist` and `geosphere` as good examples of core packages for the underlying tool. These both apply the modern geodesic methods of C. F. F. Karney (2013) [Algorithms for geodesics](https://doi.org/10.1007/s00190-012-0578-z)
+
+
 
 ---
 
