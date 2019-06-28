@@ -15,6 +15,9 @@ track_bearing_to(x, y, to_x, to_y)
 
 \item{to_y}{latitude vector of \emph{to} locations/s}
 }
+\value{
+a numeric vector of absolute bearing-to in degrees, see Details
+}
 \description{
 Calculate geodesic bearing to a location or locations based on longitude, latitude (from)
 input vectors and longitude, latitude (to) input vectors. The \emph{to} values may be a
@@ -29,6 +32,9 @@ To use this on multiple track ids, use a grouped data frame with tidyverse code 
 
 Absolute bearing is relative to North (0), and proceeds clockwise positive and anti-clockwise
 negative \code{N = 0, E = 90, S = +/-180, W = -90}.
+
+There is no \code{NA} padding in the output value (though missing values in the input will be mirrored
+in the output).
 }
 \examples{
 track_bearing_to(trips0$x, trips0$y, to_x = 147, to_y = -42)[1:10]

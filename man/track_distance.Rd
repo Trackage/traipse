@@ -12,7 +12,7 @@ track_distance(x, y)
 \item{y}{latitude}
 }
 \value{
-distance in metres
+numeric vector of distances between sequential pairs of x, y in metres, see Details
 }
 \description{
 Calculate geodesic distance on longitude, latitude input vectors.

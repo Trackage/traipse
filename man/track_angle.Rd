@@ -12,7 +12,8 @@ track_angle(x, y)
 \item{y}{latitude}
 }
 \value{
-angle in degrees
+a numeric vector of the relative internal angle between sequential locations
+in degrees, see Details
 }
 \description{
 Calculate internal track angle on longitude, latitude input vectors.

@@ -14,7 +14,7 @@ track_speed(x, y, date)
 \item{date}{date-time in POSIXct}
 }
 \value{
-distance in m/s
+numeric vector of sequential distances in metres per second, see Details
 }
 \description{
 Calculate speed (m/s) based on geodesic distance with longitude, latitude, date-time

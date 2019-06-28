@@ -10,7 +10,7 @@ track_time(date)
 \item{date}{date-time in POSIXct}
 }
 \value{
-duration in seconds
+numeric vector of duration between sequential date-time values in seconds, see Details
 }
 \description{
 Calculate time duration based on sequential difference of date-time input.

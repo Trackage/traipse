@@ -15,6 +15,9 @@ track_distance_to(x, y, to_x, to_y)
 
 \item{to_y}{latitude vector of \emph{to} locations/s}
 }
+\value{
+a numeric vector of distance-to values in metres
+}
 \description{
 Calculate geodesic distance to a location or locations based on longitude, latitude (from)
 input vectors and longitude, latitude (to) input vectors. The \emph{to} values may be a

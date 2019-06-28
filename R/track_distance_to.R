@@ -9,12 +9,13 @@
 #'
 #' To use this on multiple track ids, use a grouped data frame with tidyverse code like
 #' `data %>% group_by(id) %>% mutate(distance = track_distance_to(lon, lat, to_lon, to_lat))`
+#'
 #' @param x longitude
 #' @param y latitude
 #' @param to_x longitude vector of *to* location/s
 #' @param to_y latitude vector of *to* locations/s
 #' @export
-#'
+#' @return a numeric vector of distance-to values in metres
 #' @examples
 #' track_distance_to(trips0$x, trips0$y, to_x = 147, to_y = -42)[1:10]
 track_distance_to <- function(x, y, to_x, to_y){

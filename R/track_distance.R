@@ -11,7 +11,7 @@
 #' @param x longitude
 #' @param y latitude
 #'
-#' @return distance in metres
+#' @return numeric vector of distances between sequential pairs of x, y in metres, see Details
 #' @export
 #'
 #' @examples

@@ -1,3 +1,7 @@
+Second submission of traipse package 0.1.0. 
+
+* Fixed Value documention for various functions, thanks to CRAN feedback. 
+
 ## Test environments
 * local Linux 18.04 install, R 3.6.0
 * ubuntu 14.04 (on travis-ci), R 3.6.0

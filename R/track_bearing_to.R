@@ -12,12 +12,15 @@
 #'
 #' Absolute bearing is relative to North (0), and proceeds clockwise positive and anti-clockwise
 #' negative `N = 0, E = 90, S = +/-180, W = -90`.
+#'
+#' There is no `NA` padding in the output value (though missing values in the input will be mirrored
+#' in the output).
 #' @param x longitude
 #' @param y latitude
 #' @param to_x longitude vector of *to* location/s
 #' @param to_y latitude vector of *to* locations/s
 #' @export
-#'
+#' @return a numeric vector of absolute bearing-to in degrees, see Details
 #' @examples
 #' track_bearing_to(trips0$x, trips0$y, to_x = 147, to_y = -42)[1:10]
 #' # N E S W

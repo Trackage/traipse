@@ -140,6 +140,10 @@ single value or individual to each <em>from</em> location.</p>
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>a numeric vector of absolute bearing-to in degrees, see Details</p>
+    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>No missing values are required as padding, but input data with <code>NA</code>s will incur an
@@ -148,6 +152,8 @@ single value or individual to each <em>from</em> location.</p>
 <code>data %&gt;% group_by(id) %&gt;% mutate(bearing_to = track_bearing_to(lon, lat, to_lon, to_lat))</code>.</p>
 <p>Absolute bearing is relative to North (0), and proceeds clockwise positive and anti-clockwise
 negative <code>N = 0, E = 90, S = +/-180, W = -90</code>.</p>
+<p>There is no <code>NA</code> padding in the output value (though missing values in the input will be mirrored
+in the output).</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -164,6 +170,8 @@ negative <code>N = 0, E = 90, S = +/-180, W = -90</code>.</p>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
+      <li><a href="#value">Value</a></li>
+
       <li><a href="#details">Details</a></li>
       
       <li><a href="#examples">Examples</a></li>

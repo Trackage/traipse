@@ -11,9 +11,10 @@
 #' Absolute bearing is relative to North (0), and proceeds clockwise positive and anti-clockwise
 #' negative `N = 0, E = 90, S = +/-180, W = -90`.
 #'
+#' The last value will be `NA` as the bearing is relative to the first point of each segment.
 #' @param x longitude
 #' @param y latitude
-#'
+#' @return a numeric vector of absolute bearing in degrees, see Details
 #' @export
 #' @examples
 #' track_bearing(trips0$x, trips0$y)[1:10]

@@ -12,7 +12,7 @@
 #' @param y latitude
 #' @param date date-time in POSIXct
 #'
-#' @return distance in m/s
+#' @return numeric vector of sequential distances in metres per second, see Details
 #' @export
 #'
 #' @examples

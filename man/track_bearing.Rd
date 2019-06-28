@@ -11,6 +11,9 @@ track_bearing(x, y)
 
 \item{y}{latitude}
 }
+\value{
+a numeric vector of absolute bearing in degrees, see Details
+}
 \description{
 Calculate sequential bearing on longitude, latitude input vectors.
 }
@@ -23,6 +26,8 @@ To use this on multiple track ids, use a grouped data frame with tidyverse code 
 
 Absolute bearing is relative to North (0), and proceeds clockwise positive and anti-clockwise
 negative \code{N = 0, E = 90, S = +/-180, W = -90}.
+
+The last value will be \code{NA} as the bearing is relative to the first point of each segment.
 }
 \examples{
 track_bearing(trips0$x, trips0$y)[1:10]

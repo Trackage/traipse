@@ -7,6 +7,7 @@ geosphere
 https
 Karney
 Lifecycle
+magrittr
 metres
 POSIXct
 Spatio

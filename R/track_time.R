@@ -9,7 +9,7 @@
 #' `data %>% group_by(id) %>% mutate(duration = track_time(date))`
 #' @param date date-time in POSIXct
 #'
-#' @return duration in seconds
+#' @return numeric vector of duration between sequential date-time values in seconds, see Details
 #' @export
 #'
 #' @examples

@@ -13,7 +13,8 @@
 #' @param x longitude
 #' @param y latitude
 #'
-#' @return angle in degrees
+#' @return a numeric vector of the relative internal angle between sequential locations
+#' in degrees, see Details
 #' @export
 #' @examples
 #' track_angle(trips0$x, trips0$y)[1:10]
