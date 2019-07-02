@@ -1,3 +1,5 @@
+# traipse (development version)
+
 # traipse 0.1.0
 
 * Fixed Value documentation for various functions, thanks to CRAN feedback. 

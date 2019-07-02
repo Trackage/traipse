@@ -51,7 +51,11 @@ Time is always returned in seconds, and speed in metres per second.
 
 ## Installation
 
-Not available on CRAN yet. 
+You can install traipse from [CRAN](https://CRAN.r-project.org/package=traipse) with: 
+
+```r
+install.packages("traipse")
+```
 
 You can install the  development version from [GitHub](https://github.com/) with:
 
