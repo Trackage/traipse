@@ -10,17 +10,19 @@ track_time(date)
 \item{date}{date-time in POSIXct}
 }
 \value{
-numeric vector of duration between sequential date-time values in seconds, see Details
+numeric vector of duration between sequential date-time values in
+seconds, see Details
 }
 \description{
 Calculate time duration based on sequential difference of date-time input.
+The unit of time duration is seconds.
 }
 \details{
-By convention the first value is set to \code{NA} missing value, because the difference
-applies to each sequential pair of locations.
+By convention the first value is set to \code{NA} missing value, because the
+difference applies to each sequential pair of locations.
 
-To use this on multiple track ids, use a grouped data frame with tidyverse code like
-\code{data \%>\% group_by(id) \%>\% mutate(duration = track_time(date))}
+To use this on multiple track ids, use a grouped data frame with tidyverse
+code like \code{data \%>\% group_by(id) \%>\% mutate(duration = track_time(date))}
 }
 \examples{
 track_time(trips0$date)[1:10]

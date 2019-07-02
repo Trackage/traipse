@@ -16,17 +16,19 @@ a numeric vector of absolute turn angles, in degrees
 }
 \description{
 Calculate relative track turning angle on longitude, latitude input vectors.
+The unit of turn angle is degrees.
 }
 \details{
 By convention the last value is set to \code{NA} missing value, because the angle
 applies to the relative turn from the current location.
 
-To use this on multiple track ids, use a grouped data frame with tidyverse code like
-\code{data \%>\% group_by(id) \%>\% mutate(turn = track_turn(lon, lat))}.
+To use this on multiple track ids, use a grouped data frame with tidyverse
+code like \code{data \%>\% group_by(id) \%>\% mutate(turn = track_turn(lon, lat))}.
 
-The maximum possible value is 180 degrees and the minimum is -180, although these particular
-values are a special case and will probably always be positive. Turn angle is a signed
-quantity with negative values for a left turn and positive values for a right turn.
+The maximum possible value is 180 degrees and the minimum is -180, although
+these particular values are a special case and will probably always be
+positive. Turn angle is a signed quantity with negative values for a left
+turn and positive values for a right turn.
 }
 \examples{
 track_turn(trips0$x, trips0$y)[1:10]

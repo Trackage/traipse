@@ -1,7 +1,7 @@
 #' Track speed
 #'
 #' Calculate speed (m/s) based on geodesic distance with longitude, latitude, date-time
-#' input vectors.
+#' input vectors. The unit of speed is metres per second.
 #'
 #' By convention the first value is set to `NA` missing value, because the difference
 #' applies to each sequential pair of locations.

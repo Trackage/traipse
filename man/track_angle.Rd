@@ -16,7 +16,7 @@ a numeric vector of the relative internal angle between sequential locations
 in degrees, see Details
 }
 \description{
-Calculate internal track angle on longitude, latitude input vectors.
+Calculate internal track angle on longitude, latitude input vectors. The unit of angle is degrees.
 }
 \details{
 By convention the first and last values are set to \code{NA} missing value, because the angle

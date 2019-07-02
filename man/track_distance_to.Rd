@@ -19,9 +19,10 @@ track_distance_to(x, y, to_x, to_y)
 a numeric vector of distance-to values in metres
 }
 \description{
-Calculate geodesic distance to a location or locations based on longitude, latitude (from)
-input vectors and longitude, latitude (to) input vectors. The \emph{to} values may be a
-single value or individual to each \emph{from} location.
+Calculate geodesic distance to a location or locations based on longitude,
+latitude (from) input vectors and longitude, latitude (to) input vectors. The
+unit of distance is metres. The \emph{to} values may be a single value or
+individual to each \emph{from} location.
 }
 \details{
 No missing values are required as padding, but input data with \code{NA}s will incur an

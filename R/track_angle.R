@@ -1,6 +1,6 @@
 #' Track angle
 #'
-#' Calculate internal track angle on longitude, latitude input vectors.
+#' Calculate internal track angle on longitude, latitude input vectors. The unit of angle is degrees.
 #'
 #' By convention the first and last values are set to `NA` missing value, because the angle
 #' applies to the location between each previous and next location.

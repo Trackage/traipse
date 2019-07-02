@@ -32,7 +32,8 @@
 
 <meta property="og:title" content="Track distance — track_distance" />
 
-<meta property="og:description" content="Calculate geodesic distance on longitude, latitude input vectors." />
+<meta property="og:description" content="Calculate geodesic distance on longitude, latitude input vectors. The unit of
+distance is metres." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -63,7 +64,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">traipse</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9001</span>
       </span>
     </div>
 
@@ -109,7 +110,8 @@
 
     <div class="ref-description">
     
-    <p>Calculate geodesic distance on longitude, latitude input vectors.</p>
+    <p>Calculate geodesic distance on longitude, latitude input vectors. The unit of
+distance is metres.</p>
     
     </div>
 
@@ -130,14 +132,15 @@
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>numeric vector of distances between sequential pairs of x, y in metres, see Details</p>
+    <p>numeric vector of distances between sequential pairs of x, y in
+metres, see Details</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>By convention the first value is set to <code>NA</code> missing value, because the distance
-applies to each sequential pair of locations.</p>
-<p>To use this on multiple track ids, use a grouped data frame with tidyverse code like
-<code>data %&gt;% group_by(id) %&gt;% mutate(distance = track_distance(lon, lat))</code></p>
+    <p>By convention the first value is set to <code>NA</code> missing value, because the
+distance applies to each sequential pair of locations.</p>
+<p>To use this on multiple track ids, use a grouped data frame with tidyverse
+code like <code>data %&gt;% group_by(id) %&gt;% mutate(distance = track_distance(lon, lat))</code></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>

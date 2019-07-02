@@ -33,6 +33,19 @@ class.
   - `track_distance_to()` for distance to location
   - `track_bearing_to()` for bearing to location
 
+Distances are always returned in **metres**, directions and angles are
+always returned in **degrees**. Absolute bearing is relative to North
+(0), and proceeds clockwise positive and anti-clockwise negative `N = 0,
+E = 90, S = +/-180, W = -90`.
+
+Time is always returned in **seconds**, and speed in **metres per
+second**.
+
+## No complex data structures
+
+Traipse works directly on longitude and latitude vectors as it is
+intended for use within other tools that work directly with data.
+
 There is no capacity for providing nested data structures because this
 is trivially done by using tidyverse code
 like
@@ -46,13 +59,6 @@ values are inherently
 [window-like](https://dplyr.tidyverse.org/articles/window-functions.html)
 and in traipse padding value/s of `NA` are used to return an element for
 every input location.
-
-Distances are always returned in metres, directions and angles are
-always returned in degrees. Absolute bearing is relative to North (0),
-and proceeds clockwise positive and anti-clockwise negative `N = 0, E
-= 90, S = +/-180, W = -90`.
-
-Time is always returned in seconds, and speed in metres per second.
 
 ## Installation
 

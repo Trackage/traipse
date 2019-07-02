@@ -18,7 +18,7 @@ numeric vector of sequential distances in metres per second, see Details
 }
 \description{
 Calculate speed (m/s) based on geodesic distance with longitude, latitude, date-time
-input vectors.
+input vectors. The unit of speed is metres per second.
 }
 \details{
 By convention the first value is set to \code{NA} missing value, because the difference

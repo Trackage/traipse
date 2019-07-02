@@ -1,8 +1,9 @@
 #' Track bearing to location/s
 #'
-#' Calculate geodesic bearing to a location or locations based on longitude, latitude (from)
-#' input vectors and longitude, latitude (to) input vectors. The *to* values may be a
-#' single value or individual to each *from* location.
+#' Calculate geodesic bearing to a location or locations based on longitude,
+#' latitude (from) input vectors and longitude, latitude (to) input vectors. The
+#' unit of bearing is degrees. The *to* values may be a single value or
+#' individual to each *from* location.
 #'
 #' No missing values are required as padding, but input data with `NA`s will incur an
 #' `NA` in the output.

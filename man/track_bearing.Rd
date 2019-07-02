@@ -15,7 +15,7 @@ track_bearing(x, y)
 a numeric vector of absolute bearing in degrees, see Details
 }
 \description{
-Calculate sequential bearing on longitude, latitude input vectors.
+Calculate sequential bearing on longitude, latitude input vectors. The unit of bearing is degrees.
 }
 \details{
 By convention the last value is set to \code{NA} missing value, because the bearing

@@ -19,9 +19,10 @@ track_bearing_to(x, y, to_x, to_y)
 a numeric vector of absolute bearing-to in degrees, see Details
 }
 \description{
-Calculate geodesic bearing to a location or locations based on longitude, latitude (from)
-input vectors and longitude, latitude (to) input vectors. The \emph{to} values may be a
-single value or individual to each \emph{from} location.
+Calculate geodesic bearing to a location or locations based on longitude,
+latitude (from) input vectors and longitude, latitude (to) input vectors. The
+unit of bearing is degrees. The \emph{to} values may be a single value or
+individual to each \emph{from} location.
 }
 \details{
 No missing values are required as padding, but input data with \code{NA}s will incur an

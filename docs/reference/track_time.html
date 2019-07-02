@@ -32,7 +32,8 @@
 
 <meta property="og:title" content="Track time duration — track_time" />
 
-<meta property="og:description" content="Calculate time duration based on sequential difference of date-time input." />
+<meta property="og:description" content="Calculate time duration based on sequential difference of date-time input.
+The unit of time duration is seconds." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -63,7 +64,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">traipse</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9001</span>
       </span>
     </div>
 
@@ -109,7 +110,8 @@
 
     <div class="ref-description">
     
-    <p>Calculate time duration based on sequential difference of date-time input.</p>
+    <p>Calculate time duration based on sequential difference of date-time input.
+The unit of time duration is seconds.</p>
     
     </div>
 
@@ -126,14 +128,15 @@
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>numeric vector of duration between sequential date-time values in seconds, see Details</p>
+    <p>numeric vector of duration between sequential date-time values in
+seconds, see Details</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>By convention the first value is set to <code>NA</code> missing value, because the difference
-applies to each sequential pair of locations.</p>
-<p>To use this on multiple track ids, use a grouped data frame with tidyverse code like
-<code>data %&gt;% group_by(id) %&gt;% mutate(duration = track_time(date))</code></p>
+    <p>By convention the first value is set to <code>NA</code> missing value, because the
+difference applies to each sequential pair of locations.</p>
+<p>To use this on multiple track ids, use a grouped data frame with tidyverse
+code like <code>data %&gt;% group_by(id) %&gt;% mutate(duration = track_time(date))</code></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
