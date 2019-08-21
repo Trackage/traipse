@@ -11,3 +11,6 @@
 ^CRAN-RELEASE$
 ^_pkgdown\.yml$
 ^pkgdown$
+^traipse\.Rcheck$
+^traipse.*\.tar\.gz$
+^traipse.*\.tgz$

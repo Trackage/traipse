@@ -1,2 +1,5 @@
 .Rproj.user
 .Rhistory
+traipse.Rcheck/
+traipse*.tar.gz
+traipse*.tgz

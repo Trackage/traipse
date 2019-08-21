@@ -4,7 +4,8 @@
 \alias{track_intermediate}
 \title{Track intermediate points}
 \usage{
-track_intermediate(x, y, date = NULL, distance = NULL)
+track_intermediate(x, y, date = NULL, distance = NULL,
+  duration = NULL)
 }
 \arguments{
 \item{x}{longitude}
@@ -13,7 +14,10 @@ track_intermediate(x, y, date = NULL, distance = NULL)
 
 \item{date}{optional input date-time in POSIXct}
 
-\item{distance}{optional minimum distance between input points}
+\item{distance}{optional minimum distance (metres) between interpolated points}
+
+\item{duration}{optional minimum duration (seconds) between interpolated point,
+if set then \code{distance} must be \code{NULL} and \code{date} must be input}
 }
 \value{
 a list of data frames of intermediate points (for use with \code{unnest()} from tidyr)
@@ -39,17 +43,27 @@ group has invalid intermediates:
 \examples{
 track_intermediate(trips0$x[1:10], trips0$y[1:10], distance = 15000)
 
-track_intermediate(trips0$x[1:10], trips0$y[1:10], date = trips0$date, distance = 1500)
+track_intermediate(trips0$x[1:10], trips0$y[1:10], date = trips0$date,
+                                 distance = 1500)
 
+inter_time <- track_intermediate(trips0$x[1:10], trips0$y[1:10],
+                            date = trips0$date, duration = 1800)
 \dontrun{
 ## run with full workflow to expand into a new data frame with
 ## `int_x`, `int_y`, and (optional) `int_date`
  if (requireNamespace("tidyr") && requireNamespace("dplyr")) {
-   dd <- trips0 \%>\% group_by(id) \%>\%
-     mutate(inter = track_intermediate(x, y, date = date, distance = 50000)) \%>\%
+ tr1 <- trips0[seq(1, nrow(trips0), by = 30), ]
+   dd <- tr1 \%>\% group_by(id) \%>\%
+     mutate(inter = track_intermediate(x, y, date = date, distance = 150000)) \%>\%
      tidyr::unnest()
-   plot(dd$int_date, dd$int_y)
-   abline(v = trips0$date)
+   plot(dd$int_date, dd$int_y, pch = ".", cex = 2, main = "equidistant in space")
+   abline(v = tr1$date)
+
+   dd1 <- tr1 \%>\% group_by(id) \%>\%
+     mutate(inter = track_intermediate(x, y, date = date, duration = 3600 * 12)) \%>\%
+     tidyr::unnest()
+   plot(dd1$int_date, dd1$int_y, pch = ".", cex = 2, main = "equispaced in time")
+   abline(v = tr1$date)
  }
 }
 }
