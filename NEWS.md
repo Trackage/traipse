@@ -1,5 +1,9 @@
 # traipse (development version)
 
+* New function `track_intermediate()` to perform interpolation along a great circle
+ between input locations. The interpolation step may be set by `distance` or `duration`
+ and date-time is interpolated if included. 
+ 
 * Metres, seconds, degrees, everywhere. 
 
 # traipse 0.1.0

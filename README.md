@@ -32,6 +32,7 @@ class.
   - `track_speed()` for speed in metres per second
   - `track_distance_to()` for distance to location
   - `track_bearing_to()` for bearing to location
+  - `track_intermediate()` for interpolating locations
 
 Distances are always returned in **metres**, directions and angles are
 always returned in **degrees**. Absolute bearing is relative to North
@@ -109,8 +110,8 @@ trips0 %>% mutate(distance = track_distance(x, y), angle = track_angle(x, y))
 #> # … with 1,490 more rows
 ```
 
-Now run a the complete set of available metrics, but do it with respect
-to the grouping variable
+Now run a set of available metrics, but do it with respect to the
+grouping variable
 `id`.
 
 ``` r
@@ -182,6 +183,19 @@ arrows(metric$x[1:10], metric$y[1:10], dest[1:10,1], dest[1:10,2], col = "firebr
 ```
 
 <img src="man/figures/README-dest-point-1.png" width="100%" />
+
+## Intermediate points require extra handling
+
+The function `track_intermediate()` requires extra work as it inherently
+returns multiple variables (lon, lat, date-time). The output is a
+list-column of data frames, and if used within `mutate(inter =
+track_intermediate(lon, lat, date))` then it will be stored along side
+the rows of the input data.
+
+To use this we must unnest the data and treat the new columns as the
+output.
+
+See the documentation for more examples.
 
 ## Data are assumed to be sensibly organized
 
