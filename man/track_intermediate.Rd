@@ -7,11 +7,11 @@
 track_intermediate(x, y, date = NULL, distance = NULL)
 }
 \arguments{
-\item{x}{longitude vector}
+\item{x}{longitude}
 
-\item{y}{latitude vector}
+\item{y}{latitude}
 
-\item{date}{optional input date vector}
+\item{date}{optional input date-time in POSIXct}
 
 \item{distance}{optional minimum distance between input points}
 }
@@ -19,13 +19,19 @@ track_intermediate(x, y, date = NULL, distance = NULL)
 a list of data frames of intermediate points (for use with \code{unnest()} from tidyr)
 }
 \description{
-Calculate great circle intermediate points on longitude, latitude input vectors
+Calculate great circle intermediate points on longitude, latitude input vectors. A
+spherical model is used, from the geosphere package.
 }
 \details{
-To use on multiple track ids, use a grouped data frame with tidyverse code like
-\code{inter <- data \%>\% group_by(id) \%>\% mutate(inter = track_intermediate(lon, lat, date = , distance = )}
+This function returns a list of data frames, with a data frame of interpolated locations
+for every interval between input locations. There is a final empty data frame to ensure
+the list is the same length as the inputs. See embedded usage of the tidyr function 'unnest()'
+for ease of use.
 
-Then, un-nest this result for further use (the inter above retains the information
+To use on multiple track ids, use a grouped data frame with tidyverse code like
+\code{inter <- data \%>\% group_by(id) \%>\% mutate(inter = track_intermediate(lon, lat, date = , distance = )}.
+
+Then, un-nest this result for further use (the 'inter' above retains the information
 about the parent locations for custom usage if needed), so the final location of each
 group has invalid intermediates:
 \code{dd <- inter \%>\% slice(-1) \%>\% unnest()}
@@ -40,7 +46,8 @@ track_intermediate(trips0$x[1:10], trips0$y[1:10], date = trips0$date, distance 
 ## `int_x`, `int_y`, and (optional) `int_date`
  if (requireNamespace("tidyr") && requireNamespace("dplyr")) {
    dd <- trips0 \%>\% group_by(id) \%>\%
-     mutate(inter = track_intermediate(x, y, date = date, distance = 50000)) \%>\% unnest()
+     mutate(inter = track_intermediate(x, y, date = date, distance = 50000)) \%>\%
+     tidyr::unnest()
    plot(dd$int_date, dd$int_y)
    abline(v = trips0$date)
  }
