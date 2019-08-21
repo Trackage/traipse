@@ -70,21 +70,25 @@ track_intermediate <- function(x, y, date = NULL, distance = NULL, duration = NU
 
   if (n == 2)   listm <- list(listm)
  listm <- lapply(listm, as.data.frame)
- npoints <- npoints + 2 ## because addStartEnd = TRUE
+ ## sometimes we get V1, V2
+ listm <- lapply(listm, function(ddd) setNames(ddd, c("lon", "lat")))
+ ##npoints <- npoints + 2 ## because addStartEnd = TRUE
  funa <- function(a) data.frame(int_x = a[["lon"]], int_y = a[["lat"]],
                                 int_date = a[["int_date"]])
  runfun <- function(a) data.frame(int_x = a[["lon"]], int_y = a[["lat"]])
 
 
-
+ ## sometimes these aren't the same
+actual_npoints <- unlist(lapply(listm, nrow))
   if (!is.null(date)) {
     runfun <- funa
     for (i in seq_along(listm)) {
-
-      listm[[i]]$int_date <- seq(date[i], date[i +1], length.out = npoints[i])
+      dts <- seq(date[i], date[i +1], length.out = actual_npoints[i])
+      #if (nrow(listm[[i]]) < 1) browser()
+      listm[[i]]$int_date <- dts
     }
   }
 
-
+##browser()
  c(lapply(listm, runfun), list(data.frame()))
 }
