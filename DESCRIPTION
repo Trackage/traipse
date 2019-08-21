@@ -32,5 +32,6 @@ Suggests:
     testthat (>= 2.1.0),
     dplyr,
     tibble,
+    tidyr,
     spelling
 Language: en-US
