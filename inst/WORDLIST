@@ -7,9 +7,14 @@ geosphere
 https
 Karney
 Lifecycle
+lon
 magrittr
 metres
 POSIXct
+RStudio
 Spatio
+tidyr
 tidyverse
 ungrouped
+unnest
+un

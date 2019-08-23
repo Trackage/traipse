@@ -1,6 +1,6 @@
 Package: traipse
 Title: Shared Tools for Tracking Data
-Version: 0.1.0.9001
+Version: 0.1.0.9002
 Authors@R: 
     c(
     person(given = "Michael", 
@@ -24,7 +24,8 @@ Depends: R (>= 2.10)
 Imports: 
     magrittr,
     geodist,
-    geosphere
+    geosphere,
+    stats
 URL: https://github.com/Trackage/traipse
 BugReports: https://github.com/Trackage/traipse/issues
 Suggests: 

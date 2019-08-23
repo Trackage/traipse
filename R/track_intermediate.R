@@ -25,7 +25,7 @@
 #'  if set then `distance` must be `NULL` and `date` must be input
 #' @return a list of data frames of intermediate points (for use with `unnest()` from tidyr)
 #' @export
-#'
+#' @importFrom stats setNames
 #' @examples
 #' track_intermediate(trips0$x[1:10], trips0$y[1:10], distance = 15000)
 #'
