@@ -1,5 +1,8 @@
 # traipse (development version)
 
+* New function `track_query()` similar to `track_intermediate()` but for arbitrary
+ points in time. In-development. 
+ 
 * New function `track_intermediate()` to perform interpolation along a great circle
  between input locations. The interpolation step may be set by `distance` or `duration`
  and date-time is interpolated if included. 

@@ -1,76 +1,98 @@
----
-output: github_document
-editor_options: 
-  chunk_output_type: console
----
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-
 # traipse
 
-
 <!-- badges: start -->
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
-[![Travis build status](https://travis-ci.org/Trackage/traipse.svg?branch=master)](https://travis-ci.org/Trackage/traipse)
-[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/7v59mpmj4lqw2b0q/branch/master?svg=true)](https://ci.appveyor.com/project/mdsumner/traipse)
-[![Codecov test coverage](https://codecov.io/gh/Trackage/traipse/branch/master/graph/badge.svg)](https://codecov.io/gh/Trackage/traipse?branch=master)
-[![CRAN status](https://www.r-pkg.org/badges/version/traipse)](https://cran.r-project.org/package=traipse)
-[![CRAN_Download_Badge](http://cranlogs.r-pkg.org/badges/traipse)](https://cran.r-project.org/package=traipse)
-[![Launch RStudio Binder](http://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/Trackage/traipse/master?urlpath=rstudio)
+
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+[![Travis build
+status](https://travis-ci.org/Trackage/traipse.svg?branch=master)](https://travis-ci.org/Trackage/traipse)
+[![AppVeyor build
+status](https://ci.appveyor.com/api/projects/status/7v59mpmj4lqw2b0q/branch/master?svg=true)](https://ci.appveyor.com/project/mdsumner/traipse)
+[![Codecov test
+coverage](https://codecov.io/gh/Trackage/traipse/branch/master/graph/badge.svg)](https://codecov.io/gh/Trackage/traipse?branch=master)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/traipse)](https://cran.r-project.org/package=traipse)
+[![CRAN\_Download\_Badge](http://cranlogs.r-pkg.org/badges/traipse)](https://cran.r-project.org/package=traipse)
+[![Launch RStudio
+Binder](http://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/Trackage/traipse/master?urlpath=rstudio)
 <!-- badges: end -->
 
-The goal of traipse is to provide shared tools for tracking data, for common metrics of distance, direction, and speed. The package includes the following functions which are always assumed to operate on input locations in longitude latitude, and input date-times in R's `POSIXt` class. 
+The goal of traipse is to provide shared tools for tracking data, for
+common metrics of distance, direction, and speed. The package includes
+the following functions which are always assumed to operate on input
+locations in longitude latitude, and input date-times in R’s `POSIXt`
+class.
 
-* `track_distance()` for distance in metres
-* `track_angle()` for internal angle in degrees
-* `track_turn()` for relative turn angle
-* `track_bearing()` for absolute bearing
-* `track_time()` for duration in seconds
-* `track_speed()` for speed in metres per second
-* `track_distance_to()` for distance to location
-* `track_bearing_to()` for bearing to location
-* `track_intermediate()` for interpolating locations 
+  - `track_distance()` for distance in metres
+  - `track_angle()` for internal angle in degrees
+  - `track_turn()` for relative turn angle
+  - `track_bearing()` for absolute bearing
+  - `track_time()` for duration in seconds
+  - `track_speed()` for speed in metres per second
+  - `track_distance_to()` for distance to location
+  - `track_bearing_to()` for bearing to location
+  - `track_intermediate()` for interpolating locations
+  - `track_query()` also for interpolation, by finding locations within
+    a given track arbitrarily (in-development)
 
-Distances are always returned in **metres**, directions and angles are always returned in **degrees**. Absolute bearing is relative to North (0), and proceeds clockwise positive and anti-clockwise negative `N = 0, E = 90, S = +/-180, W = -90`. 
+Distances are always returned in **metres**, directions and angles are
+always returned in **degrees**. Absolute bearing is relative to North
+(0), and proceeds clockwise positive and anti-clockwise negative `N = 0,
+E = 90, S = +/-180, W = -90`.
 
-Time is always returned in **seconds**, and speed in **metres per second**. 
+Time is always returned in **seconds**, and speed in **metres per
+second**.
 
 ## No complex data structures
 
-Traipse works directly on longitude and latitude vectors as it is intended for use within other tools that work directly with data. 
+Traipse works directly on longitude and latitude vectors as it is
+intended for use within other tools that work directly with data.
 
-There is no capacity for providing nested data structures because this is trivially done by using tidyverse code like
+There is no capacity for providing nested data structures because this
+is trivially done by using tidyverse code
+like
 
-```R
+``` r
 data %>% group_by(id) %>% mutate(distance = track_distance(lon, lat)) %>% ungroup()
 ```
 
-or by arranging use of the functions in various ways. Track metric values are inherently [window-like](https://dplyr.tidyverse.org/articles/window-functions.html) and in traipse padding value/s of `NA` are used to return an element for every input location.  
-
+or by arranging use of the functions in various ways. Track metric
+values are inherently
+[window-like](https://dplyr.tidyverse.org/articles/window-functions.html)
+and in traipse padding value/s of `NA` are used to return an element for
+every input location.
 
 ## Installation
 
-You can install traipse from [CRAN](https://CRAN.r-project.org/package=traipse) with: 
+You can install traipse from
+[CRAN](https://CRAN.r-project.org/package=traipse) with:
 
-```r
+``` r
 install.packages("traipse")
 ```
 
-You can install the  development version from [GitHub](https://github.com/) with:
+You can install the development version from
+[GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("Trackage/traipse")
 ```
+
 ## Example
 
-This is a basic example which shows you how to calculate ellipsoidal distance and turning angle for a data set of tracks. 
+This is a basic example which shows you how to calculate ellipsoidal
+distance and turning angle for a data set of tracks.
 
-First, calculate without any groupings - we definitely don't want this for real work as there are three separate tracks within our data set identified by `id`. (No ordering is applied other than the order the rows occur).
+First, calculate without any groupings - we definitely don’t want this
+for real work as there are three separate tracks within our data set
+identified by `id`. (No ordering is applied other than the order the
+rows occur).
 
-
-```r
+``` r
 library(traipse)
 
 library(dplyr)
@@ -91,11 +113,12 @@ trips0 %>% mutate(distance = track_distance(x, y), angle = track_angle(x, y))
 #> 10  118. -40.5 2001-01-02 16:24:46 1       86066.  64.3 
 #> # … with 1,490 more rows
 ```
-Now run a set of available metrics, but do it with respect to the grouping variable `id`. 
 
+Now run a set of available metrics, but do it with respect to the
+grouping variable
+`id`.
 
-
-```r
+``` r
 metric <- trips0 %>% group_by(id) %>% mutate(distance = track_distance(x, y), 
                                              angle = track_angle(x, y),
                                              turn = track_turn(x, y), 
@@ -130,9 +153,9 @@ metric %>%
 #> Warning: Removed 2 rows containing missing values (geom_path).
 ```
 
-<img src="man/figures/README-example-group_by-1.png" title="plot of chunk example-group_by" alt="plot of chunk example-group_by" width="100%" />
+<img src="man/figures/README-example-group_by-1.png" width="100%" />
 
-```r
+``` r
 
 metric %>% 
   ggplot(aes(x, y, colour = distance_to)) + 
@@ -140,9 +163,9 @@ metric %>%
                             label = "home")
 ```
 
-<img src="man/figures/README-example-group_by-2.png" title="plot of chunk example-group_by" alt="plot of chunk example-group_by" width="100%" />
+<img src="man/figures/README-example-group_by-2.png" width="100%" />
 
-```r
+``` r
 
 metric %>% 
   ggplot(aes(x, y, colour = bearing_to)) + 
@@ -150,12 +173,12 @@ metric %>%
                             label = "home")
 ```
 
-<img src="man/figures/README-example-group_by-3.png" title="plot of chunk example-group_by" alt="plot of chunk example-group_by" width="100%" />
+<img src="man/figures/README-example-group_by-3.png" width="100%" />
 
-Using the bearing and distance now reproduce the track as *destination point* segments. 
+Using the bearing and distance now reproduce the track as *destination
+point* segments.
 
-
-```r
+``` r
 plot(metric[1:10, c("x", "y")], type = "b", lwd = 10, col = "grey")
 dest <- geosphere::destPoint(metric[1:10, c("x", "y")], 
                              b = metric$bearing[1:10], 
@@ -163,30 +186,41 @@ dest <- geosphere::destPoint(metric[1:10, c("x", "y")],
 arrows(metric$x[1:10], metric$y[1:10], dest[1:10,1], dest[1:10,2], col = "firebrick", lwd = 2)
 ```
 
-<img src="man/figures/README-dest-point-1.png" title="plot of chunk dest-point" alt="plot of chunk dest-point" width="100%" />
+<img src="man/figures/README-dest-point-1.png" width="100%" />
 
 ## Intermediate points require extra handling
 
-The function `track_intermediate()` requires extra work as it inherently returns multiple variables (lon, lat, date-time). The output is a list-column of data frames, and if used within `mutate(inter = track_intermediate(lon, lat, date))` then it will be stored along side the rows of the input data. 
+The function `track_intermediate()` requires extra work as it inherently
+returns multiple variables (lon, lat, date-time). The output is a
+list-column of data frames, and if used within `mutate(inter =
+track_intermediate(lon, lat, date))` then it will be stored along side
+the rows of the input data.
 
-To use this we must unnest the data and treat the new columns as the output. 
+To use this we must unnest the data and treat the new columns as the
+output.
 
-
-See the documentation for more examples.  
+See the documentation for more examples.
 
 ## Data are assumed to be sensibly organized
 
-Note above that we provided a *grouping ID* for when we have separate trips within the same data set. There's nothing to stop from calculating distances when the arrangement of records does not make sense, but this is your responsibility. If missing values are present, or times are out of order, or include zero-length time durations, or movement backward in time there aren't any checks for that made in the traipse package. 
+Note above that we provided a *grouping ID* for when we have separate
+trips within the same data set. There’s nothing to stop from calculating
+distances when the arrangement of records does not make sense, but this
+is your responsibility. If missing values are present, or times are out
+of order, or include zero-length time durations, or movement backward in
+time there aren’t any checks for that made in the traipse package.
 
-The idea is for developers to be able to use these tools however they like but with an assumed consistent workflow. 
+The idea is for developers to be able to use these tools however they
+like but with an assumed consistent workflow.
 
-We would like to have a simple core package to provide the most commonly used metrics. We assume `geodist` and `geosphere` as good examples of core packages for the underlying tool. These both apply the modern geodesic methods of C. F. F. Karney (2013) [Algorithms for geodesics](https://doi.org/10.1007/s00190-012-0578-z)
+We would like to have a simple core package to provide the most commonly
+used metrics. We assume `geodist` and `geosphere` as good examples of
+core packages for the underlying tool. These both apply the modern
+geodesic methods of C. F. F. Karney (2013) [Algorithms for
+geodesics](https://doi.org/10.1007/s00190-012-0578-z)
 
+-----
 
-
----
-
-Please note that this project is released with a
-[Contributor Code of Conduct](https://github.com/Trackage/traipse/blob/master/CODE_OF_CONDUCT.md).
+Please note that this project is released with a [Contributor Code of
+Conduct](https://github.com/Trackage/traipse/blob/master/CODE_OF_CONDUCT.md).
 By contributing to this project, you agree to abide by its terms.
-

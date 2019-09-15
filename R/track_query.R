@@ -7,17 +7,19 @@
 #' If `date` is not included, time itself is treated as the obvious index on n-locations so
 #' simple relative time, and `query` is expected to match this.
 #'
-#' I can't see this working in a group_by context ... but group_modify is fine:fd
+#' We use group_modify to keep the id groups:
 #' `trips0 %>% group_by(id) %>% group_modify(~track_query(.x$x, .x$y, query = c(4.5, 6.7)))`
 #' @param x longitude
 #' @param y latitude
 #' @param date date-time in POSIXct (or can be ignore, for relative index-time)
 #' @param query required argument, date-time values to return inferred x, y positions for
 #' @param type linear, geodesic, rhumb, forward, backward, nearest (also need open/closed intervals)
-#' @noRd
+#' @export
 #' @examples
 #' track_query(trips0$x[1:10], trips0$y[1:10], query = c(4.5, 5.5, 6.5))
 #' track_query(trips0$x[1:10], trips0$y[1:10], trips0$date[1:10], query = trips0$date[1:10] + 10)
+#' s <- seq(min(trips0$date), max(trips0$date), by = "1 hour")
+#' trips0 %>% group_by(id) %>% group_modify(~track_query(.x$x, .x$y, .x$date, query = s))
 track_query <- function(x, y, date = NULL, query, type = "linear") {
   type <- match.arg(type)  ## only linear for now
   if (is.null(date)) {
