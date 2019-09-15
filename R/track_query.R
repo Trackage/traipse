@@ -7,9 +7,8 @@
 #' If `date` is not included, time itself is treated as the obvious index on n-locations so
 #' simple relative time, and `query` is expected to match this.
 #'
-#' I can't see this working in a group_by context ... but group_map is fine:
-#' `trips0 %>% group_by(id) %>% group_map(~track_query(.x$x, .x$y, query = c(4.5, 6.7)))`
-#' (chuck a bind_rows() at the end ...)
+#' I can't see this working in a group_by context ... but group_modify is fine:fd
+#' `trips0 %>% group_by(id) %>% group_modify(~track_query(.x$x, .x$y, query = c(4.5, 6.7)))`
 #' @param x longitude
 #' @param y latitude
 #' @param date date-time in POSIXct (or can be ignore, for relative index-time)
