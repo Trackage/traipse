@@ -1,4 +1,4 @@
-# traipse (development version)
+# traipse 0.1.0
 
 * New function `track_query()` similar to `track_intermediate()` but for arbitrary
  points in time. In-development. 

@@ -3,6 +3,7 @@ Codecov
 doi
 durations
 geodist
+GeoPandas
 geosphere
 https
 Karney
@@ -10,7 +11,9 @@ Lifecycle
 lon
 magrittr
 metres
+ORCID
 POSIXct
+rhumb
 RStudio
 Spatio
 tidyr

@@ -16,8 +16,7 @@ coverage](https://codecov.io/gh/Trackage/traipse/branch/master/graph/badge.svg)]
 [![CRAN
 status](https://www.r-pkg.org/badges/version/traipse)](https://cran.r-project.org/package=traipse)
 [![CRAN\_Download\_Badge](http://cranlogs.r-pkg.org/badges/traipse)](https://cran.r-project.org/package=traipse)
-[![Launch RStudio
-Binder](http://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/Trackage/traipse/master?urlpath=rstudio)
+
 <!-- badges: end -->
 
 The goal of traipse is to provide shared tools for tracking data, for
@@ -52,8 +51,7 @@ Traipse works directly on longitude and latitude vectors as it is
 intended for use within other tools that work directly with data.
 
 There is no capacity for providing nested data structures because this
-is trivially done by using tidyverse code
-like
+is trivially done by using tidyverse code like
 
 ``` r
 data %>% group_by(id) %>% mutate(distance = track_distance(lon, lat)) %>% ungroup()
@@ -115,8 +113,7 @@ trips0 %>% mutate(distance = track_distance(x, y), angle = track_angle(x, y))
 ```
 
 Now run a set of available metrics, but do it with respect to the
-grouping variable
-`id`.
+grouping variable `id`.
 
 ``` r
 metric <- trips0 %>% group_by(id) %>% mutate(distance = track_distance(x, y), 
@@ -130,27 +127,27 @@ metric <- trips0 %>% group_by(id) %>% mutate(distance = track_distance(x, y),
 metric 
 #> # A tibble: 1,500 x 12
 #> # Groups:   id [3]
-#>        x     y date                id    distance  angle   turn bearing
-#>    <dbl> <dbl> <dttm>              <chr>    <dbl>  <dbl>  <dbl>   <dbl>
-#>  1  115. -42.4 2001-01-01 15:39:50 1          NA   NA      NA     34.5 
-#>  2  116. -41.4 2001-01-01 18:16:52 1      129435. 120.    -61.0  -26.5 
-#>  3  116. -41.1 2001-01-01 21:03:38 1       34632.   4.43 -175.   158.  
-#>  4  117. -42.1 2001-01-01 22:09:41 1      120575.  13.1  -167.    -9.20
-#>  5  116. -41.9 2001-01-01 23:33:54 1       30560.  72.4   108.    98.5 
-#>  6  118. -42.0 2001-01-02 01:25:12 1       97593.  25.6  -155.   -56.7 
-#>  7  117. -41.7 2001-01-02 06:45:40 1       57005.  89.5    90.9   34.1 
-#>  8  118. -40.9 2001-01-02 10:01:26 1      108811. 159.    -21.2   12.9 
-#>  9  118. -39.7 2001-01-02 13:49:59 1      130588.  23.8   156.   169.  
-#> 10  118. -40.5 2001-01-02 16:24:46 1       86066.  64.3  -116.    53.1 
-#> # … with 1,490 more rows, and 4 more variables: duration <dbl>,
-#> #   speed <dbl>, distance_to <dbl>, bearing_to <dbl>
+#>        x     y date                id    distance  angle   turn bearing duration
+#>    <dbl> <dbl> <dttm>              <chr>    <dbl>  <dbl>  <dbl>   <dbl>    <dbl>
+#>  1  115. -42.4 2001-01-01 15:39:50 1          NA   NA      NA     34.5        NA
+#>  2  116. -41.4 2001-01-01 18:16:52 1      129435. 120.    -61.0  -26.5      9422
+#>  3  116. -41.1 2001-01-01 21:03:38 1       34632.   4.43 -175.   158.      10006
+#>  4  117. -42.1 2001-01-01 22:09:41 1      120575.  13.1  -167.    -9.20     3963
+#>  5  116. -41.9 2001-01-01 23:33:54 1       30560.  72.4   108.    98.5      5053
+#>  6  118. -42.0 2001-01-02 01:25:12 1       97593.  25.6  -155.   -56.7      6678
+#>  7  117. -41.7 2001-01-02 06:45:40 1       57005.  89.5    90.9   34.1     19228
+#>  8  118. -40.9 2001-01-02 10:01:26 1      108811. 159.    -21.2   12.9     11746
+#>  9  118. -39.7 2001-01-02 13:49:59 1      130588.  23.8   156.   169.      13713
+#> 10  118. -40.5 2001-01-02 16:24:46 1       86066.  64.3  -116.    53.1      9287
+#> # … with 1,490 more rows, and 3 more variables: speed <dbl>, distance_to <dbl>,
+#> #   bearing_to <dbl>
 
 metric %>% 
   ggplot(aes(x, y, cex= 1/angle)) + 
   geom_point() + 
   geom_path(col = rgb(0.2, 0.2, 0.2, 0.2))
 #> Warning: Removed 6 rows containing missing values (geom_point).
-#> Warning: Removed 2 rows containing missing values (geom_path).
+#> Warning: Removed 2 row(s) containing missing values (geom_path).
 ```
 
 <img src="man/figures/README-example-group_by-1.png" width="100%" />
@@ -199,7 +196,76 @@ the rows of the input data.
 To use this we must unnest the data and treat the new columns as the
 output.
 
-See the documentation for more examples.
+See this example.
+
+``` r
+if (requireNamespace("tidyr") && requireNamespace("dplyr")) {
+tr1 <- trips0[seq(1, nrow(trips0), by = 30), ]
+  dd <- tr1 %>% group_by(id) %>%
+    mutate(inter = track_intermediate(x, y, date = date, distance = 150000)) %>%
+    tidyr::unnest()
+  plot(dd$int_date, dd$int_y, pch = ".", cex = 2, main = "equidistant in space")
+  abline(v = tr1$date)
+
+  dd1 <- tr1 %>% group_by(id) %>%
+    mutate(inter = track_intermediate(x, y, date = date, duration = 3600 * 12)) %>%
+    tidyr::unnest()
+  plot(dd1$int_date, dd1$int_y, pch = ".", cex = 2, main = "equispaced in time")
+  abline(v = tr1$date)
+}
+#> Warning: `cols` is now required when using unnest().
+#> Please use `cols = c(inter)`
+
+#> Warning: `cols` is now required when using unnest().
+#> Please use `cols = c(inter)`
+```
+
+<img src="man/figures/README-intermediate-1.png" width="100%" /><img src="man/figures/README-intermediate-2.png" width="100%" />
+
+Query.
+
+``` r
+track_query(trips0$x[1:10], trips0$y[1:10], query = c(4.5, 5.5, 6.5))
+#> Warning in track_query(trips0$x[1:10], trips0$y[1:10], query = c(4.5, 5.5, :
+#> date is null, so assuming linear relative movement in time
+#> # A tibble: 3 x 3
+#>       x     y  date
+#>   <dbl> <dbl> <dbl>
+#> 1  116. -42.0   4.5
+#> 2  117. -41.9   5.5
+#> 3  117. -41.8   6.5
+track_query(trips0$x[1:10], trips0$y[1:10], trips0$date[1:10], query = trips0$date[1:10] + 10)
+#> # A tibble: 10 x 3
+#>        x     y date               
+#>    <dbl> <dbl> <dttm>             
+#>  1  115. -42.4 2001-01-01 15:40:00
+#>  2  116. -41.4 2001-01-01 18:17:02
+#>  3  116. -41.1 2001-01-01 21:03:48
+#>  4  117. -42.1 2001-01-01 22:09:51
+#>  5  116. -41.9 2001-01-01 23:34:04
+#>  6  118. -42.0 2001-01-02 01:25:22
+#>  7  117. -41.7 2001-01-02 06:45:50
+#>  8  118. -40.9 2001-01-02 10:01:36
+#>  9  118. -39.7 2001-01-02 13:50:09
+#> 10   NA   NA   2001-01-02 16:24:56
+s <- seq(min(trips0$date), max(trips0$date), by = "1 hour")
+trips0 %>% group_by(id) %>% group_modify(~track_query(.x$x, .x$y, .x$date, query = s))
+#> # A tibble: 5,751 x 4
+#> # Groups:   id [3]
+#>    id        x     y date               
+#>    <chr> <dbl> <dbl> <dttm>             
+#>  1 1       NA   NA   2001-01-01 15:24:58
+#>  2 1      116. -42.1 2001-01-01 16:24:58
+#>  3 1      116. -41.7 2001-01-01 17:24:58
+#>  4 1      116. -41.4 2001-01-01 18:24:58
+#>  5 1      116. -41.3 2001-01-01 19:24:58
+#>  6 1      116. -41.2 2001-01-01 20:24:58
+#>  7 1      116. -41.5 2001-01-01 21:24:58
+#>  8 1      117. -42.1 2001-01-01 22:24:58
+#>  9 1      116. -41.9 2001-01-01 23:24:58
+#> 10 1      117. -41.9 2001-01-02 00:24:58
+#> # … with 5,741 more rows
+```
 
 ## Data are assumed to be sensibly organized
 

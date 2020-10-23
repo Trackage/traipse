@@ -34,24 +34,6 @@
 #'
 #' inter_time <- track_intermediate(trips0$x[1:10], trips0$y[1:10],
 #'                             date = trips0$date, duration = 1800)
-#' \dontrun{
-#' ## run with full workflow to expand into a new data frame with
-#' ## `int_x`, `int_y`, and (optional) `int_date`
-#'  if (requireNamespace("tidyr") && requireNamespace("dplyr")) {
-#'  tr1 <- trips0[seq(1, nrow(trips0), by = 30), ]
-#'    dd <- tr1 %>% group_by(id) %>%
-#'      mutate(inter = track_intermediate(x, y, date = date, distance = 150000)) %>%
-#'      tidyr::unnest()
-#'    plot(dd$int_date, dd$int_y, pch = ".", cex = 2, main = "equidistant in space")
-#'    abline(v = tr1$date)
-#'
-#'    dd1 <- tr1 %>% group_by(id) %>%
-#'      mutate(inter = track_intermediate(x, y, date = date, duration = 3600 * 12)) %>%
-#'      tidyr::unnest()
-#'    plot(dd1$int_date, dd1$int_y, pch = ".", cex = 2, main = "equispaced in time")
-#'    abline(v = tr1$date)
-#'  }
-#' }
 track_intermediate <- function(x, y, date = NULL, distance = NULL, duration = NULL) {
   n <- length(x)
   if (!is.null(distance) && !is.null(duration)) stop("'distance' or 'duration' (or both) must be NULL")

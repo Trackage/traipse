@@ -32,7 +32,7 @@ To use this on multiple track ids, use a grouped data frame with tidyverse code 
 \code{data \%>\% group_by(id) \%>\% mutate(bearing_to = track_bearing_to(lon, lat, to_lon, to_lat))}.
 
 Absolute bearing is relative to North (0), and proceeds clockwise positive and anti-clockwise
-negative \code{N = 0, E = 90, S = +/-180, W = -90}.
+negative \verb{N = 0, E = 90, S = +/-180, W = -90}.
 
 There is no \code{NA} padding in the output value (though missing values in the input will be mirrored
 in the output).

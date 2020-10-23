@@ -4,8 +4,7 @@
 \alias{track_intermediate}
 \title{Track intermediate points}
 \usage{
-track_intermediate(x, y, date = NULL, distance = NULL,
-  duration = NULL)
+track_intermediate(x, y, date = NULL, distance = NULL, duration = NULL)
 }
 \arguments{
 \item{x}{longitude}
@@ -33,7 +32,7 @@ the list is the same length as the inputs. See embedded usage of the tidyr funct
 for ease of use.
 
 To use on multiple track ids, use a grouped data frame with tidyverse code like
-\code{inter <- data \%>\% group_by(id) \%>\% mutate(inter = track_intermediate(lon, lat, date = , distance = )}.
+\verb{inter <- data \%>\% group_by(id) \%>\% mutate(inter = track_intermediate(lon, lat, date = , distance = )}.
 
 Then, un-nest this result for further use (the 'inter' above retains the information
 about the parent locations for custom usage if needed), so the final location of each
@@ -48,22 +47,4 @@ track_intermediate(trips0$x[1:10], trips0$y[1:10], date = trips0$date,
 
 inter_time <- track_intermediate(trips0$x[1:10], trips0$y[1:10],
                             date = trips0$date, duration = 1800)
-\dontrun{
-## run with full workflow to expand into a new data frame with
-## `int_x`, `int_y`, and (optional) `int_date`
- if (requireNamespace("tidyr") && requireNamespace("dplyr")) {
- tr1 <- trips0[seq(1, nrow(trips0), by = 30), ]
-   dd <- tr1 \%>\% group_by(id) \%>\%
-     mutate(inter = track_intermediate(x, y, date = date, distance = 150000)) \%>\%
-     tidyr::unnest()
-   plot(dd$int_date, dd$int_y, pch = ".", cex = 2, main = "equidistant in space")
-   abline(v = tr1$date)
-
-   dd1 <- tr1 \%>\% group_by(id) \%>\%
-     mutate(inter = track_intermediate(x, y, date = date, duration = 3600 * 12)) \%>\%
-     tidyr::unnest()
-   plot(dd1$int_date, dd1$int_y, pch = ".", cex = 2, main = "equispaced in time")
-   abline(v = tr1$date)
- }
-}
 }

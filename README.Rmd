@@ -135,7 +135,34 @@ The function `track_intermediate()` requires extra work as it inherently returns
 To use this we must unnest the data and treat the new columns as the output. 
 
 
-See the documentation for more examples.  
+See this example. 
+
+```{r intermediate}
+if (requireNamespace("tidyr") && requireNamespace("dplyr")) {
+tr1 <- trips0[seq(1, nrow(trips0), by = 30), ]
+  dd <- tr1 %>% group_by(id) %>%
+    mutate(inter = track_intermediate(x, y, date = date, distance = 150000)) %>%
+    tidyr::unnest()
+  plot(dd$int_date, dd$int_y, pch = ".", cex = 2, main = "equidistant in space")
+  abline(v = tr1$date)
+
+  dd1 <- tr1 %>% group_by(id) %>%
+    mutate(inter = track_intermediate(x, y, date = date, duration = 3600 * 12)) %>%
+    tidyr::unnest()
+  plot(dd1$int_date, dd1$int_y, pch = ".", cex = 2, main = "equispaced in time")
+  abline(v = tr1$date)
+}
+
+```
+
+Query. 
+
+```{r, query}
+track_query(trips0$x[1:10], trips0$y[1:10], query = c(4.5, 5.5, 6.5))
+track_query(trips0$x[1:10], trips0$y[1:10], trips0$date[1:10], query = trips0$date[1:10] + 10)
+s <- seq(min(trips0$date), max(trips0$date), by = "1 hour")
+trips0 %>% group_by(id) %>% group_modify(~track_query(.x$x, .x$y, .x$date, query = s))
+```
 
 ## Data are assumed to be sensibly organized
 
