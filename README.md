@@ -17,6 +17,8 @@ coverage](https://codecov.io/gh/Trackage/traipse/branch/master/graph/badge.svg)]
 status](https://www.r-pkg.org/badges/version/traipse)](https://cran.r-project.org/package=traipse)
 [![CRAN\_Download\_Badge](http://cranlogs.r-pkg.org/badges/traipse)](https://cran.r-project.org/package=traipse)
 
+[![R build
+status](https://github.com/Trackage/traipse/workflows/R-CMD-check/badge.svg)](https://github.com/Trackage/traipse/actions)
 <!-- badges: end -->
 
 The goal of traipse is to provide shared tools for tracking data, for
