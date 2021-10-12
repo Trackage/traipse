@@ -1,4 +1,9 @@
-# traipse 0.1.0
+# traipse 0.2.5
+
+* Patch fix for new {geosphere} >= 1.5.14, thanks to CRAN notification pretest reverse
+ dependency checking. 
+
+# traipse 0.2.0
 
 * New function `track_query()` similar to `track_intermediate()` but for arbitrary
  points in time. In-development. 
