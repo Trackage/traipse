@@ -6,17 +6,10 @@
 <!-- badges: start -->
 
 [![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
-[![Travis build
-status](https://travis-ci.org/Trackage/traipse.svg?branch=master)](https://travis-ci.org/Trackage/traipse)
-[![AppVeyor build
-status](https://ci.appveyor.com/api/projects/status/7v59mpmj4lqw2b0q/branch/master?svg=true)](https://ci.appveyor.com/project/mdsumner/traipse)
-[![Codecov test
-coverage](https://codecov.io/gh/Trackage/traipse/branch/master/graph/badge.svg)](https://codecov.io/gh/Trackage/traipse?branch=master)
+experimental](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/traipse)](https://cran.r-project.org/package=traipse)
-[![CRAN\_Download\_Badge](http://cranlogs.r-pkg.org/badges/traipse)](https://cran.r-project.org/package=traipse)
-
+[![CRAN_Download_Badge](http://cranlogs.r-pkg.org/badges/traipse)](https://cran.r-project.org/package=traipse)
 [![R build
 status](https://github.com/Trackage/traipse/workflows/R-CMD-check/badge.svg)](https://github.com/Trackage/traipse/actions)
 <!-- badges: end -->
@@ -27,22 +20,22 @@ the following functions which are always assumed to operate on input
 locations in longitude latitude, and input date-times in R’s `POSIXt`
 class.
 
-  - `track_distance()` for distance in metres
-  - `track_angle()` for internal angle in degrees
-  - `track_turn()` for relative turn angle
-  - `track_bearing()` for absolute bearing
-  - `track_time()` for duration in seconds
-  - `track_speed()` for speed in metres per second
-  - `track_distance_to()` for distance to location
-  - `track_bearing_to()` for bearing to location
-  - `track_intermediate()` for interpolating locations
-  - `track_query()` also for interpolation, by finding locations within
+-   `track_distance()` for distance in metres
+-   `track_angle()` for internal angle in degrees
+-   `track_turn()` for relative turn angle
+-   `track_bearing()` for absolute bearing
+-   `track_time()` for duration in seconds
+-   `track_speed()` for speed in metres per second
+-   `track_distance_to()` for distance to location
+-   `track_bearing_to()` for bearing to location
+-   `track_intermediate()` for interpolating locations
+-   `track_query()` also for interpolation, by finding locations within
     a given track arbitrarily (in-development)
 
 Distances are always returned in **metres**, directions and angles are
 always returned in **degrees**. Absolute bearing is relative to North
-(0), and proceeds clockwise positive and anti-clockwise negative `N = 0,
-E = 90, S = +/-180, W = -90`.
+(0), and proceeds clockwise positive and anti-clockwise negative
+`N = 0, E = 90, S = +/-180, W = -90`.
 
 Time is always returned in **seconds**, and speed in **metres per
 second**.
@@ -98,7 +91,7 @@ library(traipse)
 library(dplyr)
 ## there's no grouping here - we haven't gotten our data organized yet
 trips0 %>% mutate(distance = track_distance(x, y), angle = track_angle(x, y))
-#> # A tibble: 1,500 x 6
+#> # A tibble: 1,500 × 6
 #>        x     y date                id    distance  angle
 #>    <dbl> <dbl> <dttm>              <chr>    <dbl>  <dbl>
 #>  1  115. -42.4 2001-01-01 15:39:50 1          NA   NA   
@@ -127,7 +120,7 @@ metric <- trips0 %>% group_by(id) %>% mutate(distance = track_distance(x, y),
                                              distance_to = track_distance_to(x, y, 147, -42), 
                                              bearing_to = track_bearing_to(x, y, 100, -42)) 
 metric 
-#> # A tibble: 1,500 x 12
+#> # A tibble: 1,500 × 12
 #> # Groups:   id [3]
 #>        x     y date                id    distance  angle   turn bearing duration
 #>    <dbl> <dbl> <dttm>              <chr>    <dbl>  <dbl>  <dbl>   <dbl>    <dbl>
@@ -143,7 +136,6 @@ metric
 #> 10  118. -40.5 2001-01-02 16:24:46 1       86066.  64.3  -116.    53.1      9287
 #> # … with 1,490 more rows, and 3 more variables: speed <dbl>, distance_to <dbl>,
 #> #   bearing_to <dbl>
-
 metric %>% 
   ggplot(aes(x, y, cex= 1/angle)) + 
   geom_point() + 
@@ -155,7 +147,6 @@ metric %>%
 <img src="man/figures/README-example-group_by-1.png" width="100%" />
 
 ``` r
-
 metric %>% 
   ggplot(aes(x, y, colour = distance_to)) + 
   geom_point() + geom_label(data = data.frame(x = 147, y = -42, distance_to = 0), 
@@ -165,7 +156,6 @@ metric %>%
 <img src="man/figures/README-example-group_by-2.png" width="100%" />
 
 ``` r
-
 metric %>% 
   ggplot(aes(x, y, colour = bearing_to)) + 
   geom_point() + geom_label(data = data.frame(x = 100, y = -42, bearing_to = 0), 
@@ -191,9 +181,9 @@ arrows(metric$x[1:10], metric$y[1:10], dest[1:10,1], dest[1:10,2], col = "firebr
 
 The function `track_intermediate()` requires extra work as it inherently
 returns multiple variables (lon, lat, date-time). The output is a
-list-column of data frames, and if used within `mutate(inter =
-track_intermediate(lon, lat, date))` then it will be stored along side
-the rows of the input data.
+list-column of data frames, and if used within
+`mutate(inter = track_intermediate(lon, lat, date))` then it will be
+stored along side the rows of the input data.
 
 To use this we must unnest the data and treat the new columns as the
 output.
@@ -230,14 +220,14 @@ Query.
 track_query(trips0$x[1:10], trips0$y[1:10], query = c(4.5, 5.5, 6.5))
 #> Warning in track_query(trips0$x[1:10], trips0$y[1:10], query = c(4.5, 5.5, :
 #> date is null, so assuming linear relative movement in time
-#> # A tibble: 3 x 3
+#> # A tibble: 3 × 3
 #>       x     y  date
 #>   <dbl> <dbl> <dbl>
 #> 1  116. -42.0   4.5
 #> 2  117. -41.9   5.5
 #> 3  117. -41.8   6.5
 track_query(trips0$x[1:10], trips0$y[1:10], trips0$date[1:10], query = trips0$date[1:10] + 10)
-#> # A tibble: 10 x 3
+#> # A tibble: 10 × 3
 #>        x     y date               
 #>    <dbl> <dbl> <dttm>             
 #>  1  115. -42.4 2001-01-01 15:40:00
@@ -252,7 +242,7 @@ track_query(trips0$x[1:10], trips0$y[1:10], trips0$date[1:10], query = trips0$da
 #> 10   NA   NA   2001-01-02 16:24:56
 s <- seq(min(trips0$date), max(trips0$date), by = "1 hour")
 trips0 %>% group_by(id) %>% group_modify(~track_query(.x$x, .x$y, .x$date, query = s))
-#> # A tibble: 5,751 x 4
+#> # A tibble: 5,751 × 4
 #> # Groups:   id [3]
 #>    id        x     y date               
 #>    <chr> <dbl> <dbl> <dttm>             
@@ -287,7 +277,7 @@ core packages for the underlying tool. These both apply the modern
 geodesic methods of C. F. F. Karney (2013) [Algorithms for
 geodesics](https://doi.org/10.1007/s00190-012-0578-z)
 
------
+------------------------------------------------------------------------
 
 Please note that this project is released with a [Contributor Code of
 Conduct](https://github.com/Trackage/traipse/blob/master/CODE_OF_CONDUCT.md).
