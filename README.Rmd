@@ -38,6 +38,7 @@ The goal of traipse is to provide shared tools for tracking data, for common met
 * `track_bearing_to()` for bearing to location
 * `track_intermediate()` for interpolating locations 
 * `track_query()` also for interpolation, by finding locations within a given track arbitrarily (in-development)
+* `track_grid` for identifying locations in grid cells
 
 Distances are always returned in **metres**, directions and angles are always returned in **degrees**. Absolute bearing is relative to North (0), and proceeds clockwise positive and anti-clockwise negative `N = 0, E = 90, S = +/-180, W = -90`. 
 

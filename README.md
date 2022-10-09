@@ -32,6 +32,7 @@ class.
 -   `track_intermediate()` for interpolating locations
 -   `track_query()` also for interpolation, by finding locations within
     a given track arbitrarily (in-development)
+-   `track_grid` for identifying locations in grid cells
 
 Distances are always returned in **metres**, directions and angles are
 always returned in **degrees**. Absolute bearing is relative to North
@@ -137,6 +138,7 @@ metric
 #> 10  118. -40.5 2001-01-02 16:24:46 1       86066.  64.3  -116.    53.1      9287
 #> # … with 1,490 more rows, and 3 more variables: speed <dbl>, distance_to <dbl>,
 #> #   bearing_to <dbl>
+
 metric %>% 
   ggplot(aes(x, y, cex= 1/angle)) + 
   geom_point() + 
@@ -148,6 +150,7 @@ metric %>%
 <img src="man/figures/README-example-group_by-1.png" width="100%" />
 
 ``` r
+
 metric %>% 
   ggplot(aes(x, y, colour = distance_to)) + 
   geom_point() + geom_label(data = data.frame(x = 147, y = -42, distance_to = 0), 
@@ -157,6 +160,7 @@ metric %>%
 <img src="man/figures/README-example-group_by-2.png" width="100%" />
 
 ``` r
+
 metric %>% 
   ggplot(aes(x, y, colour = bearing_to)) + 
   geom_point() + geom_label(data = data.frame(x = 100, y = -42, bearing_to = 0), 
@@ -208,8 +212,7 @@ tr1 <- trips0[seq(1, nrow(trips0), by = 30), ]
 }
 #> Warning: `cols` is now required when using unnest().
 #> Please use `cols = c(inter)`
-
-#> Warning: `cols` is now required when using unnest().
+#> `cols` is now required when using unnest().
 #> Please use `cols = c(inter)`
 ```
 
