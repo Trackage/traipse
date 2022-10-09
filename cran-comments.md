@@ -1,11 +1,11 @@
-traipse package 0.2.5, fix for new {geosphere} >= 1.5.14, thanks to CRAN notification pretest reverse dependency checking. 
+traipse package 0.3.0, fix for failing test on R-devel. 
 
 
 ## Test environments
 
-* local Linux 20.04 install, R 4.1.1
+* local Linux 20.04 install, R 4.2.1
 * win-builder (devel)
-* mac-builder
+
 
 ## R CMD check results
 

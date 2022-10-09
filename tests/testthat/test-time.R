@@ -6,10 +6,13 @@ test_that("time works", {
                     c(NA, 1, 1, 1))
 
 
+  ## doesn't error in R-devel 2022-01-09
+  if (packageVersion("base") <= "4.2.1") {
   expect_error(track_time(1:4),
                "Cannot convert 'date' of class 'integer' to POSIXct")
 
 
+  })
 })
 
 
