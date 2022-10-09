@@ -17,6 +17,9 @@ track_query(x, y, date = NULL, query, type = "linear")
 
 \item{type}{linear, geodesic, rhumb, forward, backward, nearest (also need open/closed intervals)}
 }
+\value{
+data frame of 'x,y,date' of inferred positions
+}
 \description{
 Latent positions may be queried using arbitrary date-time values. The only method
 (for now) is 'linear', but default should be 'geodesic'. In time we include more methods

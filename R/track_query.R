@@ -16,6 +16,7 @@
 #' @param type linear, geodesic, rhumb, forward, backward, nearest (also need open/closed intervals)
 #' @export
 #' @importFrom stats approxfun
+#' @return data frame of 'x,y,date' of inferred positions
 #' @examples
 #' track_query(trips0$x[1:10], trips0$y[1:10], query = c(4.5, 5.5, 6.5))
 #' track_query(trips0$x[1:10], trips0$y[1:10], trips0$date[1:10], query = trips0$date[1:10] + 10)
