@@ -24,6 +24,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -36,18 +38,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">traipse</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
@@ -57,7 +53,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/Trackage/traipse/">
+  <a href="https://github.com/Trackage/traipse/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -74,11 +70,10 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="traipse" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#traipse" class="anchor"></a>traipse</h1></div>
+<div class="section level1">
+<div class="page-header"><h1 id="traipse">traipse<a class="anchor" aria-label="anchor" href="#traipse"></a>
+</h1></div>
 <!-- badges: start -->
-
 <p>The goal of traipse is to provide shared tools for tracking data, for common metrics of distance, direction, and speed. The package includes the following functions which are always assumed to operate on input locations in longitude latitude, and input date-times in R’s <code>POSIXt</code> class.</p>
 <ul>
 <li>
@@ -104,239 +99,249 @@
 </ul>
 <p>Distances are always returned in <strong>metres</strong>, directions and angles are always returned in <strong>degrees</strong>. Absolute bearing is relative to North (0), and proceeds clockwise positive and anti-clockwise negative <code>N = 0, E = 90, S = +/-180, W = -90</code>.</p>
 <p>Time is always returned in <strong>seconds</strong>, and speed in <strong>metres per second</strong>.</p>
-<div id="no-complex-data-structures" class="section level2">
-<h2 class="hasAnchor">
-<a href="#no-complex-data-structures" class="anchor"></a>No complex data structures</h2>
+<div class="section level2">
+<h2 id="no-complex-data-structures">No complex data structures<a class="anchor" aria-label="anchor" href="#no-complex-data-structures"></a>
+</h2>
 <p>Traipse works directly on longitude and latitude vectors as it is intended for use within other tools that work directly with data.</p>
 <p>There is no capacity for providing nested data structures because this is trivially done by using tidyverse code like</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">data</span> <span class="op">%&gt;%</span> <span class="fu">group_by</span><span class="op">(</span><span class="va">id</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">mutate</span><span class="op">(</span>distance <span class="op">=</span> <span class="fu"><a href="reference/track_distance.html">track_distance</a></span><span class="op">(</span><span class="va">lon</span>, <span class="va">lat</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p>or by arranging use of the functions in various ways. Track metric values are inherently <a href="https://dplyr.tidyverse.org/articles/window-functions.html">window-like</a> and in traipse padding value/s of <code>NA</code> are used to return an element for every input location.</p>
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu">group_by</span><span class="op">(</span><span class="va">id</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu">mutate</span><span class="op">(</span>distance <span class="op">=</span> <span class="fu"><a href="reference/track_distance.html">track_distance</a></span><span class="op">(</span><span class="va">lon</span>, <span class="va">lat</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>or by arranging use of the functions in various ways. Track metric values are inherently <a href="https://dplyr.tidyverse.org/articles/window-functions.html" class="external-link">window-like</a> and in traipse padding value/s of <code>NA</code> are used to return an element for every input location.</p>
 </div>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
-<p>You can install traipse from <a href="https://CRAN.r-project.org/package=traipse">CRAN</a> with:</p>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<p>You can install traipse from <a href="https://CRAN.r-project.org/package=traipse" class="external-link">CRAN</a> with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"traipse"</span><span class="op">)</span></code></pre></div>
-<p>You can install the development version from <a href="https://github.com/">GitHub</a> with:</p>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"traipse"</span><span class="op">)</span></span></code></pre></div>
+<p>You can install the development version from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"Trackage/traipse"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"Trackage/traipse"</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="example" class="section level2">
-<h2 class="hasAnchor">
-<a href="#example" class="anchor"></a>Example</h2>
+<div class="section level2">
+<h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
+</h2>
 <p>This is a basic example which shows you how to calculate ellipsoidal distance and turning angle for a data set of tracks.</p>
 <p>First, calculate without any groupings - we definitely don’t want this for real work as there are three separate tracks within our data set identified by <code>id</code>. (No ordering is applied other than the order the rows occur).</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/Trackage/traipse">traipse</a></span><span class="op">)</span>
-
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
-<span class="co">## there's no grouping here - we haven't gotten our data organized yet</span>
-<span class="va">trips0</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>distance <span class="op">=</span> <span class="fu"><a href="reference/track_distance.html">track_distance</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span>, angle <span class="op">=</span> <span class="fu"><a href="reference/track_angle.html">track_angle</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 1,500 × 6</span>
-<span class="co">#&gt;        x     y date                id    distance  angle</span>
-<span class="co">#&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dttm&gt;              &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;</span>
-<span class="co">#&gt;  1  115. -42.4 2001-01-01 15:39:50 1          NA   NA   </span>
-<span class="co">#&gt;  2  116. -41.4 2001-01-01 18:16:52 1      129435. 120.  </span>
-<span class="co">#&gt;  3  116. -41.1 2001-01-01 21:03:38 1       34632.   4.43</span>
-<span class="co">#&gt;  4  117. -42.1 2001-01-01 22:09:41 1      120575.  13.1 </span>
-<span class="co">#&gt;  5  116. -41.9 2001-01-01 23:33:54 1       30560.  72.4 </span>
-<span class="co">#&gt;  6  118. -42.0 2001-01-02 01:25:12 1       97593.  25.6 </span>
-<span class="co">#&gt;  7  117. -41.7 2001-01-02 06:45:40 1       57005.  89.5 </span>
-<span class="co">#&gt;  8  118. -40.9 2001-01-02 10:01:26 1      108811. 159.  </span>
-<span class="co">#&gt;  9  118. -39.7 2001-01-02 13:49:59 1      130588.  23.8 </span>
-<span class="co">#&gt; 10  118. -40.5 2001-01-02 16:24:46 1       86066.  64.3 </span>
-<span class="co">#&gt; # … with 1,490 more rows</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/Trackage/traipse" class="external-link">traipse</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span><span class="co">## there's no grouping here - we haven't gotten our data organized yet</span></span>
+<span><span class="va">trips0</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>distance <span class="op">=</span> <span class="fu"><a href="reference/track_distance.html">track_distance</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span>, angle <span class="op">=</span> <span class="fu"><a href="reference/track_angle.html">track_angle</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 1,500 × 6</span></span>
+<span><span class="co">#&gt;        x     y date                id    distance  angle</span></span>
+<span><span class="co">#&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dttm&gt;              &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt;  1  115. -42.4 2001-01-01 15:39:50 1          NA   NA   </span></span>
+<span><span class="co">#&gt;  2  116. -41.4 2001-01-01 18:16:52 1      129435. 120.  </span></span>
+<span><span class="co">#&gt;  3  116. -41.1 2001-01-01 21:03:38 1       34632.   4.43</span></span>
+<span><span class="co">#&gt;  4  117. -42.1 2001-01-01 22:09:41 1      120575.  13.1 </span></span>
+<span><span class="co">#&gt;  5  116. -41.9 2001-01-01 23:33:54 1       30560.  72.4 </span></span>
+<span><span class="co">#&gt;  6  118. -42.0 2001-01-02 01:25:12 1       97593.  25.6 </span></span>
+<span><span class="co">#&gt;  7  117. -41.7 2001-01-02 06:45:40 1       57005.  89.5 </span></span>
+<span><span class="co">#&gt;  8  118. -40.9 2001-01-02 10:01:26 1      108811. 159.  </span></span>
+<span><span class="co">#&gt;  9  118. -39.7 2001-01-02 13:49:59 1      130588.  23.8 </span></span>
+<span><span class="co">#&gt; 10  118. -40.5 2001-01-02 16:24:46 1       86066.  64.3 </span></span>
+<span><span class="co">#&gt; # … with 1,490 more rows</span></span></code></pre></div>
 <p>Now run a set of available metrics, but do it with respect to the grouping variable <code>id</code>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">metric</span> <span class="op">&lt;-</span> <span class="va">trips0</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">id</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>distance <span class="op">=</span> <span class="fu"><a href="reference/track_distance.html">track_distance</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span>, 
-                                             angle <span class="op">=</span> <span class="fu"><a href="reference/track_angle.html">track_angle</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span>,
-                                             turn <span class="op">=</span> <span class="fu"><a href="reference/track_turn.html">track_turn</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span>, 
-                                             bearing <span class="op">=</span> <span class="fu"><a href="reference/track_bearing.html">track_bearing</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span>, 
-                                             duration <span class="op">=</span> <span class="fu"><a href="reference/track_time.html">track_time</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span>,
-                                             speed <span class="op">=</span> <span class="fu"><a href="reference/track_speed.html">track_speed</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, <span class="va">date</span><span class="op">)</span>, 
-                                             distance_to <span class="op">=</span> <span class="fu"><a href="reference/track_distance_to.html">track_distance_to</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, <span class="fl">147</span>, <span class="op">-</span><span class="fl">42</span><span class="op">)</span>, 
-                                             bearing_to <span class="op">=</span> <span class="fu"><a href="reference/track_bearing_to.html">track_bearing_to</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, <span class="fl">100</span>, <span class="op">-</span><span class="fl">42</span><span class="op">)</span><span class="op">)</span> 
-<span class="va">metric</span> 
-<span class="co">#&gt; # A tibble: 1,500 × 12</span>
-<span class="co">#&gt; # Groups:   id [3]</span>
-<span class="co">#&gt;        x     y date                id    distance  angle   turn bearing duration</span>
-<span class="co">#&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dttm&gt;              &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;</span>
-<span class="co">#&gt;  1  115. -42.4 2001-01-01 15:39:50 1          NA   NA      NA     34.5        NA</span>
-<span class="co">#&gt;  2  116. -41.4 2001-01-01 18:16:52 1      129435. 120.    -61.0  -26.5      9422</span>
-<span class="co">#&gt;  3  116. -41.1 2001-01-01 21:03:38 1       34632.   4.43 -175.   158.      10006</span>
-<span class="co">#&gt;  4  117. -42.1 2001-01-01 22:09:41 1      120575.  13.1  -167.    -9.20     3963</span>
-<span class="co">#&gt;  5  116. -41.9 2001-01-01 23:33:54 1       30560.  72.4   108.    98.5      5053</span>
-<span class="co">#&gt;  6  118. -42.0 2001-01-02 01:25:12 1       97593.  25.6  -155.   -56.7      6678</span>
-<span class="co">#&gt;  7  117. -41.7 2001-01-02 06:45:40 1       57005.  89.5    90.9   34.1     19228</span>
-<span class="co">#&gt;  8  118. -40.9 2001-01-02 10:01:26 1      108811. 159.    -21.2   12.9     11746</span>
-<span class="co">#&gt;  9  118. -39.7 2001-01-02 13:49:59 1      130588.  23.8   156.   169.      13713</span>
-<span class="co">#&gt; 10  118. -40.5 2001-01-02 16:24:46 1       86066.  64.3  -116.    53.1      9287</span>
-<span class="co">#&gt; # … with 1,490 more rows, and 3 more variables: speed &lt;dbl&gt;, distance_to &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   bearing_to &lt;dbl&gt;</span>
-<span class="va">metric</span> <span class="op">%&gt;%</span> 
-  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, cex<span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="va">angle</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
-  <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
-  <span class="fu">geom_path</span><span class="op">(</span>col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Warning: Removed 6 rows containing missing values (geom_point).</span>
-<span class="co">#&gt; Warning: Removed 2 row(s) containing missing values (geom_path).</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">metric</span> <span class="op">&lt;-</span> <span class="va">trips0</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">id</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>distance <span class="op">=</span> <span class="fu"><a href="reference/track_distance.html">track_distance</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span>, </span>
+<span>                                             angle <span class="op">=</span> <span class="fu"><a href="reference/track_angle.html">track_angle</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span>,</span>
+<span>                                             turn <span class="op">=</span> <span class="fu"><a href="reference/track_turn.html">track_turn</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span>, </span>
+<span>                                             bearing <span class="op">=</span> <span class="fu"><a href="reference/track_bearing.html">track_bearing</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span>, </span>
+<span>                                             duration <span class="op">=</span> <span class="fu"><a href="reference/track_time.html">track_time</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span>,</span>
+<span>                                             speed <span class="op">=</span> <span class="fu"><a href="reference/track_speed.html">track_speed</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, <span class="va">date</span><span class="op">)</span>, </span>
+<span>                                             distance_to <span class="op">=</span> <span class="fu"><a href="reference/track_distance_to.html">track_distance_to</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, <span class="fl">147</span>, <span class="op">-</span><span class="fl">42</span><span class="op">)</span>, </span>
+<span>                                             bearing_to <span class="op">=</span> <span class="fu"><a href="reference/track_bearing_to.html">track_bearing_to</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, <span class="fl">100</span>, <span class="op">-</span><span class="fl">42</span><span class="op">)</span><span class="op">)</span> </span>
+<span><span class="va">metric</span> </span>
+<span><span class="co">#&gt; # A tibble: 1,500 × 12</span></span>
+<span><span class="co">#&gt; # Groups:   id [3]</span></span>
+<span><span class="co">#&gt;        x     y date                id    distance  angle   turn bearing duration</span></span>
+<span><span class="co">#&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dttm&gt;              &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt;  1  115. -42.4 2001-01-01 15:39:50 1          NA   NA      NA     34.5        NA</span></span>
+<span><span class="co">#&gt;  2  116. -41.4 2001-01-01 18:16:52 1      129435. 120.    -61.0  -26.5      9422</span></span>
+<span><span class="co">#&gt;  3  116. -41.1 2001-01-01 21:03:38 1       34632.   4.43 -175.   158.      10006</span></span>
+<span><span class="co">#&gt;  4  117. -42.1 2001-01-01 22:09:41 1      120575.  13.1  -167.    -9.20     3963</span></span>
+<span><span class="co">#&gt;  5  116. -41.9 2001-01-01 23:33:54 1       30560.  72.4   108.    98.5      5053</span></span>
+<span><span class="co">#&gt;  6  118. -42.0 2001-01-02 01:25:12 1       97593.  25.6  -155.   -56.7      6678</span></span>
+<span><span class="co">#&gt;  7  117. -41.7 2001-01-02 06:45:40 1       57005.  89.5    90.9   34.1     19228</span></span>
+<span><span class="co">#&gt;  8  118. -40.9 2001-01-02 10:01:26 1      108811. 159.    -21.2   12.9     11746</span></span>
+<span><span class="co">#&gt;  9  118. -39.7 2001-01-02 13:49:59 1      130588.  23.8   156.   169.      13713</span></span>
+<span><span class="co">#&gt; 10  118. -40.5 2001-01-02 16:24:46 1       86066.  64.3  -116.    53.1      9287</span></span>
+<span><span class="co">#&gt; # … with 1,490 more rows, and 3 more variables: speed &lt;dbl&gt;, distance_to &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   bearing_to &lt;dbl&gt;</span></span>
+<span><span class="va">metric</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, cex<span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="va">angle</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu">geom_path</span><span class="op">(</span>col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html" class="external-link">rgb</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: Removed 6 rows containing missing values (geom_point).</span></span>
+<span><span class="co">#&gt; Warning: Removed 2 row(s) containing missing values (geom_path).</span></span></code></pre></div>
 <p><img src="reference/figures/README-example-group_by-1.png" width="100%"></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">metric</span> <span class="op">%&gt;%</span> 
-  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, colour <span class="op">=</span> <span class="va">distance_to</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
-  <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu">geom_label</span><span class="op">(</span>data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">147</span>, y <span class="op">=</span> <span class="op">-</span><span class="fl">42</span>, distance_to <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>, 
-                            label <span class="op">=</span> <span class="st">"home"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">metric</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, colour <span class="op">=</span> <span class="va">distance_to</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu">geom_label</span><span class="op">(</span>data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">147</span>, y <span class="op">=</span> <span class="op">-</span><span class="fl">42</span>, distance_to <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>, </span>
+<span>                            label <span class="op">=</span> <span class="st">"home"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-example-group_by-2.png" width="100%"></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">metric</span> <span class="op">%&gt;%</span> 
-  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, colour <span class="op">=</span> <span class="va">bearing_to</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
-  <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu">geom_label</span><span class="op">(</span>data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">100</span>, y <span class="op">=</span> <span class="op">-</span><span class="fl">42</span>, bearing_to <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>, 
-                            label <span class="op">=</span> <span class="st">"home"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">metric</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, colour <span class="op">=</span> <span class="va">bearing_to</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu">geom_label</span><span class="op">(</span>data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">100</span>, y <span class="op">=</span> <span class="op">-</span><span class="fl">42</span>, bearing_to <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>, </span>
+<span>                            label <span class="op">=</span> <span class="st">"home"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-example-group_by-3.png" width="100%"></p>
 <p>Using the bearing and distance now reproduce the track as <em>destination point</em> segments.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">metric</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span><span class="op">]</span>, type <span class="op">=</span> <span class="st">"b"</span>, lwd <span class="op">=</span> <span class="fl">10</span>, col <span class="op">=</span> <span class="st">"grey"</span><span class="op">)</span>
-<span class="va">dest</span> <span class="op">&lt;-</span> <span class="fu">geosphere</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/geosphere/man/destPoint.html">destPoint</a></span><span class="op">(</span><span class="va">metric</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span><span class="op">]</span>, 
-                             b <span class="op">=</span> <span class="va">metric</span><span class="op">$</span><span class="va">bearing</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span>, 
-                            d <span class="op">=</span> <span class="va">metric</span><span class="op">$</span><span class="va">distance</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">11</span><span class="op">]</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/arrows.html">arrows</a></span><span class="op">(</span><span class="va">metric</span><span class="op">$</span><span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span>, <span class="va">metric</span><span class="op">$</span><span class="va">y</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span>, <span class="va">dest</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,<span class="fl">1</span><span class="op">]</span>, <span class="va">dest</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,<span class="fl">2</span><span class="op">]</span>, col <span class="op">=</span> <span class="st">"firebrick"</span>, lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">metric</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span><span class="op">]</span>, type <span class="op">=</span> <span class="st">"b"</span>, lwd <span class="op">=</span> <span class="fl">10</span>, col <span class="op">=</span> <span class="st">"grey"</span><span class="op">)</span></span>
+<span><span class="va">dest</span> <span class="op">&lt;-</span> <span class="fu">geosphere</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/geosphere/man/destPoint.html" class="external-link">destPoint</a></span><span class="op">(</span><span class="va">metric</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span><span class="op">]</span>, </span>
+<span>                             b <span class="op">=</span> <span class="va">metric</span><span class="op">$</span><span class="va">bearing</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span>, </span>
+<span>                            d <span class="op">=</span> <span class="va">metric</span><span class="op">$</span><span class="va">distance</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">11</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/arrows.html" class="external-link">arrows</a></span><span class="op">(</span><span class="va">metric</span><span class="op">$</span><span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span>, <span class="va">metric</span><span class="op">$</span><span class="va">y</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span>, <span class="va">dest</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,<span class="fl">1</span><span class="op">]</span>, <span class="va">dest</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,<span class="fl">2</span><span class="op">]</span>, col <span class="op">=</span> <span class="st">"firebrick"</span>, lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-dest-point-1.png" width="100%"></p>
 </div>
-<div id="intermediate-points-require-extra-handling" class="section level2">
-<h2 class="hasAnchor">
-<a href="#intermediate-points-require-extra-handling" class="anchor"></a>Intermediate points require extra handling</h2>
-<p>The function <code><a href="reference/track_intermediate.html">track_intermediate()</a></code> requires extra work as it inherently returns multiple variables (lon, lat, date-time). The output is a list-column of data frames, and if used within <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate(inter = track_intermediate(lon, lat, date))</a></code> then it will be stored along side the rows of the input data.</p>
+<div class="section level2">
+<h2 id="intermediate-points-require-extra-handling">Intermediate points require extra handling<a class="anchor" aria-label="anchor" href="#intermediate-points-require-extra-handling"></a>
+</h2>
+<p>The function <code><a href="reference/track_intermediate.html">track_intermediate()</a></code> requires extra work as it inherently returns multiple variables (lon, lat, date-time). The output is a list-column of data frames, and if used within <code>mutate(inter = track_intermediate(lon, lat, date))</code> then it will be stored along side the rows of the input data.</p>
 <p>To use this we must unnest the data and treat the new columns as the output.</p>
 <p>See this example.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"tidyr"</span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"dplyr"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-<span class="va">tr1</span> <span class="op">&lt;-</span> <span class="va">trips0</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">trips0</span><span class="op">)</span>, by <span class="op">=</span> <span class="fl">30</span><span class="op">)</span>, <span class="op">]</span>
-  <span class="va">dd</span> <span class="op">&lt;-</span> <span class="va">tr1</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">id</span><span class="op">)</span> <span class="op">%&gt;%</span>
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>inter <span class="op">=</span> <span class="fu"><a href="reference/track_intermediate.html">track_intermediate</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, date <span class="op">=</span> <span class="va">date</span>, distance <span class="op">=</span> <span class="fl">150000</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-    <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span><span class="op">(</span><span class="op">)</span>
-  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">dd</span><span class="op">$</span><span class="va">int_date</span>, <span class="va">dd</span><span class="op">$</span><span class="va">int_y</span>, pch <span class="op">=</span> <span class="st">"."</span>, cex <span class="op">=</span> <span class="fl">2</span>, main <span class="op">=</span> <span class="st">"equidistant in space"</span><span class="op">)</span>
-  <span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>v <span class="op">=</span> <span class="va">tr1</span><span class="op">$</span><span class="va">date</span><span class="op">)</span>
-
-  <span class="va">dd1</span> <span class="op">&lt;-</span> <span class="va">tr1</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">id</span><span class="op">)</span> <span class="op">%&gt;%</span>
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>inter <span class="op">=</span> <span class="fu"><a href="reference/track_intermediate.html">track_intermediate</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, date <span class="op">=</span> <span class="va">date</span>, duration <span class="op">=</span> <span class="fl">3600</span> <span class="op">*</span> <span class="fl">12</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-    <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span><span class="op">(</span><span class="op">)</span>
-  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">dd1</span><span class="op">$</span><span class="va">int_date</span>, <span class="va">dd1</span><span class="op">$</span><span class="va">int_y</span>, pch <span class="op">=</span> <span class="st">"."</span>, cex <span class="op">=</span> <span class="fl">2</span>, main <span class="op">=</span> <span class="st">"equispaced in time"</span><span class="op">)</span>
-  <span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>v <span class="op">=</span> <span class="va">tr1</span><span class="op">$</span><span class="va">date</span><span class="op">)</span>
-<span class="op">}</span>
-<span class="co">#&gt; Warning: `cols` is now required when using unnest().</span>
-<span class="co">#&gt; Please use `cols = c(inter)`</span>
-
-<span class="co">#&gt; Warning: `cols` is now required when using unnest().</span>
-<span class="co">#&gt; Please use `cols = c(inter)`</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"tidyr"</span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"dplyr"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span><span class="va">tr1</span> <span class="op">&lt;-</span> <span class="va">trips0</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">trips0</span><span class="op">)</span>, by <span class="op">=</span> <span class="fl">30</span><span class="op">)</span>, <span class="op">]</span></span>
+<span>  <span class="va">dd</span> <span class="op">&lt;-</span> <span class="va">tr1</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">id</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>inter <span class="op">=</span> <span class="fu"><a href="reference/track_intermediate.html">track_intermediate</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, date <span class="op">=</span> <span class="va">date</span>, distance <span class="op">=</span> <span class="fl">150000</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">dd</span><span class="op">$</span><span class="va">int_date</span>, <span class="va">dd</span><span class="op">$</span><span class="va">int_y</span>, pch <span class="op">=</span> <span class="st">"."</span>, cex <span class="op">=</span> <span class="fl">2</span>, main <span class="op">=</span> <span class="st">"equidistant in space"</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/abline.html" class="external-link">abline</a></span><span class="op">(</span>v <span class="op">=</span> <span class="va">tr1</span><span class="op">$</span><span class="va">date</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="va">dd1</span> <span class="op">&lt;-</span> <span class="va">tr1</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">id</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>inter <span class="op">=</span> <span class="fu"><a href="reference/track_intermediate.html">track_intermediate</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, date <span class="op">=</span> <span class="va">date</span>, duration <span class="op">=</span> <span class="fl">3600</span> <span class="op">*</span> <span class="fl">12</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">dd1</span><span class="op">$</span><span class="va">int_date</span>, <span class="va">dd1</span><span class="op">$</span><span class="va">int_y</span>, pch <span class="op">=</span> <span class="st">"."</span>, cex <span class="op">=</span> <span class="fl">2</span>, main <span class="op">=</span> <span class="st">"equispaced in time"</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/abline.html" class="external-link">abline</a></span><span class="op">(</span>v <span class="op">=</span> <span class="va">tr1</span><span class="op">$</span><span class="va">date</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="co">#&gt; Warning: `cols` is now required when using unnest().</span></span>
+<span><span class="co">#&gt; Please use `cols = c(inter)`</span></span>
+<span></span>
+<span><span class="co">#&gt; Warning: `cols` is now required when using unnest().</span></span>
+<span><span class="co">#&gt; Please use `cols = c(inter)`</span></span></code></pre></div>
 <p><img src="reference/figures/README-intermediate-1.png" width="100%"><img src="reference/figures/README-intermediate-2.png" width="100%"></p>
 <p>Query.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/track_query.html">track_query</a></span><span class="op">(</span><span class="va">trips0</span><span class="op">$</span><span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span>, <span class="va">trips0</span><span class="op">$</span><span class="va">y</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span>, query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4.5</span>, <span class="fl">5.5</span>, <span class="fl">6.5</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Warning in track_query(trips0$x[1:10], trips0$y[1:10], query = c(4.5, 5.5, :</span>
-<span class="co">#&gt; date is null, so assuming linear relative movement in time</span>
-<span class="co">#&gt; # A tibble: 3 × 3</span>
-<span class="co">#&gt;       x     y  date</span>
-<span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt; 1  116. -42.0   4.5</span>
-<span class="co">#&gt; 2  117. -41.9   5.5</span>
-<span class="co">#&gt; 3  117. -41.8   6.5</span>
-<span class="fu"><a href="reference/track_query.html">track_query</a></span><span class="op">(</span><span class="va">trips0</span><span class="op">$</span><span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span>, <span class="va">trips0</span><span class="op">$</span><span class="va">y</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span>, <span class="va">trips0</span><span class="op">$</span><span class="va">date</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span>, query <span class="op">=</span> <span class="va">trips0</span><span class="op">$</span><span class="va">date</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span> <span class="op">+</span> <span class="fl">10</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 10 × 3</span>
-<span class="co">#&gt;        x     y date               </span>
-<span class="co">#&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dttm&gt;             </span>
-<span class="co">#&gt;  1  115. -42.4 2001-01-01 15:40:00</span>
-<span class="co">#&gt;  2  116. -41.4 2001-01-01 18:17:02</span>
-<span class="co">#&gt;  3  116. -41.1 2001-01-01 21:03:48</span>
-<span class="co">#&gt;  4  117. -42.1 2001-01-01 22:09:51</span>
-<span class="co">#&gt;  5  116. -41.9 2001-01-01 23:34:04</span>
-<span class="co">#&gt;  6  118. -42.0 2001-01-02 01:25:22</span>
-<span class="co">#&gt;  7  117. -41.7 2001-01-02 06:45:50</span>
-<span class="co">#&gt;  8  118. -40.9 2001-01-02 10:01:36</span>
-<span class="co">#&gt;  9  118. -39.7 2001-01-02 13:50:09</span>
-<span class="co">#&gt; 10   NA   NA   2001-01-02 16:24:56</span>
-<span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">trips0</span><span class="op">$</span><span class="va">date</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">trips0</span><span class="op">$</span><span class="va">date</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">"1 hour"</span><span class="op">)</span>
-<span class="va">trips0</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">id</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_map.html">group_modify</a></span><span class="op">(</span><span class="op">~</span><span class="fu"><a href="reference/track_query.html">track_query</a></span><span class="op">(</span><span class="va">.x</span><span class="op">$</span><span class="va">x</span>, <span class="va">.x</span><span class="op">$</span><span class="va">y</span>, <span class="va">.x</span><span class="op">$</span><span class="va">date</span>, query <span class="op">=</span> <span class="va">s</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 5,751 × 4</span>
-<span class="co">#&gt; # Groups:   id [3]</span>
-<span class="co">#&gt;    id        x     y date               </span>
-<span class="co">#&gt;    &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dttm&gt;             </span>
-<span class="co">#&gt;  1 1       NA   NA   2001-01-01 15:24:58</span>
-<span class="co">#&gt;  2 1      116. -42.1 2001-01-01 16:24:58</span>
-<span class="co">#&gt;  3 1      116. -41.7 2001-01-01 17:24:58</span>
-<span class="co">#&gt;  4 1      116. -41.4 2001-01-01 18:24:58</span>
-<span class="co">#&gt;  5 1      116. -41.3 2001-01-01 19:24:58</span>
-<span class="co">#&gt;  6 1      116. -41.2 2001-01-01 20:24:58</span>
-<span class="co">#&gt;  7 1      116. -41.5 2001-01-01 21:24:58</span>
-<span class="co">#&gt;  8 1      117. -42.1 2001-01-01 22:24:58</span>
-<span class="co">#&gt;  9 1      116. -41.9 2001-01-01 23:24:58</span>
-<span class="co">#&gt; 10 1      117. -41.9 2001-01-02 00:24:58</span>
-<span class="co">#&gt; # … with 5,741 more rows</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/track_query.html">track_query</a></span><span class="op">(</span><span class="va">trips0</span><span class="op">$</span><span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span>, <span class="va">trips0</span><span class="op">$</span><span class="va">y</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span>, query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4.5</span>, <span class="fl">5.5</span>, <span class="fl">6.5</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning in track_query(trips0$x[1:10], trips0$y[1:10], query = c(4.5, 5.5, :</span></span>
+<span><span class="co">#&gt; date is null, so assuming linear relative movement in time</span></span>
+<span><span class="co">#&gt; # A tibble: 3 × 3</span></span>
+<span><span class="co">#&gt;       x     y  date</span></span>
+<span><span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1  116. -42.0   4.5</span></span>
+<span><span class="co">#&gt; 2  117. -41.9   5.5</span></span>
+<span><span class="co">#&gt; 3  117. -41.8   6.5</span></span>
+<span><span class="fu"><a href="reference/track_query.html">track_query</a></span><span class="op">(</span><span class="va">trips0</span><span class="op">$</span><span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span>, <span class="va">trips0</span><span class="op">$</span><span class="va">y</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span>, <span class="va">trips0</span><span class="op">$</span><span class="va">date</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span>, query <span class="op">=</span> <span class="va">trips0</span><span class="op">$</span><span class="va">date</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span> <span class="op">+</span> <span class="fl">10</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 10 × 3</span></span>
+<span><span class="co">#&gt;        x     y date               </span></span>
+<span><span class="co">#&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dttm&gt;             </span></span>
+<span><span class="co">#&gt;  1  115. -42.4 2001-01-01 15:40:00</span></span>
+<span><span class="co">#&gt;  2  116. -41.4 2001-01-01 18:17:02</span></span>
+<span><span class="co">#&gt;  3  116. -41.1 2001-01-01 21:03:48</span></span>
+<span><span class="co">#&gt;  4  117. -42.1 2001-01-01 22:09:51</span></span>
+<span><span class="co">#&gt;  5  116. -41.9 2001-01-01 23:34:04</span></span>
+<span><span class="co">#&gt;  6  118. -42.0 2001-01-02 01:25:22</span></span>
+<span><span class="co">#&gt;  7  117. -41.7 2001-01-02 06:45:50</span></span>
+<span><span class="co">#&gt;  8  118. -40.9 2001-01-02 10:01:36</span></span>
+<span><span class="co">#&gt;  9  118. -39.7 2001-01-02 13:50:09</span></span>
+<span><span class="co">#&gt; 10   NA   NA   2001-01-02 16:24:56</span></span>
+<span><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="va">trips0</span><span class="op">$</span><span class="va">date</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">trips0</span><span class="op">$</span><span class="va">date</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">"1 hour"</span><span class="op">)</span></span>
+<span><span class="va">trips0</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">id</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_map.html" class="external-link">group_modify</a></span><span class="op">(</span><span class="op">~</span><span class="fu"><a href="reference/track_query.html">track_query</a></span><span class="op">(</span><span class="va">.x</span><span class="op">$</span><span class="va">x</span>, <span class="va">.x</span><span class="op">$</span><span class="va">y</span>, <span class="va">.x</span><span class="op">$</span><span class="va">date</span>, query <span class="op">=</span> <span class="va">s</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 5,751 × 4</span></span>
+<span><span class="co">#&gt; # Groups:   id [3]</span></span>
+<span><span class="co">#&gt;    id        x     y date               </span></span>
+<span><span class="co">#&gt;    &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dttm&gt;             </span></span>
+<span><span class="co">#&gt;  1 1       NA   NA   2001-01-01 15:24:58</span></span>
+<span><span class="co">#&gt;  2 1      116. -42.1 2001-01-01 16:24:58</span></span>
+<span><span class="co">#&gt;  3 1      116. -41.7 2001-01-01 17:24:58</span></span>
+<span><span class="co">#&gt;  4 1      116. -41.4 2001-01-01 18:24:58</span></span>
+<span><span class="co">#&gt;  5 1      116. -41.3 2001-01-01 19:24:58</span></span>
+<span><span class="co">#&gt;  6 1      116. -41.2 2001-01-01 20:24:58</span></span>
+<span><span class="co">#&gt;  7 1      116. -41.5 2001-01-01 21:24:58</span></span>
+<span><span class="co">#&gt;  8 1      117. -42.1 2001-01-01 22:24:58</span></span>
+<span><span class="co">#&gt;  9 1      116. -41.9 2001-01-01 23:24:58</span></span>
+<span><span class="co">#&gt; 10 1      117. -41.9 2001-01-02 00:24:58</span></span>
+<span><span class="co">#&gt; # … with 5,741 more rows</span></span></code></pre></div>
 </div>
-<div id="data-are-assumed-to-be-sensibly-organized" class="section level2">
-<h2 class="hasAnchor">
-<a href="#data-are-assumed-to-be-sensibly-organized" class="anchor"></a>Data are assumed to be sensibly organized</h2>
+<div class="section level2">
+<h2 id="data-are-assumed-to-be-sensibly-organized">Data are assumed to be sensibly organized<a class="anchor" aria-label="anchor" href="#data-are-assumed-to-be-sensibly-organized"></a>
+</h2>
 <p>Note above that we provided a <em>grouping ID</em> for when we have separate trips within the same data set. There’s nothing to stop from calculating distances when the arrangement of records does not make sense, but this is your responsibility. If missing values are present, or times are out of order, or include zero-length time durations, or movement backward in time there aren’t any checks for that made in the traipse package.</p>
 <p>The idea is for developers to be able to use these tools however they like but with an assumed consistent workflow.</p>
-<p>We would like to have a simple core package to provide the most commonly used metrics. We assume <code>geodist</code> and <code>geosphere</code> as good examples of core packages for the underlying tool. These both apply the modern geodesic methods of C. F. F. Karney (2013) <a href="https://doi.org/10.1007/s00190-012-0578-z">Algorithms for geodesics</a></p>
+<p>We would like to have a simple core package to provide the most commonly used metrics. We assume <code>geodist</code> and <code>geosphere</code> as good examples of core packages for the underlying tool. These both apply the modern geodesic methods of C. F. F. Karney (2013) <a href="https://doi.org/10.1007/s00190-012-0578-z" class="external-link">Algorithms for geodesics</a></p>
 <hr>
-<p>Please note that this project is released with a <a href="https://github.com/Trackage/traipse/blob/master/CODE_OF_CONDUCT.md">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
+<p>Please note that this project is released with a <a href="https://github.com/Trackage/traipse/blob/master/CODE_OF_CONDUCT.md" class="external-link">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=traipse">https://​cloud.r-project.org/​package=traipse</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/Trackage/traipse/">https://​github.com/​Trackage/​traipse/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/Trackage/traipse/issues">https://​github.com/​Trackage/​traipse/​issues</a>
-</li>
+<li><a href="https://cloud.r-project.org/package=traipse" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/Trackage/traipse/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/Trackage/traipse/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
-<li><a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a></li>
+<li><a href="https://www.r-project.org/Licenses/GPL-3" class="external-link">GPL-3</a></li>
 </ul>
 </div>
+
 <div class="community">
-<h2>Community</h2>
+<h2 data-toc-skip>Community</h2>
 <ul class="list-unstyled">
 <li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
 </ul>
 </div>
-<div class="developers">
-<h2>Developers</h2>
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
-<li>Michael Sumner <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-2471-7511" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li><a href="authors.html#citation">Citing traipse</a></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="developers">
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li><a href="https://lifecycle.r-lib.org/articles/stages.html"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="Lifecycle: experimental"></a></li>
-<li><a href="https://cran.r-project.org/package=traipse"><img src="https://www.r-pkg.org/badges/version/traipse" alt="CRAN status"></a></li>
-<li><a href="https://cran.r-project.org/package=traipse"><img src="http://cranlogs.r-pkg.org/badges/traipse" alt="CRAN_Download_Badge"></a></li>
-<li><a href="https://github.com/Trackage/traipse/actions"><img src="https://github.com/Trackage/traipse/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
-<li><a href="https://github.com/Trackage/traipse/actions"><img src="https://github.com/Trackage/traipse/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li>Michael Sumner <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-2471-7511" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 </ul>
 </div>
+
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://lifecycle.r-lib.org/articles/stages.html" class="external-link"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="Lifecycle: experimental"></a></li>
+<li><a href="https://cran.r-project.org/package=traipse" class="external-link"><img src="https://www.r-pkg.org/badges/version/traipse" alt="CRAN status"></a></li>
+<li><a href="https://cran.r-project.org/package=traipse" class="external-link"><img src="http://cranlogs.r-pkg.org/badges/traipse" alt="CRAN_Download_Badge"></a></li>
+<li><a href="https://github.com/Trackage/traipse/actions" class="external-link"><img src="https://github.com/Trackage/traipse/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
+<li><a href="https://github.com/Trackage/traipse/actions" class="external-link"><img src="https://github.com/Trackage/traipse/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+</ul>
 </div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Michael Sumner.</p>
+  <p></p>
+<p>Developed by Michael Sumner.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>
@@ -344,6 +349,8 @@
 
   
 
+
+  
 
   </body>
 </html>
