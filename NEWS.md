@@ -1,5 +1,7 @@
 # traipse 0.3.0
 
+* New function 'track_grid()' to compute cell index for points for a grid. 
+
 * Fixed test failing as newer R allows raw numeric input to date-time. 
 
 # traipse 0.2.5
