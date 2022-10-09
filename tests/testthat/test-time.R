@@ -12,7 +12,7 @@ test_that("time works", {
                "Cannot convert 'date' of class 'integer' to POSIXct")
 
 
-  })
+  }
 })
 
 
