@@ -16,3 +16,4 @@
 ^traipse.*\.tgz$
 ^.binder$
 ^\.github$
+^CRAN-SUBMISSION$
