@@ -5,14 +5,10 @@
 
 <!-- badges: start -->
 
-[![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/traipse)](https://cran.r-project.org/package=traipse)
 [![CRAN_Download_Badge](http://cranlogs.r-pkg.org/badges/traipse)](https://cran.r-project.org/package=traipse)
-[![R build
-status](https://github.com/AustralianAntarcticDivision/traipse/workflows/R-CMD-check/badge.svg)](https://github.com/AustralianAntarcticDivision/traipse/actions)
-[![R-CMD-check](https://github.com/AustralianAntarcticDivision/traipse/workflows/R-CMD-check/badge.svg)](https://github.com/AustralianAntarcticDivision/traipse/actions)
+[![R-CMD-check](https://github.com/AustralianAntarcticDivision/traipse/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/AustralianAntarcticDivision/traipse/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The goal of traipse is to provide shared tools for tracking data, for
