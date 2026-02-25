@@ -25,8 +25,11 @@
 #' ## minimum turn angle
 #' track_turn(c(0, 0, 0), c(0, 1, 2))
 track_turn <- function(x, y) {
+
   xy <- cbind(x, y)
   n <- nrow(xy)
+  if (n < 3L) return(rep(NA_real_, n))
+
   angle <- c(geosphere::bearing(xy[-nrow(xy), , drop = FALSE],
                                 xy[-1L, , drop = FALSE]) * pi/180, NA_real_)
   angle <- ifelse(angle < 0, 2 * pi + angle, angle)
