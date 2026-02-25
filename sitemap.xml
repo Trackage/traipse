@@ -1,63 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/CODE_OF_CONDUCT.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/news/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/pipe.html</loc>
-  </url>
-  <url>
-    <loc>/reference/track_angle.html</loc>
-  </url>
-  <url>
-    <loc>/reference/track_bearing.html</loc>
-  </url>
-  <url>
-    <loc>/reference/track_bearing_to.html</loc>
-  </url>
-  <url>
-    <loc>/reference/track_distance.html</loc>
-  </url>
-  <url>
-    <loc>/reference/track_distance_to.html</loc>
-  </url>
-  <url>
-    <loc>/reference/track_grid.html</loc>
-  </url>
-  <url>
-    <loc>/reference/track_intermediate.html</loc>
-  </url>
-  <url>
-    <loc>/reference/track_query.html</loc>
-  </url>
-  <url>
-    <loc>/reference/track_speed.html</loc>
-  </url>
-  <url>
-    <loc>/reference/track_time.html</loc>
-  </url>
-  <url>
-    <loc>/reference/track_turn.html</loc>
-  </url>
-  <url>
-    <loc>/reference/traipse-package.html</loc>
-  </url>
-  <url>
-    <loc>/reference/trips0.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/CODE_OF_CONDUCT.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/news/index.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/pipe.html</loc></url>
+<url><loc>/reference/track_angle.html</loc></url>
+<url><loc>/reference/track_bearing.html</loc></url>
+<url><loc>/reference/track_bearing_to.html</loc></url>
+<url><loc>/reference/track_distance.html</loc></url>
+<url><loc>/reference/track_distance_to.html</loc></url>
+<url><loc>/reference/track_grid.html</loc></url>
+<url><loc>/reference/track_intermediate.html</loc></url>
+<url><loc>/reference/track_query.html</loc></url>
+<url><loc>/reference/track_speed.html</loc></url>
+<url><loc>/reference/track_time.html</loc></url>
+<url><loc>/reference/track_turn.html</loc></url>
+<url><loc>/reference/traipse-package.html</loc></url>
+<url><loc>/reference/trips0.html</loc></url>
 </urlset>
+
