@@ -1,6 +1,6 @@
 Package: traipse
 Title: Shared Tools for Tracking Data
-Version: 0.3.0.9001
+Version: 0.3.0.9002
 Authors@R: 
     c(
     person(given = "Michael", 
