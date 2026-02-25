@@ -1,3 +1,4 @@
+
 #' Track bearing
 #'
 #' Calculate sequential bearing on longitude, latitude input vectors. The unit of bearing is degrees.
@@ -16,12 +17,15 @@
 #' @param y latitude
 #' @return a numeric vector of absolute bearing in degrees, see Details
 #' @export
+#' @importFrom geographiclib geodesic_inverse geodesic_path_fast
 #' @examples
 #' track_bearing(trips0$x, trips0$y)[1:10]
 track_bearing <- function(x, y) {
   xy <- cbind(x, y)
   n <- nrow(xy)
-  c(geosphere::bearing(xy[-nrow(xy), , drop = FALSE],
-                       xy[-1L, , drop = FALSE]), NA_real_)
+  c(geographiclib::geodesic_inverse(xy[-nrow(xy), , drop = FALSE],
+                       xy[-1L, , drop = FALSE])[["azi1"]], NA_real_)
+
+
 
 }

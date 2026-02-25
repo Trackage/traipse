@@ -47,10 +47,16 @@ track_intermediate <- function(x, y, date = NULL, distance = NULL, duration = NU
     if (is.null(date)) stop("if 'duration' is not NULL, 'date' must also be given/n")
     npoints <- pmax(3, ceiling(track_time(date) / duration))[-1L]
   }
-  listm <- geosphere::gcIntermediate(cbind(x[-n], y[-n]), cbind(x[-1], y[-1]),
-                                     n = npoints, addStartEnd = TRUE, sp = FALSE)
+  ## we need +2L for old startEnd add behaviour (but we're now ellipsoid accurate, not distCosine)
+  npoints <- npoints + 2L
+  listm <- vector("list", length(npoints))
+  for (i in seq_along(listm)) {
+    #browser()
+      nn <- geographiclib::geodesic_path_fast(cbind(x[i], y[i]), cbind(x[i+1], y[i+1]), n = npoints[i])
+      listm[[i]] <- nn[,1:2, drop = FALSE]
+  }
 
-  if (n == 2)   listm <- list(listm)
+ if (n == 2)   listm <- list(listm)
  listm <- lapply(listm, as.data.frame)
  ## sometimes we get V1, V2
  listm <- lapply(listm, function(ddd) setNames(ddd, c("lon", "lat")))

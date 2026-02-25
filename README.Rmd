@@ -121,10 +121,12 @@ Using the bearing and distance now reproduce the track as *destination point* se
 
 ```{r dest-point}
 plot(metric[1:10, c("x", "y")], type = "b", lwd = 10, col = "grey")
-dest <- geosphere::destPoint(metric[1:10, c("x", "y")], 
-                             b = metric$bearing[1:10], 
-                            d = metric$distance[2:11])
-arrows(metric$x[1:10], metric$y[1:10], dest[1:10,1], dest[1:10,2], col = "firebrick", lwd = 2)
+dest <- geographiclib::geodesic_direct(
+  metric[1:10, c("x", "y")],
+  azi = metric$bearing[1:10], s= metric$distance[2:11]
+)
+
+arrows(metric$x[1:10], metric$y[1:10], dest$lon2[1:10], dest$lat2[1:10], col = "firebrick", lwd = 2)
 ```
 
 ## Intermediate points require extra handling

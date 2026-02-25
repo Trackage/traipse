@@ -14,17 +14,17 @@ Description: A collection of commonly used tools for animal movement and other t
  provided for geographic data that can be used directly or within 'tidyverse' 
  syntax. Distances and bearings are calculated using modern geodesic methods as 
  provided by Charles F. F. Karney (2013) <doi:10.1007/s00190-012-0578-z> 
- via the 'geodist' and 'geosphere' packages. 
+ via the 'geographiclib' package. 
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.1
+RoxygenNote: 7.3.3
 Depends: R (>= 2.10)
 Imports: 
     magrittr,
     geodist,
-    geosphere,
+    geographiclib,
     stats
 URL: https://github.com/Trackage/traipse
 BugReports: https://github.com/Trackage/traipse/issues
@@ -34,5 +34,6 @@ Suggests:
     dplyr,
     tibble,
     tidyr,
-    spelling
+    spelling, 
+    geosphere
 Language: en-US

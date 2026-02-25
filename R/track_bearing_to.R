@@ -39,5 +39,5 @@ track_bearing_to <- function(x, y, to_x, to_y){
   if (nrow(xy) > nrow(to_xy) && nrow(to_xy) == 1L) {
     to_xy <- to_xy[rep(1L, nrow(xy)), ]
   }
-  geosphere::bearing(xy, to_xy)
+  geographiclib::geodesic_inverse(xy, to_xy)[["azi1"]]
 }
