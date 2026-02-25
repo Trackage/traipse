@@ -17,7 +17,7 @@
 #' @param y latitude
 #' @return a numeric vector of absolute bearing in degrees, see Details
 #' @export
-#' @from geographiclib import geodesic_inverse
+#' @importFrom geographiclib geodesic_inverse geodesic_path_fast
 #' @examples
 #' track_bearing(trips0$x, trips0$y)[1:10]
 track_bearing <- function(x, y) {

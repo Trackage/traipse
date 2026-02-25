@@ -1,5 +1,10 @@
 # traipse dev
 
+* Entirely removed geosphere usage. 
+
+* Now using geographiclib, have equivalance for bearings, angles, and turns. Better accuracy now for 
+ 'track_intermediate()' on exact ellipsoidal calculations. 
+ 
 * Fixed: track_angle and track_turn now return all-NA for fewer than 3 input points, instead of erroring."
  
 # traipse 0.3.0
