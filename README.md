@@ -11,8 +11,8 @@ experimental](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https:/
 status](https://www.r-pkg.org/badges/version/traipse)](https://cran.r-project.org/package=traipse)
 [![CRAN_Download_Badge](http://cranlogs.r-pkg.org/badges/traipse)](https://cran.r-project.org/package=traipse)
 [![R build
-status](https://github.com/Trackage/traipse/workflows/R-CMD-check/badge.svg)](https://github.com/Trackage/traipse/actions)
-[![R-CMD-check](https://github.com/Trackage/traipse/workflows/R-CMD-check/badge.svg)](https://github.com/Trackage/traipse/actions)
+status](https://github.com/AustralianAntarcticDivision/traipse/workflows/R-CMD-check/badge.svg)](https://github.com/AustralianAntarcticDivision/traipse/actions)
+[![R-CMD-check](https://github.com/AustralianAntarcticDivision/traipse/workflows/R-CMD-check/badge.svg)](https://github.com/AustralianAntarcticDivision/traipse/actions)
 <!-- badges: end -->
 
 The goal of traipse is to provide shared tools for tracking data, for
@@ -74,7 +74,7 @@ You can install the development version from
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("Trackage/traipse")
+devtools::install_github("AustralianAntarcticDivision/traipse")
 ```
 
 ## Example
@@ -297,5 +297,5 @@ geodesics](https://doi.org/10.1007/s00190-012-0578-z)
 ------------------------------------------------------------------------
 
 Please note that this project is released with a [Contributor Code of
-Conduct](https://github.com/Trackage/traipse/blob/master/CODE_OF_CONDUCT.md).
+Conduct](https://github.com/AustralianAntarcticDivision/traipse/blob/master/CODE_OF_CONDUCT.md).
 By contributing to this project, you agree to abide by its terms.

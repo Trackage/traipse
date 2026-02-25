@@ -26,8 +26,8 @@ Imports:
     geodist,
     geographiclib,
     stats
-URL: https://github.com/Trackage/traipse
-BugReports: https://github.com/Trackage/traipse/issues
+URL: https://github.com/AustralianAntarcticDivision/traipse
+BugReports: https://github.com/AustralianAntarcticDivision/traipse/issues
 Suggests: 
     covr,
     testthat (>= 2.1.0),
