@@ -1,6 +1,6 @@
 ## test-geosphere-migration.R
 ##
-## Two-phase test suite for traipse geosphere → geographiclib migration.
+## Two-phase test suite for traipse geosphere -> geographiclib migration.
 ##
 ## Phase 1 (BEFORE swap):
 ##   - Run capture-reference-values.R to dump current geosphere outputs
@@ -12,7 +12,7 @@
 ##   - Run this file — structural tests still pass
 ##   - Snapshot tests compare new geographiclib values against old geosphere values
 ##   - For bearing/angle/turn: expect agreement to ~1e-6 (same Karney algorithm)
-##   - For track_intermediate: values WILL differ (spherical → ellipsoidal),
+##   - For track_intermediate: values WILL differ (spherical -> ellipsoidal),
 ##     document the magnitude of change, then update reference values to
 ##     the new geographiclib ground truth
 ##
@@ -145,20 +145,20 @@ test_that("track_angle: length and NA padding", {
   expect_true(is.na(a[length(a)]))
 })
 
-test_that("track_angle: straight line ≈ 180", {
+test_that("track_angle: straight line ~= 180", {
   straight <- data.frame(x = seq(0, 10, by = 1), y = rep(0, 11))
   a <- track_angle(straight$x, straight$y)
   interior <- a[!is.na(a)]
   expect_true(all(abs(interior - 180) < 2))
 })
 
-test_that("track_angle: reversal ≈ 0", {
+test_that("track_angle: reversal ~= 0", {
   rev <- data.frame(x = c(0, 5, 0), y = c(0, 0, 0))
   a <- track_angle(rev$x, rev$y)
   expect_equal(a[2], 0, tolerance = 1)
 })
 
-test_that("track_angle: right angle ≈ 90", {
+test_that("track_angle: right angle ~= 90", {
   lshape <- data.frame(x = c(0, 5, 5), y = c(0, 0, 5))
   a <- track_angle(lshape$x, lshape$y)
   expect_equal(a[2], 90, tolerance = 3)
@@ -185,7 +185,7 @@ test_that("track_turn: values in [-180, 180]", {
   expect_true(all(tv >= -180 & tv <= 180))
 })
 
-test_that("track_turn: straight ≈ 0", {
+test_that("track_turn: straight ~= 0", {
   straight <- data.frame(x = seq(0, 10, by = 1), y = rep(0, 11))
   tu <- track_turn(straight$x, straight$y)
   interior <- tu[!is.na(tu)]
@@ -200,13 +200,13 @@ test_that("track_turn: left and right have opposite signs", {
   expect_true(sign(tl) != sign(tr))
 })
 
-test_that("track_turn: reversal ≈ ±180", {
+test_that("track_turn: reversal ~= ±180", {
   rev <- data.frame(x = c(0, 5, 0), y = c(0, 0, 0))
   tu <- track_turn(rev$x, rev$y)
   expect_equal(abs(tu[2]), 180, tolerance = 1)
 })
 
-test_that("track_turn ≈ diff(track_bearing) normalised", {
+test_that("track_turn ~= diff(track_bearing) normalised", {
   x <- dense$x[1:30]
   y <- dense$y[1:30]
   b  <- track_bearing(x, y)
@@ -254,10 +254,10 @@ test_that("track_bearing_to: vectorised targets", {
 })
 
 test_that("track_bearing_to: from poles", {
-  # North pole → equator = due south
+  # North pole -> equator = due south
   b <- track_bearing_to(0, 89.999, 0, 0)
   expect_true(abs(abs(b) - 180) < 1)
-  # South pole → equator = due north
+  # South pole -> equator = due north
   b2 <- track_bearing_to(0, -89.999, 0, 0)
   expect_true(abs(b2) < 1)
 })
@@ -331,8 +331,8 @@ test_that("NA in input propagates correctly", {
   expect_length(track_bearing_to(x, y, 10, 10), 5)
   # Bearings touching an NA input should be NA
   b <- track_bearing(x, y)
-  expect_true(is.na(b[1]))  # (0,0) → (NA,1)
-  expect_true(is.na(b[2]))  # (NA,1) → (2,NA)
+  expect_true(is.na(b[1]))  # (0,0) -> (NA,1)
+  expect_true(is.na(b[2]))  # (NA,1) -> (2,NA)
 })
 
 
@@ -347,109 +347,148 @@ test_that("NA in input propagates correctly", {
 #   4. Run after the geographiclib swap
 #
 # For bearing/angle/turn: use tight tolerance (1e-6) — same Karney algorithm
-# For track_intermediate: values WILL change (spherical → ellipsoidal).
+# For track_intermediate: values WILL change (spherical -> ellipsoidal).
 #   First run with loose tolerance to see the magnitude, then tighten.
 
 ## Paste reference-values.R content here:
 # source("reference-values.R")  # or inline below
 
-ref_bearing <- NULL
-ref_angle <- NULL
-ref_turn <- NULL
-ref_bearing_to <- NULL
-ref_bearing_anti <- NULL
-ref_bearing_polar <- NULL
-ref_bearing_to_cardinal <- NULL
-ref_inter_d_npts <- NULL
+## Reference values captured from traipse 0.3.0.9001 with geosphere 1.5.20
+## Date: 2026-02-25 13:41:37 UTC
 
-# test_that("SNAPSHOT: track_bearing matches reference", {
-#   skip_if(is.null(ref_bearing), "Reference values not yet captured")
-#   x <- trips0_id1$x[1:20]
-#   y <- trips0_id1$y[1:20]
-#   b <- track_bearing(x, y)
-#   expect_equal(b, ref_bearing, tolerance = 1e-6)
-# })
-#
-# test_that("SNAPSHOT: track_angle matches reference", {
-#   skip_if(is.null(ref_angle), "Reference values not yet captured")
-#   x <- trips0_id1$x[1:20]
-#   y <- trips0_id1$y[1:20]
-#   a <- track_angle(x, y)
-#   expect_equal(a, ref_angle, tolerance = 1e-6)
-# })
-#
-# test_that("SNAPSHOT: track_turn matches reference", {
-#   skip_if(is.null(ref_turn), "Reference values not yet captured")
-#   x <- trips0_id1$x[1:20]
-#   y <- trips0_id1$y[1:20]
-#   tu <- track_turn(x, y)
-#   expect_equal(tu, ref_turn, tolerance = 1e-6)
-# })
-#
-# test_that("SNAPSHOT: track_bearing_to matches reference", {
-#   skip_if(is.null(ref_bearing_to), "Reference values not yet captured")
-#   x <- trips0_id1$x[1:20]
-#   y <- trips0_id1$y[1:20]
-#   bt <- track_bearing_to(x, y, 147, -42)
-#   expect_equal(bt, ref_bearing_to, tolerance = 1e-6)
-# })
-#
-# test_that("SNAPSHOT: antimeridian bearing matches reference", {
-#   skip_if(is.null(ref_bearing_anti), "Reference values not yet captured")
-#   ax <- c(170, 175, 179, -179, -175, -170, -165, -160)
-#   ay <- c(-40, -41, -42, -43, -42, -41, -40, -39)
-#   b <- track_bearing(ax, ay)
-#   expect_equal(b, ref_bearing_anti, tolerance = 1e-6)
-# })
-#
-# test_that("SNAPSHOT: polar bearing matches reference", {
-#   skip_if(is.null(ref_bearing_polar), "Reference values not yet captured")
-#   px <- seq(-180, 170, by = 10)
-#   py <- rep(-75, 36)
-#   b <- track_bearing(px, py)
-#   expect_equal(b, ref_bearing_polar, tolerance = 1e-6)
-# })
-#
-# test_that("SNAPSHOT: track_intermediate point count matches reference", {
-#   skip_if(is.null(ref_inter_d_npts), "Reference values not yet captured")
-#   inter <- track_intermediate(
-#     trips0_id1$x[1:5], trips0_id1$y[1:5],
-#     date = trips0_id1$date[1:5], distance = 50000
-#   )
-#   npts <- vapply(inter, nrow, integer(1))
-#   # Point counts may differ slightly with ellipsoidal intermediate
-#   # (slightly different total distance → different number of steps)
-#   # Allow ±1 point difference per interval
-#   expect_true(all(abs(npts - ref_inter_d_npts) <= 1),
-#     info = paste("Got:", paste(npts, collapse = ","),
-#                  "Ref:", paste(ref_inter_d_npts, collapse = ",")))
-# })
+# ── trips0 id1 first 20 points ──
+
+ref_bearing <- c( 34.5207685919, -26.4750016024, 158.0749290697, -9.1990066797, 98.4537393364, -56.7290950868, 34.1307276223, 12.8844075884, 168.8959701847, 53.0686621582, -34.2576755138, 62.0681521435, 56.2023163169, 80.9624056812, 54.2562389001, 20.6505619041, -60.2760682233, -111.5174736839, 46.4798942180, NA_real_ )
+
+ref_angle <- c( NA_real_, 119.5900724486, 4.4286404381, 13.0878908080, 72.3866315292, 25.5956429237, 89.5222366524, 159.2318550528, 23.7686009703, 64.2987302946, 93.3147204731, 84.1268457769, 175.3726865205, 154.6829639546, 153.6247107474, 146.8644512727, 99.1826941893, 128.3205742823, 22.5009314406, NA_real_ )
+
+ref_turn <- c( NA_real_, -60.9957701943, -175.4500693278, -167.2739357494, 107.6527460161, -155.1828344232, 90.8598227091, -21.2463200339, 156.0115625963, -115.8273080265, -87.3263376720, 96.3258276573, -5.8658358266, 24.7600893643, -26.7061667811, -33.6056769959, -80.9266301275, -51.2414054606, 157.9973679020, NA_real_ )
+
+ref_bearing_to <- c( 99.9145104064, 101.8223154084, 102.5153399694, 100.0057199620, 100.6670450269, 99.9731303702, 100.8515638911, 102.6089720435, 105.3108761782, 103.4334943286, 104.7066499770, 106.7829259231, 108.8517471490, 110.1745081061, 110.4369747690, 111.7749922279, 112.8479818304, 113.5112288013, 112.6387490279, 114.7053479132 )
+
+# ── antimeridian track ──
+
+ref_bearing_anti <- c( 106.2964798290, 109.7124790916, 124.7193393335, 72.6913925820, 76.7689311981, 76.9520809062, 77.1245646383, NA_real_ )
+
+ref_angle_anti <- c( NA_real_, 173.3354400022, 162.3419521641, 129.3233600914, 173.2193985189, 176.5024394394, 176.5789555327, NA_real_ )
+
+ref_turn_anti <- c( NA_real_, 3.4159992625, 15.0068602420, -52.0279467515, 4.0775386161, 0.1831497081, 0.1724837320, NA_real_ )
+
+# ── polar track (bearing only, latitude = -75) ──
+
+ref_bearing_polar <- c( 94.8304497586, 94.8304497586, 94.8304497586, 94.8304497586, 94.8304497586, 94.8304497586, 94.8304497586, 94.8304497586, 94.8304497586, 94.8304497586, 94.8304497586, 94.8304497586, 94.8304497586, 94.8304497586, 94.8304497586, 94.8304497586, 94.8304497586, 94.8304497586, 94.8304497586, 94.8304497586, 94.8304497586, 94.8304497586, 94.8304497586, 94.8304497586, 94.8304497586, 94.8304497586, 94.8304497586, 94.8304497586, 94.8304497586, 94.8304497586, 94.8304497586, 94.8304497586, 94.8304497586, 94.8304497586, 94.8304497586, NA_real_ )
+
+# ── cardinal bearing-to from origin ──
+
+ref_bearing_to_cardinal <- c( 0.0000000000, 90.0000000000, 180.0000000000, -90.0000000000 )
+
+# ── track_intermediate by distance (first interval) ──
+# Interval 1: (x[1],y[1]) -> (x[2],y[2]), 50km spacing
+
+ref_inter_d_x <- c( 115.2766532944, 115.4984694774, 115.7186075881, 115.9370913990, 116.1539443500 )
+
+ref_inter_d_y <- c( -42.3757967249, -42.1355439728, -41.8948672243, -41.6537732160, -41.4122685656 )
+
+ref_inter_d_npts <- c( 5, 5, 5, 5, 0 )
+
+# ── track_intermediate by duration (first interval) ──
+# Interval 1: 1-hour spacing
+
+ref_inter_t_x <- c( 115.2766532944, 115.4984694774, 115.7186075881, 115.9370913990, 116.1539443500 )
+
+ref_inter_t_y <- c( -42.3757967249, -42.1355439728, -41.8948672243, -41.6537732160, -41.4122685656 )
+
+ref_inter_t_npts <- c( 5, 5, 5, 5, 0 )
 
 
-# ════════════════════════════════════════════════════════════════════════════
-# C. DIAGNOSTIC COMPARISON (run manually during migration)
-# ════════════════════════════════════════════════════════════════════════════
-#
-# After pasting reference values above, uncomment this to see HOW MUCH
-# values change (especially for track_intermediate ellipsoidal vs spherical):
-#
-# test_that("DIAGNOSTIC: quantify intermediate point drift", {
-#   skip_if(is.null(ref_inter_d_x), "Reference values not yet captured")
-#   inter <- track_intermediate(
-#     trips0_id1$x[1:5], trips0_id1$y[1:5],
-#     date = trips0_id1$date[1:5], distance = 50000
-#   )
-#   if (nrow(inter[[1]]) > 0 && length(ref_inter_d_x) > 0) {
-#     nn <- min(nrow(inter[[1]]), length(ref_inter_d_x))
-#     dx <- inter[[1]]$int_x[1:nn] - ref_inter_d_x[1:nn]
-#     dy <- inter[[1]]$int_y[1:nn] - ref_inter_d_y[1:nn]
-#     cat("\nIntermediate point drift (spherical → ellipsoidal):\n")
-#     cat("  max |Δlon|:", max(abs(dx)), "degrees\n")
-#     cat("  max |Δlat|:", max(abs(dy)), "degrees\n")
-#     cat("  mean |Δlon|:", mean(abs(dx)), "degrees\n")
-#     cat("  mean |Δlat|:", mean(abs(dy)), "degrees\n")
-#     # At southern ocean latitudes, expect ~0.1-0.3% difference
-#     # between spherical and ellipsoidal intermediate points
-#   }
-#   succeed()  # diagnostic only, always passes
-# })
+test_that("SNAPSHOT: track_bearing matches reference", {
+  skip_if(is.null(ref_bearing), "Reference values not yet captured")
+  x <- trips0_id1$x[1:20]
+  y <- trips0_id1$y[1:20]
+  b <- track_bearing(x, y)
+  expect_equal(b, ref_bearing, tolerance = 1e-6)
+})
+
+test_that("SNAPSHOT: track_angle matches reference", {
+  skip_if(is.null(ref_angle), "Reference values not yet captured")
+  x <- trips0_id1$x[1:20]
+  y <- trips0_id1$y[1:20]
+  a <- track_angle(x, y)
+  expect_equal(a, ref_angle, tolerance = 1e-6)
+})
+
+test_that("SNAPSHOT: track_turn matches reference", {
+  skip_if(is.null(ref_turn), "Reference values not yet captured")
+  x <- trips0_id1$x[1:20]
+  y <- trips0_id1$y[1:20]
+  tu <- track_turn(x, y)
+  expect_equal(tu, ref_turn, tolerance = 1e-6)
+})
+
+test_that("SNAPSHOT: track_bearing_to matches reference", {
+  skip_if(is.null(ref_bearing_to), "Reference values not yet captured")
+  x <- trips0_id1$x[1:20]
+  y <- trips0_id1$y[1:20]
+  bt <- track_bearing_to(x, y, 147, -42)
+  expect_equal(bt, ref_bearing_to, tolerance = 1e-6)
+})
+
+test_that("SNAPSHOT: antimeridian bearing matches reference", {
+  skip_if(is.null(ref_bearing_anti), "Reference values not yet captured")
+  ax <- c(170, 175, 179, -179, -175, -170, -165, -160)
+  ay <- c(-40, -41, -42, -43, -42, -41, -40, -39)
+  b <- track_bearing(ax, ay)
+  expect_equal(b, ref_bearing_anti, tolerance = 1e-6)
+})
+
+test_that("SNAPSHOT: polar bearing matches reference", {
+  skip_if(is.null(ref_bearing_polar), "Reference values not yet captured")
+  px <- seq(-180, 170, by = 10)
+  py <- rep(-75, 36)
+  b <- track_bearing(px, py)
+  expect_equal(b, ref_bearing_polar, tolerance = 1e-6)
+})
+
+test_that("SNAPSHOT: track_intermediate point count matches reference", {
+  skip_if(is.null(ref_inter_d_npts), "Reference values not yet captured")
+  inter <- track_intermediate(
+    trips0_id1$x[1:5], trips0_id1$y[1:5],
+    date = trips0_id1$date[1:5], distance = 50000
+  )
+  npts <- vapply(inter, nrow, integer(1))
+  # Point counts may differ slightly with ellipsoidal intermediate
+  # (slightly different total distance -> different number of steps)
+  # Allow ±1 point difference per interval
+  expect_true(all(abs(npts - ref_inter_d_npts) <= 1),
+    info = paste("Got:", paste(npts, collapse = ","),
+                 "Ref:", paste(ref_inter_d_npts, collapse = ",")))
+})
+
+
+#════════════════════════════════════════════════════════════════════════════
+#C. DIAGNOSTIC COMPARISON (run manually during migration)
+#════════════════════════════════════════════════════════════════════════════
+
+#After pasting reference values above, uncomment this to see HOW MUCH
+#values change (especially for track_intermediate ellipsoidal vs spherical):
+
+test_that("DIAGNOSTIC: quantify intermediate point drift", {
+  skip_if(is.null(ref_inter_d_x), "Reference values not yet captured")
+  inter <- track_intermediate(
+    trips0_id1$x[1:5], trips0_id1$y[1:5],
+    date = trips0_id1$date[1:5], distance = 50000
+  )
+  if (nrow(inter[[1]]) > 0 && length(ref_inter_d_x) > 0) {
+    nn <- min(nrow(inter[[1]]), length(ref_inter_d_x))
+    dx <- inter[[1]]$int_x[1:nn] - ref_inter_d_x[1:nn]
+    dy <- inter[[1]]$int_y[1:nn] - ref_inter_d_y[1:nn]
+    cat("\nIntermediate point drift (spherical -> ellipsoidal):\n")
+    cat("  max |dlon|:", max(abs(dx)), "degrees\n")
+    cat("  max |dlat|:", max(abs(dy)), "degrees\n")
+    cat("  mean |dlon|:", mean(abs(dx)), "degrees\n")
+    cat("  mean |dlat|:", mean(abs(dy)), "degrees\n")
+    # At southern ocean latitudes, expect ~0.1-0.3% difference
+    # between spherical and ellipsoidal intermediate points
+  }
+  succeed()  # diagnostic only, always passes
+})

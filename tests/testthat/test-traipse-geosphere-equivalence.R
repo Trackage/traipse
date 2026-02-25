@@ -1,10 +1,10 @@
 ## test-traipse-geosphere-equivalence.R
 ##
-## Comprehensive tests for the traipse geosphere → geographiclib migration.
+## Comprehensive tests for the traipse geosphere -> geographiclib migration.
 ##
 ## Strategy:
 ##   1. Run this BEFORE the swap with geosphere to generate reference values
-##   2. Swap geosphere → geographiclib in the source
+##   2. Swap geosphere -> geographiclib in the source
 ##   3. Run again — all tests should pass (within tolerance)
 ##
 ## The tolerance reflects that both geosphere::bearing() and geographiclib
@@ -377,7 +377,7 @@ test_that("track_speed = track_distance / track_time", {
 
 
 # ── 8. Numerical equivalence snapshot (run BEFORE swap) ─────────────────────
-# Uncomment and run this block before the geosphere→geographiclib swap
+# Uncomment and run this block before the geosphere->geographiclib swap
 # to capture exact reference values. Then hardcode them below for
 # post-swap verification.
 #
