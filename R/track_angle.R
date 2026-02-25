@@ -29,8 +29,8 @@ track_angle <- function(x, y) {
   if (n < 3L) return(rep(NA_real_, n))
   # angle <- .abdali(xy[2:(n - 1), , drop = FALSE], xy[3:n, , drop = FALSE]) -
   #          .abdali(xy[2:(n - 1), , drop = FALSE], xy[1:(n - 2), , drop = FALSE])
-  angle <- geosphere::bearing(xy[2:(n - 1), , drop = FALSE], xy[3:n, , drop = FALSE]) -
-           geosphere::bearing(xy[2:(n - 1), , drop = FALSE], xy[1:(n - 2), , drop = FALSE])
+  angle <- geographiclib::geodesic_inverse(xy[2:(n - 1), , drop = FALSE], xy[3:n, , drop = FALSE])[["azi1"]] -
+    geographiclib::geodesic_inverse(xy[2:(n - 1), , drop = FALSE], xy[1:(n - 2), , drop = FALSE])[["azi1"]]
   angle <- abs((angle + 180) %% 360 - 180)
   c(NA_real_, angle, NA_real_)
 }

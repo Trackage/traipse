@@ -30,8 +30,8 @@ track_turn <- function(x, y) {
   n <- nrow(xy)
   if (n < 3L) return(rep(NA_real_, n))
 
-  angle <- c(geosphere::bearing(xy[-nrow(xy), , drop = FALSE],
-                                xy[-1L, , drop = FALSE]) * pi/180, NA_real_)
+  angle <- c(geographiclib::geodesic_inverse(xy[-nrow(xy), , drop = FALSE],
+                                xy[-1L, , drop = FALSE])[["azi1"]] * pi/180, NA_real_)
   angle <- ifelse(angle < 0, 2 * pi + angle, angle)
 
   angle <- ifelse(angle > pi, (2 * pi - angle) * -1, angle)
