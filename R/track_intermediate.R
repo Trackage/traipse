@@ -1,7 +1,7 @@
 #' Track intermediate points
 #'
-#' Calculate great circle intermediate points on longitude, latitude input vectors. A
-#' spherical model is used, from the geosphere package.
+#' Calculate great circle intermediate points on longitude, latitude input vectors. An exact
+#'  ellipsoidal model is used, from the geographiclib package.
 #'
 #' This function returns a list of data frames, with a data frame of interpolated locations
 #' for every interval between input locations. There is a final empty data frame to ensure

@@ -1,6 +1,6 @@
 Package: traipse
 Title: Shared Tools for Tracking Data
-Version: 0.3.0.9002
+Version: 0.4.0
 Authors@R: 
     c(
     person(given = "Michael", 
@@ -34,6 +34,5 @@ Suggests:
     dplyr,
     tibble,
     tidyr,
-    spelling, 
-    geosphere
+    spelling
 Language: en-US

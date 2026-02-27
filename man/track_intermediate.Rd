@@ -22,8 +22,8 @@ if set then \code{distance} must be \code{NULL} and \code{date} must be input}
 a list of data frames of intermediate points (for use with \code{unnest()} from tidyr)
 }
 \description{
-Calculate great circle intermediate points on longitude, latitude input vectors. A
-spherical model is used, from the geosphere package.
+Calculate great circle intermediate points on longitude, latitude input vectors. An exact
+ellipsoidal model is used, from the geographiclib package.
 }
 \details{
 This function returns a list of data frames, with a data frame of interpolated locations

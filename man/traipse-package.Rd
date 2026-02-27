@@ -11,8 +11,8 @@ A collection of commonly used tools for animal movement and other tracking data.
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/Trackage/traipse}
-  \item Report bugs at \url{https://github.com/Trackage/traipse/issues}
+  \item \url{https://github.com/AustralianAntarcticDivision/traipse}
+  \item Report bugs at \url{https://github.com/AustralianAntarcticDivision/traipse/issues}
 }
 
 }

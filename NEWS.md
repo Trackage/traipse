@@ -1,11 +1,13 @@
-# traipse dev
+# traipse 0.4.0
 
-* Entirely removed geosphere usage. 
+* traipse now depends on CRAN package geographiclib. 
 
-* Now using geographiclib, have equivalance for bearings, angles, and turns. Better accuracy now for 
- 'track_intermediate()' on exact ellipsoidal calculations. 
+* Entirely removed geosphere dependency. 
+
+* Now using geographiclib, have equivalence for bearings, angles, and turns. Better accuracy now for
+'track_intermediate()' on exact ellipsoidal calculations.
  
-* Fixed: track_angle and track_turn now return all-NA for fewer than 3 input points, instead of erroring."
+* Fixed: track_angle and track_turn now return all-NA for fewer than 3 input points. 
  
 # traipse 0.3.0
 
