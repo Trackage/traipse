@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">traipse</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.0.9002</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.4.0</span>
       </span>
     </div>
 
@@ -47,6 +47,13 @@
       <small>Source: <a href="https://github.com/AustralianAntarcticDivision/traipse/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.4.0" id="traipse-040">traipse 0.4.0<a class="anchor" aria-label="anchor" href="#traipse-040"></a></h2>
+<ul><li><p>traipse now depends on CRAN package geographiclib.</p></li>
+<li><p>Entirely removed geosphere dependency.</p></li>
+<li><p>Now using geographiclib, have equivalence for bearings, angles, and turns. Better accuracy now for ‘track_intermediate()’ on exact ellipsoidal calculations.</p></li>
+<li><p>Fixed: track_angle and track_turn now return all-NA for fewer than 3 input points.</p></li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.3.0" id="traipse-030">traipse 0.3.0<small>2022-10-10</small><a class="anchor" aria-label="anchor" href="#traipse-030"></a></h2>
 <ul><li><p>New function ‘track_grid()’ to compute cell index for points for a grid.</p></li>
