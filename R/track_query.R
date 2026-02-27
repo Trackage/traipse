@@ -30,7 +30,7 @@ track_query <- function(x, y, date = NULL, query, type = "linear") {
   x_t <- approxfun(date, x)
   y_t <- approxfun(date, y)
   if (inherits(query, "Date")) query <- as.POSIXct(query)
-  tibble::tibble(x = x_t(query),
+  data.frame(x = x_t(query),
                  y = y_t(query),
                  date = query)  ## here need to insert the rule-based date, not the query
 }
