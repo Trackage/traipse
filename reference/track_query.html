@@ -100,26 +100,22 @@ simple relative time, and <code>query</code> is expected to match this.</p>
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">track_query</span><span class="op">(</span><span class="va">trips0</span><span class="op">$</span><span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span>, <span class="va">trips0</span><span class="op">$</span><span class="va">y</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span>, query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4.5</span>, <span class="fl">5.5</span>, <span class="fl">6.5</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>date is null, so assuming linear relative movement in time</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 3</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       x     y  date</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  116. -<span style="color: #BB0000;">42.0</span>   4.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>  117. -<span style="color: #BB0000;">41.9</span>   5.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>  117. -<span style="color: #BB0000;">41.8</span>   6.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          x         y date</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 116.4852 -42.00301  4.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 117.0383 -41.92883  5.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 117.3345 -41.84897  6.5</span>
 <span class="r-in"><span><span class="fu">track_query</span><span class="op">(</span><span class="va">trips0</span><span class="op">$</span><span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span>, <span class="va">trips0</span><span class="op">$</span><span class="va">y</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span>, <span class="va">trips0</span><span class="op">$</span><span class="va">date</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span>, query <span class="op">=</span> <span class="va">trips0</span><span class="op">$</span><span class="va">date</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span> <span class="op">+</span> <span class="fl">10</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 3</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        x     y date               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>  115. -<span style="color: #BB0000;">42.4</span> 2001-01-01 <span style="color: #949494;">15:40:00</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>  116. -<span style="color: #BB0000;">41.4</span> 2001-01-01 <span style="color: #949494;">18:17:02</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>  116. -<span style="color: #BB0000;">41.1</span> 2001-01-01 <span style="color: #949494;">21:03:48</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>  117. -<span style="color: #BB0000;">42.1</span> 2001-01-01 <span style="color: #949494;">22:09:51</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>  116. -<span style="color: #BB0000;">41.9</span> 2001-01-01 <span style="color: #949494;">23:34:04</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>  118. -<span style="color: #BB0000;">42.0</span> 2001-01-02 <span style="color: #949494;">01:25:22</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>  117. -<span style="color: #BB0000;">41.7</span> 2001-01-02 <span style="color: #949494;">06:45:50</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>  118. -<span style="color: #BB0000;">40.9</span> 2001-01-02 <span style="color: #949494;">10:01:36</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>  118. -<span style="color: #BB0000;">39.7</span> 2001-01-02 <span style="color: #949494;">13:50:09</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>   <span style="color: #BB0000;">NA</span>   <span style="color: #BB0000;">NA</span>   2001-01-02 <span style="color: #949494;">16:24:56</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           x         y                date</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  115.2776 -42.37477 2001-01-01 15:40:00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  116.1538 -41.41199 2001-01-01 18:17:02</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  115.9714 -41.13553 2001-01-01 21:03:48</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  116.5145 -42.13828 2001-01-01 22:09:51</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  116.4575 -41.86738 2001-01-01 23:34:04</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6  117.6205 -41.99032 2001-01-02 01:25:22</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7  117.0488 -41.70678 2001-01-02 06:45:50</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8  117.7729 -40.89334 2001-01-02 10:01:36</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9  118.1126 -39.74807 2001-01-02 13:50:09</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10       NA        NA 2001-01-02 16:24:56</span>
 <span class="r-in"><span><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="va">trips0</span><span class="op">$</span><span class="va">date</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">trips0</span><span class="op">$</span><span class="va">date</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">"1 hour"</span><span class="op">)</span></span></span>
 </code></pre></div>
     </div>
