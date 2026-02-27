@@ -1,5 +1,7 @@
 # traipse 0.4.0
 
+* Package repository has changed to now https://github.com/AustralianAntarcticDivision/traipse, for issues and information.
+
 * traipse now depends on CRAN package geographiclib. 
 
 * Entirely removed geosphere dependency. 
